@@ -10,14 +10,14 @@
 using namespace std;
 
 extern CThostFtdcMdApi* pUserApi;
-extern char FRONT_ADDR[];
+extern char FRONT_ADDR_quote[];
 extern TThostFtdcBrokerIDType brokerIDType;
 extern TThostFtdcInvestorIDType investorIDType;
 extern TThostFtdcPasswordType passwordType;
 
 extern char* ppIntrumentID[];
 extern int iInstrumentID;
-extern int iRequestID_quote =0;
+extern int iRequestID_quote;
 double OpenPrice = 0;
 
 
