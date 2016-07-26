@@ -5,6 +5,7 @@
 
 #include "MarketDataHandle.h"
 #include <iostream>
+#include <cstring>
 
 using namespace std;
 
@@ -12,6 +13,8 @@ extern CThostFtdcMdApi* pUserApi;
 extern char FRONT_ADDR[];
 extern TThostFtdcBrokerIDType brokerIDType;
 extern TThostFtdcInvestorIDType investorIDType;
+extern TThostFtdcPasswordType passwordType;
+
 extern char* ppIntrumentID[];
 extern int iInstrumentID;
 extern int iRequestID_quote;
@@ -38,6 +41,17 @@ void MarketDataHandle::OnFrontConnected()
 {
     cerr << "--->>> " << "OnFrontConnected" <<endl;
     ReqUserLogin();
+}
+
+
+void MarketDataHandle::ReqUserLogin() {
+    CThostFtdcReqUserLoginField req;
+    memset(&req, 0, sizeof(req));
+    strcpy(req.BrokerID, brokerIDType);
+    strcpy(req.UserID, investorIDType);
+    strcpy(req.Password, passwordType);
+    int iResult = pUserApi->ReqUserLogin(&req, ++iRequestID_quote);
+    cerr << "--->>> sending user login request: " << ((iResult == 0) ? "success" : "fail" )<< endl;
 }
 
 void MarketDataHandle::OnRspUserLogin(CThostFtdcRspUserLoginField *pRspUserLogin, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast) {
