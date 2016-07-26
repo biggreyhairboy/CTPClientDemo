@@ -17,7 +17,7 @@ extern TThostFtdcPasswordType passwordType;
 
 extern char* ppIntrumentID[];
 extern int iInstrumentID;
-extern int iRequestID_quote;
+extern int iRequestID_quote = 0;
 double OpenPrice = 0;
 
 
