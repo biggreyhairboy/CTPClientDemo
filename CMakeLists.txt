@@ -2,6 +2,9 @@ cmake_minimum_required(VERSION 3.5)
 project(CTPClientDemo)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+find_package(Threads)   
+
+
 #set(CMAKE_VERBOSE_MAKEFILE ON)
 #add_subdirectory(ctpapi_linux64)
 
@@ -18,4 +21,4 @@ add_library(thosttraderapi SHARED IMPORTED)
 SET_TARGET_PROPERTIES(thostmduserapi PROPERTIES IMPORTED_LOCATION ${PROJECT_SOURCE_DIR}/ctpapi_linux64/thostmduserapi.so)
 SET_TARGET_PROPERTIES(thosttraderapi PROPERTIES IMPORTED_LOCATION ${PROJECT_SOURCE_DIR}/ctpapi_linux64/thosttraderapi.so)
 add_executable(CTPClientDemo ${SOURCE_FILES})
-target_link_libraries( CTPClientDemo thostmduserapi thosttraderapi)
+target_link_libraries(CTPClientDemo thostmduserapi thosttraderapi ${CMAKE_THREAD_LIBS_INIT})
