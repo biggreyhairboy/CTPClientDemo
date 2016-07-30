@@ -87,8 +87,8 @@ void MarketDataHandle::OnRspUnSubForQuoteRsp(CThostFtdcSpecificInstrumentField *
 }
 
 void MarketDataHandle::OnRtnDepthMarketData(CThostFtdcDepthMarketDataField *pDepthMarketData){
-    //cerr << "DailyChangeRatio: " << (pDepthMarketData->OpenPrice - pDepthMarketData->AskPrice1) / pDepthMarketData->OpenPrice << endl;
-    //cerr << "OnRtnDepthMarketData: askprice" << pDepthMarketData->AskPrice1 << endl;
+    cerr << "DailyChangeRatio: " << (pDepthMarketData->OpenPrice - pDepthMarketData->AskPrice1) / pDepthMarketData->OpenPrice << endl;
+    cerr << "OnRtnDepthMarketData: askprice" << pDepthMarketData->AskPrice1 << endl;
     if (iRequestID_quote > 15)
     {
         return ;

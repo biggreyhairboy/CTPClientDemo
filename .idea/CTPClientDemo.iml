@@ -7,6 +7,8 @@
       <sourceFolder url="file://$MODULE_DIR$/TradingHandle.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/CMakeLists.txt" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/TradingHandle.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/DBDriver.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/DBDriver.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/MarketDataHandle.cpp" isTestSource="false" />
     </content>
     <orderEntry type="sourceFolder" forTests="false" />
