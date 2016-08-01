@@ -49,13 +49,13 @@ void tradeThread()
 }
 
 int main() {
-    DBDriver dbDriver("localhost", "root", "223223", "talk_is_cheap");
-//    cout << "quote thread started .... " << endl;
-//    std::thread QuoteT(quoteThread);
-//    QuoteT.detach();
-//
-//    std::thread TradingT(tradeThread);
-//    TradingT.detach();
+    //DBDriver dbDriver("localhost", "root", "223223", "talk_is_cheap");
+    cout << "quote thread started .... " << endl;
+    std::thread QuoteT(quoteThread);
+    QuoteT.detach();
+
+    std::thread TradingT(tradeThread);
+    TradingT.detach();
 
 //todo: add trading logic
     getchar();

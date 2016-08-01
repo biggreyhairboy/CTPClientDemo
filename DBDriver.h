@@ -12,17 +12,25 @@
 #include "cppconn/statement.h"
 #include "cppconn/resultset.h"
 #include "cppconn/exception.h"
+#include "ctpapi_linux64/ThostFtdcUserApiStruct.h"
 
 using namespace std;
 
 class DBDriver {
 public:
+    //DBDriver *dbDriver;
     string host;
     string user;
     string password;
     string database;
-    DBDriver GetDBDriverInstance();
+    sql::Driver * driver;
+    sql::Connection *connection;
+    sql::Statement *statement;
+    sql::ResultSet *resultSet;
+
+    //static DBDriver GetDBDriverInstance();
     DBDriver(string host, string user, string password, string database);
+    bool ExcuteQuery(CThostFtdcDepthMarketDataField *pDepthMarketData);
     ~DBDriver();
 private:
     void Initialize();

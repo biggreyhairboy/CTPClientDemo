@@ -4,7 +4,10 @@
 #ifndef CTPCLIENTDEMO_MARKETDATAHANDLE_H
 #define CTPCLIENTDEMO_MARKETDATAHANDLE_H
 
+#include <string>
 #include "ctpapi_linux64/ThostFtdcMdApi.h"
+using namespace std;
+
 class MarketDataHandle : public CThostFtdcMdSpi{
     //virtual void OnRspError(CThostFtdcRspInfoField* pRspInfo, int nRquestID, bool bIsLast);
 

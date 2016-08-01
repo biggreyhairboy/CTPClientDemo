@@ -4,6 +4,7 @@
 
 
 #include "MarketDataHandle.h"
+#include "DBDriver.h"
 #include <iostream>
 #include <cstring>
 
@@ -87,8 +88,11 @@ void MarketDataHandle::OnRspUnSubForQuoteRsp(CThostFtdcSpecificInstrumentField *
 }
 
 void MarketDataHandle::OnRtnDepthMarketData(CThostFtdcDepthMarketDataField *pDepthMarketData){
+    DBDriver dbDriver("localhost", "root", "223223", "talk_is_cheap");
+    dbDriver.ExcuteQuery(pDepthMarketData);
     cerr << "DailyChangeRatio: " << (pDepthMarketData->OpenPrice - pDepthMarketData->AskPrice1) / pDepthMarketData->OpenPrice << endl;
     cerr << "OnRtnDepthMarketData: askprice" << pDepthMarketData->AskPrice1 << endl;
+
     if (iRequestID_quote > 15)
     {
         return ;
