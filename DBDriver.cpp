@@ -28,8 +28,9 @@ void DBDriver::Initialize() {
 //}
 
 bool DBDriver::ExcuteQuery(CThostFtdcDepthMarketDataField *pDepthMarketData){
-    double cp = pDepthMarketData->ClosePrice;
-    double sp = pDepthMarketData->SettlementPrice;
+    //double cp = pDepthMarketData->ClosePrice;
+    //double sp = pDepthMarketData->SettlementPrice;
+    //todo: 多开 多平 双开 双平 空开
     string query = "insert into tick_data_futures values(" + std::string(pDepthMarketData->TradingDay)
                    + std::string(", \0") + "'" + string(pDepthMarketData->InstrumentID) + "'"
                    + std::string(", \0") + std::to_string(pDepthMarketData->LastPrice)
@@ -54,9 +55,16 @@ bool DBDriver::ExcuteQuery(CThostFtdcDepthMarketDataField *pDepthMarketData){
                    + std::string(", \0") + std::to_string(pDepthMarketData->AskVolume1)
                    + std::string(", \0") + std::to_string(pDepthMarketData->AveragePrice)
                    + std::string(", \0") + std::string(pDepthMarketData->ActionDay) + ");";
-    resultSet = statement->executeQuery(query);
-    resultSet = statement->executeQuery("insert into one_day (High) values (2450)");
-    resultSet = statement->executeQuery("select * from one_day");
+    try {
+        resultSet = statement->executeQuery(query);
+    }catch (sql::SQLException ex)
+    {
+        cerr << "sql error" << endl;
+        cerr << ex.what() << endl;
+    }
+    //resultSet = statement->executeQuery(query);
+    //resultSet = statement->executeQuery("insert into one_day (High) values (2450)");
+    //resultSet = statement->executeQuery("select * from one_day");
 }
 
 DBDriver::~DBDriver() {}

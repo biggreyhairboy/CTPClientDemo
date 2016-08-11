@@ -1,6 +1,0 @@
-I use GB2312 as the default encoding for my .cpp source file,
- the Chinese charaters display correctly in the source file,
- but when use "ctrl + F" to search Chinese charaters,
- the content in the search box does not display correctly
- (in my case the content displays as some rectangles )
- though the search result is correct.

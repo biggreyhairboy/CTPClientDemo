@@ -7,6 +7,7 @@
 
 #include <string>
 #include <istream>
+#include <exception>
 #include "mysql_connection.h"
 #include <cppconn/driver.h>
 #include "cppconn/statement.h"

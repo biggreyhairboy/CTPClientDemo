@@ -1,13 +1,20 @@
 #include <iostream>
 #include <thread>
+#include <boost/log/core.hpp>
+#include <boost/log/trivial.hpp>
+#include <boost/log/expressions.hpp>
+#include <boost/property_tree/ptree.hpp>
+#include <boost/property_tree/ini_parser.hpp>
+#include <boost/log/utility/setup/file.hpp>
 #include "ctpapi_linux64/ThostFtdcMdApi.h"
 #include "ctpapi_linux64/ThostFtdcTraderApi.h"
 #include "MarketDataHandle.h"
 #include "TradingHandle.h"
 #include "DBDriver.h"
 
-using namespace std;
 
+using namespace std;
+namespace  logging = boost::log;
 CThostFtdcMdApi *pUserApi;
 CThostFtdcTraderApi * pTraderApi;
 //todo: move global config to .ini
@@ -36,21 +43,26 @@ void quoteThread()
 
 void tradeThread()
 {
-    // 初始化UserApi
-    pTraderApi = CThostFtdcTraderApi::CreateFtdcTraderApi();			// 创建UserApi
+    pTraderApi = CThostFtdcTraderApi::CreateFtdcTraderApi();
     TradingHandle *pTradingHandle = new TradingHandle();
-    pTraderApi->RegisterSpi((CThostFtdcTraderSpi*) pTradingHandle);			// 注册事件类
-    pTraderApi->SubscribePublicTopic(THOST_TERT_QUICK);				// 注册公有流
-    pTraderApi->SubscribePrivateTopic(THOST_TERT_QUICK);				// 注册私有流
-    pTraderApi->RegisterFront(FRONT_ADDR_trade);							// connect
+    pTraderApi->RegisterSpi((CThostFtdcTraderSpi*) pTradingHandle);
+    pTraderApi->SubscribePublicTopic(THOST_TERT_QUICK);
+    pTraderApi->SubscribePrivateTopic(THOST_TERT_QUICK);
+    pTraderApi->RegisterFront(FRONT_ADDR_trade);
     pTraderApi->Init();
     pTraderApi->Join();
     pTraderApi->Release();
 }
 
 int main() {
+    cout << "开始吧" <<endl;
+    boost::property_tree::ptree pt;
+    boost::property_tree::ini_parser::read_ini("/home/biggreyhairboy/ClionProjects/CTPClientDemo/CTPClientDemo.ini", pt);
+    cout << pt.get<std::string>("Server_IP.TradeFront") << std::endl;
+    logging::add_file_log("/home/biggreyhairboy/ClionProjects/CTPClientDemo/CTPClientDemo.log");
     //DBDriver dbDriver("localhost", "root", "223223", "talk_is_cheap");
-    cout << "quote thread started .... " << endl;
+    BOOST_LOG_TRIVIAL(info)<<"quote thread started ...";
+    //cout << "quote thread started .... " << endl;
     std::thread QuoteT(quoteThread);
     QuoteT.detach();
 
