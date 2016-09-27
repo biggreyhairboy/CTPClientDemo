@@ -21,7 +21,7 @@ extern int iInstrumentID;
 extern int iRequestID_quote = 0;
 double OpenPrice = 0;
 
-DBDriver dbDriver("localhost", "root", "223223", "talk_is_cheap");
+DBDriver dbDriver("192.168.56.1", "patrick", "223223", "talk_is_cheap");
 
 
 void MarketDataHandle::OnRspError(CThostFtdcRspInfoField *pRspInfo, int nRquestID, bool bIsLast) {

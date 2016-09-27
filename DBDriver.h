@@ -20,17 +20,17 @@ using namespace std;
 class DBDriver {
 public:
     //DBDriver *dbDriver;
-    string host;
-    string user;
-    string password;
-    string database;
+    std::string host;
+    std::string user;
+    std::string password;
+    std::string database;
     sql::Driver * driver;
     sql::Connection *connection;
     sql::Statement *statement;
     sql::ResultSet *resultSet;
 
     //static DBDriver GetDBDriverInstance();
-    DBDriver(string host, string user, string password, string database);
+    DBDriver(std::string host, std::string user, std::string password, std::string database);
     bool ExcuteQuery(CThostFtdcDepthMarketDataField *pDepthMarketData);
     ~DBDriver();
 private:

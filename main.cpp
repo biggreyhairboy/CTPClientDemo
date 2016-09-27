@@ -60,7 +60,7 @@ int main() {
     boost::property_tree::ini_parser::read_ini("/home/biggreyhairboy/ClionProjects/CTPClientDemo/CTPClientDemo.ini", pt);
     cout << pt.get<std::string>("Server_IP.TradeFront") << std::endl;
     logging::add_file_log("/home/biggreyhairboy/ClionProjects/CTPClientDemo/CTPClientDemo.log");
-    //DBDriver dbDriver("localhost", "root", "223223", "talk_is_cheap");
+    DBDriver dbDriver("192.168.56.1", "patrick", "223223", "talk_is_cheap");
     BOOST_LOG_TRIVIAL(info)<<"quote thread started ...";
     //cout << "quote thread started .... " << endl;
     std::thread QuoteT(quoteThread);
