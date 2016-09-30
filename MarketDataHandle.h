@@ -5,10 +5,12 @@
 #define CTPCLIENTDEMO_MARKETDATAHANDLE_H
 
 #include <string>
+#include "DBDriver.h"
 #include "ctpapi_linux64/ThostFtdcMdApi.h"
 using namespace std;
 
 class MarketDataHandle : public CThostFtdcMdSpi{
+
     //virtual void OnRspError(CThostFtdcRspInfoField* pRspInfo, int nRquestID, bool bIsLast);
 
     ///当客户端与交易后台建立起通信连接时（还未登录前），该方法被调用。
@@ -57,10 +59,21 @@ class MarketDataHandle : public CThostFtdcMdSpi{
 
 private:
     void ReqUserLogin();
-    void SubscribeMarketData();
-    void SubscribeForQuoteRsp();
+    void SubscribeMarketData(char* [], int);
+    void SubscribeForQuoteRsp(char* [], int);
     bool IsErrorRspInfo(CThostFtdcRspInfoField *pRspInfo);
-
+public:
+    CThostFtdcMdApi* pUserApi;
+    char FRONT_ADDR_quote[];
+    TThostFtdcBrokerIDType brokerIDType;
+    TThostFtdcInvestorIDType investorIDType;
+    TThostFtdcPasswordType passwordType;
+    char* ppIntrumentID[];
+    int InstrumentID;
+    DBDriver* dbDriver;
+    int iRequestID_quote = 0;
+    //double OpenPrice = 0;
+    MarketDataHandle(char[], TThostFtdcBrokerIDType, TThostFtdcInvestorIDType, TThostFtdcPasswordType, DBDriver*, char* [], int);
 };
 
 

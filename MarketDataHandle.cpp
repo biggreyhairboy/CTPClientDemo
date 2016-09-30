@@ -4,29 +4,28 @@
 
 
 #include "MarketDataHandle.h"
-#include "DBDriver.h"
-#include <iostream>
 #include <cstring>
+
+#include <string>
+#include <iostream>
 
 using namespace std;
 
-extern CThostFtdcMdApi* pUserApi;
-extern char FRONT_ADDR_quote[];
-extern TThostFtdcBrokerIDType brokerIDType;
-extern TThostFtdcInvestorIDType investorIDType;
-extern TThostFtdcPasswordType passwordType;
-
-extern char* ppIntrumentID[];
-extern int iInstrumentID;
-extern int iRequestID_quote = 0;
-double OpenPrice = 0;
-
-DBDriver dbDriver("192.168.56.1", "patrick", "223223", "talk_is_cheap");
-
-
-void MarketDataHandle::OnRspError(CThostFtdcRspInfoField *pRspInfo, int nRquestID, bool bIsLast) {
-    cerr << "--->>> " << "OnrspError" << endl;
-    IsErrorRspInfo(pRspInfo);
+MarketDataHandle::MarketDataHandle(char front_address[], TThostFtdcBrokerIDType brokerid, TThostFtdcInvestorIDType investorid, TThostFtdcPasswordType password, DBDriver* dbdriver, char* ppinsturment[], int insturmentid)
+{
+    strcpy(FRONT_ADDR_quote, front_address);
+    strcpy(brokerIDType, brokerid);
+    strcpy(investorIDType, investorid);
+    strcpy(passwordType, password);
+    strcpy(*ppIntrumentID, *ppinsturment);
+    //ppIntrumentID = ppinsturment;
+    InstrumentID = insturmentid;
+//
+//    FRONT_ADDR_quote = front_address;
+//    brokerIDType = brokerid;
+//    investorIDType = investorid;
+//    passwordType = password;
+    dbDriver = dbdriver;
 }
 
 void MarketDataHandle::OnFrontDisconnected(int nReason){
@@ -61,16 +60,16 @@ void MarketDataHandle::OnRspUserLogin(CThostFtdcRspUserLoginField *pRspUserLogin
     if (bIsLast && !IsErrorRspInfo(pRspInfo))
     {
         cerr << "--->>> current trading date = " << pUserApi->GetTradingDay() << endl;
-        SubscribeMarketData();
-        SubscribeForQuoteRsp();
+        SubscribeMarketData(ppIntrumentID, InstrumentID);
+        SubscribeForQuoteRsp(ppIntrumentID, InstrumentID);
     }
 }
 
-void MarketDataHandle::SubscribeMarketData() {
+void MarketDataHandle::SubscribeMarketData(char* ppIntrumentID[], int iInstrumentID) {
     int iResult = pUserApi->SubscribeMarketData(ppIntrumentID, iInstrumentID);
     cerr << "--->>> request subscribe market data: " << ((iResult == 0) ? "success" : "fail") << endl;
 }
-void MarketDataHandle::SubscribeForQuoteRsp() {
+void MarketDataHandle::SubscribeForQuoteRsp(char* ppIntrumentID[], int iInstrumentID) {
     int iResult = pUserApi->SubscribeForQuoteRsp(ppIntrumentID, iInstrumentID);
     cerr << "--->>> request subscribe quoting: " << ((iResult == 0) ? "success" : "fail") << endl;
     cout << "--->>> symbol " << ppIntrumentID[0] << endl;
@@ -89,7 +88,7 @@ void MarketDataHandle::OnRspUnSubForQuoteRsp(CThostFtdcSpecificInstrumentField *
 }
 
 void MarketDataHandle::OnRtnDepthMarketData(CThostFtdcDepthMarketDataField *pDepthMarketData){
-    dbDriver.ExcuteQuery(pDepthMarketData);
+    dbDriver->ExcuteQuery(pDepthMarketData);
 
     cerr << "DailyChangeRatio: " << (pDepthMarketData->OpenPrice - pDepthMarketData->AskPrice1) / pDepthMarketData->OpenPrice << endl;
     cerr << "OnRtnDepthMarketData: askprice" << pDepthMarketData->AskPrice1 << endl;

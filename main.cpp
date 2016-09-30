@@ -1,4 +1,13 @@
+/***********************************
+ * Author: Patrick Yang
+ * Encoding: GB10830
+ * Date: 20160927
+ * Function: Extract data from CTP interface and store to MySQL
+ */
+
 #include <iostream>
+#include <sstream>
+#include <vector>
 #include <thread>
 #include <boost/log/core.hpp>
 #include <boost/log/trivial.hpp>
@@ -18,56 +27,104 @@ namespace  logging = boost::log;
 CThostFtdcMdApi *pUserApi;
 CThostFtdcTraderApi * pTraderApi;
 //todo: move global config to .ini
-char FRONT_ADDR_quote[] = "tcp://180.168.146.187:10011";
-char FRONT_ADDR_trade[] = "tcp://180.168.146.187:10001";
-TThostFtdcBrokerIDType brokerIDType = "9999";
-TThostFtdcInvestorIDType investorIDType = "039395";
-TThostFtdcPasswordType passwordType = "yjk19890412";
-char *ppIntrumentID[] = {"rb1610", "rb1701"};
-int iInstrumentID = 2;
 
-TThostFtdcInstrumentIDType INSTRUMENT_ID = "rb1610";
-TThostFtdcDirectionType DIRECTION = THOST_FTDC_D_Sell;
-TThostFtdcPriceType LIMIT_PRICE = 2430;
-int iRequestID_trade = 0;
 
-void quoteThread()
+//交易部分先不写
+//TThostFtdcInstrumentIDType INSTRUMENT_ID = "rb1701";
+//TThostFtdcDirectionType DIRECTION = THOST_FTDC_D_Sell;
+//TThostFtdcPriceType LIMIT_PRICE = 2430;
+//int iRequestID_trade = 0;
+
+void split(const string &s, char delim, vector<string> &elems);
+vector<string> split(const string &s, char delim);
+
+
+void split(const string &s, char delim, vector<string> &elems){
+    stringstream ss;
+    ss.str(s);
+    string item;
+    while(getline(ss, item, delim)){
+        elems.push_back(item);
+    }
+}
+
+vector<string> split(const string &s, char delim){
+    vector<string> elems;
+    split(s, delim, elems);
+    return elems;
+}
+
+void quoteThread(char FRONT_ADDR_quote[], TThostFtdcBrokerIDType brokerid, TThostFtdcInvestorIDType investorid, TThostFtdcPasswordType password, DBDriver* dbdriver, char* ppinsturment[], int instrument )
 {
     pUserApi = CThostFtdcMdApi::CreateFtdcMdApi();
-    CThostFtdcMdSpi *pMarketDataHandle = new MarketDataHandle();
+    CThostFtdcMdSpi *pMarketDataHandle = new MarketDataHandle(FRONT_ADDR_quote, brokerid, investorid, password, dbdriver, ppinsturment, instrument);
     pUserApi->RegisterSpi(pMarketDataHandle);
     pUserApi->RegisterFront(FRONT_ADDR_quote);
     pUserApi->Init();
     pUserApi->Join();
 }
 
-void tradeThread()
-{
-    pTraderApi = CThostFtdcTraderApi::CreateFtdcTraderApi();
-    TradingHandle *pTradingHandle = new TradingHandle();
-    pTraderApi->RegisterSpi((CThostFtdcTraderSpi*) pTradingHandle);
-    pTraderApi->SubscribePublicTopic(THOST_TERT_QUICK);
-    pTraderApi->SubscribePrivateTopic(THOST_TERT_QUICK);
-    pTraderApi->RegisterFront(FRONT_ADDR_trade);
-    pTraderApi->Init();
-    pTraderApi->Join();
-    pTraderApi->Release();
-}
+//void tradeThread()
+//{
+//    pTraderApi = CThostFtdcTraderApi::CreateFtdcTraderApi();
+//    TradingHandle *pTradingHandle = new TradingHandle();
+//    pTraderApi->RegisterSpi((CThostFtdcTraderSpi*) pTradingHandle);
+//    pTraderApi->SubscribePublicTopic(THOST_TERT_QUICK);
+//    pTraderApi->SubscribePrivateTopic(THOST_TERT_QUICK);
+//    pTraderApi->RegisterFront(FRONT_ADDR_trade);
+//    pTraderApi->Init();
+//    pTraderApi->Join();
+//    pTraderApi->Release();
+//}
 
 int main() {
     cout << "开始吧" <<endl;
+    //read config
     boost::property_tree::ptree pt;
     boost::property_tree::ini_parser::read_ini("/home/biggreyhairboy/ClionProjects/CTPClientDemo/CTPClientDemo.ini", pt);
-    cout << pt.get<std::string>("Server_IP.TradeFront") << std::endl;
-    logging::add_file_log("/home/biggreyhairboy/ClionProjects/CTPClientDemo/CTPClientDemo.log");
-    DBDriver dbDriver("192.168.56.1", "patrick", "223223", "talk_is_cheap");
+    //server
+    string MF= pt.get<std::string>("Server_IP.MarketFront");
+    string TF = pt.get<std::string>("Server_IP.TradeFront");
+    const int chararraylength = 50;
+    char FRONT_ADDR_quote[chararraylength];
+    char FRONT_ADDR_trade[chararraylength];
+    strcpy(FRONT_ADDR_quote, MF.c_str());
+    strcpy(FRONT_ADDR_trade, TF.c_str());
+    //account
+    TThostFtdcBrokerIDType brokerIDType;
+    strcpy(brokerIDType, pt.get<std::string>("Account.BrokerID").c_str());
+    TThostFtdcInvestorIDType investorIDType;
+    strcpy(investorIDType, pt.get<std::string>("Account.InvestorID").c_str());
+    TThostFtdcPasswordType passwordType;
+    strcpy(passwordType, pt.get<std::string>("Account.Password").c_str());
+    //database
+    string Server = pt.get<std::string>("Database.Server");
+    string User = pt.get<std::string>("Database.User");
+    string Password = pt.get<std::string>("Database.Password");
+    string Scheme = pt.get<std::string>("Database.Scheme");
+    DBDriver dbDriver(Server, User, Password, Scheme);
+
+    //market
+    int iInstrumentID = 2;
+    string SubscribeSymbolList = pt.get<std::string>("MarketData.SubscribeSymbolList");
+    vector<string> vs(split(SubscribeSymbolList, ','));
+    char* ppIntrumentID[vs.size()];
+    int n = 0;
+    for(vector<string>::iterator iter = vs.begin(); iter != vs.end(); iter++)
+    {
+        strcpy(ppIntrumentID[n], (*iter).c_str());
+        n++;
+    }
+    //other config
+    logging::add_file_log(pt.get<std::string>("CTPClientDemo.LogPath"));
+
     BOOST_LOG_TRIVIAL(info)<<"quote thread started ...";
     //cout << "quote thread started .... " << endl;
-    std::thread QuoteT(quoteThread);
+    std::thread QuoteT(quoteThread, FRONT_ADDR_quote, brokerIDType, investorIDType, passwordType, dbDriver, ppIntrumentID,iInstrumentID);
     QuoteT.detach();
 
-    std::thread TradingT(tradeThread);
-    TradingT.detach();
+//    std::thread TradingT(tradeThread);
+//    TradingT.detach();
 
 //todo: add trading logic
     getchar();
