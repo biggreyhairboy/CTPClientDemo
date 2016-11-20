@@ -10,7 +10,19 @@
 using namespace std;
 
 class MarketDataHandle : public CThostFtdcMdSpi{
-
+public:
+    CThostFtdcMdApi* pUserApi;
+    char FRONT_ADDR_quote[];
+    TThostFtdcBrokerIDType brokerIDType;
+    TThostFtdcInvestorIDType investorIDType;
+    TThostFtdcPasswordType passwordType;
+    char* ppIntrumentID[10];
+    int InstrumentID;
+    DBDriver* dbDriver;
+    int iRequestID_quote = 0;
+    //double OpenPrice = 0;
+    MarketDataHandle(char *, TThostFtdcBrokerIDType, TThostFtdcInvestorIDType, TThostFtdcPasswordType, DBDriver *,
+                     vector<string>, int);
     //virtual void OnRspError(CThostFtdcRspInfoField* pRspInfo, int nRquestID, bool bIsLast);
 
     ///当客户端与交易后台建立起通信连接时（还未登录前），该方法被调用。
@@ -62,18 +74,6 @@ private:
     void SubscribeMarketData(char* [], int);
     void SubscribeForQuoteRsp(char* [], int);
     bool IsErrorRspInfo(CThostFtdcRspInfoField *pRspInfo);
-public:
-    CThostFtdcMdApi* pUserApi;
-    char FRONT_ADDR_quote[];
-    TThostFtdcBrokerIDType brokerIDType;
-    TThostFtdcInvestorIDType investorIDType;
-    TThostFtdcPasswordType passwordType;
-    char* ppIntrumentID[];
-    int InstrumentID;
-    DBDriver* dbDriver;
-    int iRequestID_quote = 0;
-    //double OpenPrice = 0;
-    MarketDataHandle(char[], TThostFtdcBrokerIDType, TThostFtdcInvestorIDType, TThostFtdcPasswordType, DBDriver*, char* [], int);
 };
 
 

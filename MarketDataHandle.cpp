@@ -10,15 +10,28 @@
 #include <iostream>
 
 using namespace std;
-
-MarketDataHandle::MarketDataHandle(char front_address[], TThostFtdcBrokerIDType brokerid, TThostFtdcInvestorIDType investorid, TThostFtdcPasswordType password, DBDriver* dbdriver, char* ppinsturment[], int insturmentid)
+//如果实在不行就还是用全局变量，虽然这不是个好的选择
+//extern int instrumentid =
+//extern char*
+MarketDataHandle::MarketDataHandle(char *front_address, TThostFtdcBrokerIDType brokerid,
+                                   TThostFtdcInvestorIDType investorid, TThostFtdcPasswordType password,
+                                   DBDriver *dbdriver, vector<string> ppinsturment, int insturmentid)
 {
     strcpy(FRONT_ADDR_quote, front_address);
     strcpy(brokerIDType, brokerid);
     strcpy(investorIDType, investorid);
     strcpy(passwordType, password);
-    strcpy(*ppIntrumentID, *ppinsturment);
-    //ppIntrumentID = ppinsturment;
+    //strcpy(*ppIntrumentID, *ppinsturment);
+    //ppIntrumentID(ppinsturment);
+    //char * ppIntrumentID[] = new char* [ppinsturment.size()];//这里需要的是复制一个数组
+    int n = 0;
+    //可以使用std::copy
+    for(vector<string>::iterator iter = ppinsturment.begin(); iter != ppinsturment.end(); iter++)
+    {
+        string s = *iter;
+        strcpy(ppIntrumentID[n],(*iter).c_str());
+        n++;
+    }
     InstrumentID = insturmentid;
 //
 //    FRONT_ADDR_quote = front_address;
@@ -60,14 +73,14 @@ void MarketDataHandle::OnRspUserLogin(CThostFtdcRspUserLoginField *pRspUserLogin
     if (bIsLast && !IsErrorRspInfo(pRspInfo))
     {
         cerr << "--->>> current trading date = " << pUserApi->GetTradingDay() << endl;
-        SubscribeMarketData(ppIntrumentID, InstrumentID);
-        SubscribeForQuoteRsp(ppIntrumentID, InstrumentID);
     }
 }
 
 void MarketDataHandle::SubscribeMarketData(char* ppIntrumentID[], int iInstrumentID) {
     int iResult = pUserApi->SubscribeMarketData(ppIntrumentID, iInstrumentID);
     cerr << "--->>> request subscribe market data: " << ((iResult == 0) ? "success" : "fail") << endl;
+    //SubscribeMarketData(ppIntrumentID, InstrumentID);
+    SubscribeForQuoteRsp(ppIntrumentID, InstrumentID);
 }
 void MarketDataHandle::SubscribeForQuoteRsp(char* ppIntrumentID[], int iInstrumentID) {
     int iResult = pUserApi->SubscribeForQuoteRsp(ppIntrumentID, iInstrumentID);
@@ -110,6 +123,11 @@ bool MarketDataHandle::IsErrorRspInfo(CThostFtdcRspInfoField *pRspInfo) {
         cerr << "--->>> ErrorID = " << pRspInfo->ErrorID << ", ErrorMsg= " << pRspInfo->ErrorMsg << endl;
     }
     return bResult;
+}
+
+void MarketDataHandle::OnRspError(CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast)
+{
+    cerr << "error on responce"<< endl;
 }
 
 

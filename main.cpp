@@ -54,10 +54,12 @@ vector<string> split(const string &s, char delim){
     return elems;
 }
 
-void quoteThread(char FRONT_ADDR_quote[], TThostFtdcBrokerIDType brokerid, TThostFtdcInvestorIDType investorid, TThostFtdcPasswordType password, DBDriver* dbdriver, char* ppinsturment[], int instrument )
+void quoteThread(char* FRONT_ADDR_quote, TThostFtdcBrokerIDType brokerid, TThostFtdcInvestorIDType investorid,
+                 TThostFtdcPasswordType password, DBDriver* dbdriver, vector<string> ppinsturment, int instrument )
 {
     pUserApi = CThostFtdcMdApi::CreateFtdcMdApi();
-    CThostFtdcMdSpi *pMarketDataHandle = new MarketDataHandle(FRONT_ADDR_quote, brokerid, investorid, password, dbdriver, ppinsturment, instrument);
+    CThostFtdcMdSpi *pMarketDataHandle = new MarketDataHandle(FRONT_ADDR_quote, brokerid, investorid,
+                                                              password, dbdriver, ppinsturment, instrument);
     pUserApi->RegisterSpi(pMarketDataHandle);
     pUserApi->RegisterFront(FRONT_ADDR_quote);
     pUserApi->Init();
@@ -107,20 +109,21 @@ int main() {
     //market
     int iInstrumentID = 2;
     string SubscribeSymbolList = pt.get<std::string>("MarketData.SubscribeSymbolList");
-    vector<string> vs(split(SubscribeSymbolList, ','));
-    char* ppIntrumentID[vs.size()];
-    int n = 0;
-    for(vector<string>::iterator iter = vs.begin(); iter != vs.end(); iter++)
-    {
-        strcpy(ppIntrumentID[n], (*iter).c_str());
-        n++;
-    }
+    vector<string> ppIntrumentID(split(SubscribeSymbolList, ','));
+//    char* ppIntrumentID[vs.size()];
+//    int n = 0;
+//    for(vector<string>::iterator iter = vs.begin(); iter != vs.end(); iter++)
+//    {
+//        strcpy(ppIntrumentID[n], (*iter).c_str());
+//        n++;
+//    }
     //other config
     logging::add_file_log(pt.get<std::string>("CTPClientDemo.LogPath"));
 
     BOOST_LOG_TRIVIAL(info)<<"quote thread started ...";
     //cout << "quote thread started .... " << endl;
-    std::thread QuoteT(quoteThread, FRONT_ADDR_quote, brokerIDType, investorIDType, passwordType, dbDriver, ppIntrumentID,iInstrumentID);
+    std::thread QuoteT(quoteThread, FRONT_ADDR_quote, brokerIDType, investorIDType, passwordType,
+                       &dbDriver, ppIntrumentID,iInstrumentID);
     QuoteT.detach();
 
 //    std::thread TradingT(tradeThread);
