@@ -25,16 +25,11 @@ MarketDataHandle::MarketDataHandle(char *front_address, TThostFtdcBrokerIDType b
     //可以使用std::copy
     for(vector<string>::iterator iter = ppinsturment.begin(); iter != ppinsturment.end(); iter++)
     {
+        //将vector数组抓换乘char* 数组
         ppIntrumentID[n] = (*iter).c_str();
-        //strcpy(ppIntrumentID[n],(*iter).c_str());
         n++;
     }
     InstrumentID = insturmentid;
-//
-//    FRONT_ADDR_quote = front_address;
-//    brokerIDType = brokerid;
-//    investorIDType = investorid;
-//    passwordType = password;
     dbDriver = dbdriver;
 }
 

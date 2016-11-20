@@ -16,7 +16,7 @@ public:
     TThostFtdcBrokerIDType brokerIDType;
     TThostFtdcInvestorIDType investorIDType;
     TThostFtdcPasswordType passwordType;
-    char* ppIntrumentID[10];
+    const char* ppIntrumentID[10];
     int InstrumentID;
     DBDriver* dbDriver;
     int iRequestID_quote = 0;
