@@ -21,15 +21,12 @@ MarketDataHandle::MarketDataHandle(char *front_address, TThostFtdcBrokerIDType b
     strcpy(brokerIDType, brokerid);
     strcpy(investorIDType, investorid);
     strcpy(passwordType, password);
-    //strcpy(*ppIntrumentID, *ppinsturment);
-    //ppIntrumentID(ppinsturment);
-    //char * ppIntrumentID[] = new char* [ppinsturment.size()];//这里需要的是复制一个数组
     int n = 0;
     //可以使用std::copy
     for(vector<string>::iterator iter = ppinsturment.begin(); iter != ppinsturment.end(); iter++)
     {
-        string s = *iter;
-        strcpy(ppIntrumentID[n],(*iter).c_str());
+        ppIntrumentID[n] = (*iter).c_str();
+        //strcpy(ppIntrumentID[n],(*iter).c_str());
         n++;
     }
     InstrumentID = insturmentid;
