@@ -8,25 +8,22 @@
 
 #include <string>
 #include <iostream>
-
 using namespace std;
-//如果实在不行就还是用全局变量，虽然这不是个好的选择
-//extern int instrumentid =
-//extern char*
 MarketDataHandle::MarketDataHandle(char *front_address, TThostFtdcBrokerIDType brokerid,
                                    TThostFtdcInvestorIDType investorid, TThostFtdcPasswordType password,
                                    DBDriver *dbdriver, vector<string> ppinsturment, int insturmentid)
 {
-    strcpy(FRONT_ADDR_quote, front_address);
-    strcpy(brokerIDType, brokerid);
-    strcpy(investorIDType, investorid);
-    strcpy(passwordType, password);
+    strcpy(this->FRONT_ADDR_quote, front_address);
+    strcpy(this->brokerIDType, brokerid);
+    strcpy(this->investorIDType, investorid);
+    strcpy(this->passwordType, password);
+    this->iRequestID_quote = 0;
     int n = 0;
     //可以使用std::copy
     for(vector<string>::iterator iter = ppinsturment.begin(); iter != ppinsturment.end(); iter++)
     {
-        //将vector数组抓换乘char* 数组
-        ppIntrumentID[n] = (*iter).c_str();
+        //将vector数组转换成char* 数组
+        this->ppIntrumentID[n] = (*iter).c_str();
         n++;
     }
     InstrumentID = insturmentid;
