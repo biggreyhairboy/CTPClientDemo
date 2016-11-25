@@ -6,33 +6,27 @@
 #include <iostream>
 #include <thread>
 #include "TradingHandle.h"
-
+#include "ctpapi_linux64/ThostFtdcTraderApi.h"
 using namespace std;
 
-// trader 参数
-extern CThostFtdcTraderApi* pTraderApi;
+TradingHandle::TradingHandle(CThostFtdcTraderApi* iTraderApi, char* front_address, TThostFtdcBrokerIDType brokerid,
+                             TThostFtdcInvestorIDType investorid, TThostFtdcPasswordType password, DBDriver *dbdriver,
+                             TThostFtdcInstrumentIDType INSTRUMENT_ID,
+                             TThostFtdcPriceType LIMIT_PRICE, int  quantity, TThostFtdcDirectionType DIRECTION)
+{
+    this->pTraderApi = iTraderApi;
+    this->dbDrvier = dbdriver;
+    strcpy(this->FRONT_ADDR_trade, front_address);
+    strcpy(this->brokerIDType, brokerid);
+    strcpy(this->investorIDType, investorid);
+    strcpy(this->passwordType, password);
 
-// 配置参数
-extern char FRONT_ADDR_trade[];		// 前置地址
-extern char brokerIDType[];		// 经纪公司代码
-extern char investorIDType[];		// 投资者代码
-extern char passwordType[];			// 用户密码
-extern char INSTRUMENT_ID[];	// 合约代码
-extern TThostFtdcPriceType	LIMIT_PRICE;	// 价格
-extern TThostFtdcDirectionType	DIRECTION;	// 买卖方向
-
-// 请求编号
-extern int iRequestID_trade;
-
-
-// 会话参数
-TThostFtdcFrontIDType	FRONT_ID;	//前置编号
-TThostFtdcSessionIDType	SESSION_ID;	//会话编号
-TThostFtdcOrderRefType	ORDER_REF;	//报单引用
-TThostFtdcOrderRefType	EXECORDER_REF;	//执行宣告引用
-TThostFtdcOrderRefType	FORQUOTE_REF;	//询价引用
-TThostFtdcOrderRefType	QUOTE_REF;	//报价引用
-
+    strcpy(this->INSTRUMENT_ID, INSTRUMENT_ID);
+    this->LIMIT_PRICE = LIMIT_PRICE;
+    this->DIRECTION = DIRECTION;
+    this->quantity = quantity;
+    int iRequestID_trade = 0;
+}
 // 流控判断
 bool IsFlowControl(int iResult)
 {
@@ -87,6 +81,7 @@ void TradingHandle::ReqSettlementInfoConfirm()
     strcpy(req.InvestorID, investorIDType);
     int iResult = pTraderApi->ReqSettlementInfoConfirm(&req, ++iRequestID_trade);
     cerr << "trade---->>> 投资者结算结果确认: " << iResult << ((iResult == 0) ? ", 成功" : ", 失败") << endl;
+    ReqOrderInsert();
 }
 
 void TradingHandle::OnRspSettlementInfoConfirm(CThostFtdcSettlementInfoConfirmField *pSettlementInfoConfirm, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast)
@@ -97,6 +92,7 @@ void TradingHandle::OnRspSettlementInfoConfirm(CThostFtdcSettlementInfoConfirmFi
         ///请求查询合约
         ReqQryInstrument();
     }
+
 }
 
 void TradingHandle::ReqQryInstrument()
@@ -228,7 +224,7 @@ void TradingHandle::ReqOrderInsert()
     ///价格
     req.LimitPrice = LIMIT_PRICE;
     ///数量: 1
-    req.VolumeTotalOriginal = 1;
+    req.VolumeTotalOriginal = quantity;
     ///有效期类型: 当日有效
     req.TimeCondition = THOST_FTDC_TC_GFD;
     ///GTD日期

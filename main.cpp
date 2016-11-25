@@ -21,23 +21,11 @@
 #include "TradingHandle.h"
 #include "DBDriver.h"
 
-
 using namespace std;
 namespace  logging = boost::log;
-CThostFtdcMdApi *pUserApi;
-CThostFtdcTraderApi * pTraderApi;
-//todo: move global config to .ini
-
-
-//交易部分先不写
-//TThostFtdcInstrumentIDType INSTRUMENT_ID = "rb1701";
-//TThostFtdcDirectionType DIRECTION = THOST_FTDC_D_Sell;
-//TThostFtdcPriceType LIMIT_PRICE = 2430;
-//int iRequestID_trade = 0;
 
 void split(const string &s, char delim, vector<string> &elems);
 vector<string> split(const string &s, char delim);
-
 
 void split(const string &s, char delim, vector<string> &elems){
     stringstream ss;
@@ -57,8 +45,8 @@ vector<string> split(const string &s, char delim){
 void quoteThread(char* FRONT_ADDR_quote, TThostFtdcBrokerIDType brokerid, TThostFtdcInvestorIDType investorid,
                  TThostFtdcPasswordType password, DBDriver* dbdriver, vector<string> ppinsturment, int instrument )
 {
-    pUserApi = CThostFtdcMdApi::CreateFtdcMdApi();
-    CThostFtdcMdSpi *pMarketDataHandle = new MarketDataHandle(FRONT_ADDR_quote, brokerid, investorid,
+    CThostFtdcMdApi* pUserApi = CThostFtdcMdApi::CreateFtdcMdApi();
+    CThostFtdcMdSpi *pMarketDataHandle = new MarketDataHandle(pUserApi, FRONT_ADDR_quote, brokerid, investorid,
                                                               password, dbdriver, ppinsturment, instrument);
     pUserApi->RegisterSpi(pMarketDataHandle);
     pUserApi->RegisterFront(FRONT_ADDR_quote);
@@ -66,21 +54,25 @@ void quoteThread(char* FRONT_ADDR_quote, TThostFtdcBrokerIDType brokerid, TThost
     pUserApi->Join();
 }
 
-//void tradeThread()
-//{
-//    pTraderApi = CThostFtdcTraderApi::CreateFtdcTraderApi();
-//    TradingHandle *pTradingHandle = new TradingHandle();
-//    pTraderApi->RegisterSpi((CThostFtdcTraderSpi*) pTradingHandle);
-//    pTraderApi->SubscribePublicTopic(THOST_TERT_QUICK);
-//    pTraderApi->SubscribePrivateTopic(THOST_TERT_QUICK);
-//    pTraderApi->RegisterFront(FRONT_ADDR_trade);
-//    pTraderApi->Init();
-//    pTraderApi->Join();
-//    pTraderApi->Release();
-//}
+void tradeThread(char* FRONT_ADDR_trade, TThostFtdcBrokerIDType brokerid, TThostFtdcInvestorIDType investorid,
+                 TThostFtdcPasswordType password, DBDriver* dbdriver, TThostFtdcInstrumentIDType INSTRUMENT_ID,
+                 TThostFtdcPriceType LIMIT_PRICE, int quantity, TThostFtdcDirectionType DIRECTION)
+{
+    CThostFtdcTraderApi* pTraderApi = CThostFtdcTraderApi::CreateFtdcTraderApi();
+    TradingHandle *pTradingHandle = new TradingHandle(pTraderApi, FRONT_ADDR_trade, brokerid, investorid, password, dbdriver,
+                                                      INSTRUMENT_ID, LIMIT_PRICE, quantity,  DIRECTION);
+    pTraderApi->RegisterSpi((CThostFtdcTraderSpi*) pTradingHandle);
+    pTraderApi->SubscribePublicTopic(THOST_TERT_QUICK);
+    pTraderApi->SubscribePrivateTopic(THOST_TERT_QUICK);
+    pTraderApi->RegisterFront(FRONT_ADDR_trade);
+    pTraderApi->Init();
+    pTraderApi->Join();
+    pTraderApi->Release();
+}
 
 int main() {
     cout << "开始吧" <<endl;
+    //配置文件加上default值，防止exception
     //read config
     boost::property_tree::ptree pt;
     boost::property_tree::ini_parser::read_ini("/home/biggreyhairboy/ClionProjects/CTPClientDemo/CTPClientDemo.ini", pt);
@@ -105,31 +97,32 @@ int main() {
     string Password = pt.get<std::string>("Database.Password");
     string Scheme = pt.get<std::string>("Database.Scheme");
     DBDriver dbDriver(Server, User, Password, Scheme);
-
     //market
     int iInstrumentID = 2;
     string SubscribeSymbolList = pt.get<std::string>("MarketData.SubscribeSymbolList");
     vector<string> ppIntrumentID(split(SubscribeSymbolList, ','));
-//    char* ppIntrumentID[vs.size()];
-//    int n = 0;
-//    for(vector<string>::iterator iter = vs.begin(); iter != vs.end(); iter++)
-//    {
-//        strcpy(ppIntrumentID[n], (*iter).c_str());
-//        n++;
-//    }
-    //other config
     logging::add_file_log(pt.get<std::string>("CTPClientDemo.LogPath"));
+    //trading
+    string tradeinstrument = pt.get<std::string>("Trading.tradeinstrument");
+    char tinstrumemt[chararraylength];
+    strcpy(tinstrumemt, tradeinstrument.c_str());
+    int quantity = pt.get<int>("Trading.quantity");
+    double price = pt.get<double>("Trading.price");
+    string strdirection = pt.get<std::string>("Trading.direction");
+    char direction = strdirection.at(0);
+    strcpy(FRONT_ADDR_quote, TF.c_str());
 
-    BOOST_LOG_TRIVIAL(info)<<"quote thread started ...";
-    //cout << "quote thread started .... " << endl;
-    std::thread QuoteT(quoteThread, FRONT_ADDR_quote, brokerIDType, investorIDType, passwordType,
-                       &dbDriver, ppIntrumentID,iInstrumentID);
-    QuoteT.detach();
+//    BOOST_LOG_TRIVIAL(info)<<"quote thread started ...";
+//    //cout << "quote thread started .... " << endl;
+//    std::thread QuoteT(quoteThread, FRONT_ADDR_quote, brokerIDType, investorIDType, passwordType,
+//                       &dbDriver, ppIntrumentID,iInstrumentID);
+//    QuoteT.detach();
 
-//    std::thread TradingT(tradeThread);
-//    TradingT.detach();
+    BOOST_LOG_TRIVIAL(info)<<"trade thread started ...";
+    std::thread TradingT(tradeThread, FRONT_ADDR_quote, brokerIDType, investorIDType, passwordType,
+                       &dbDriver, tinstrumemt, price, quantity, direction);
+    TradingT.detach();
 
-//todo: add trading logic
     getchar();
     return 0;
 }
@@ -137,13 +130,9 @@ int main() {
 /*
 cmake_minimum_required(VERSION 3.5)
 project(CTPClientDemo)
-
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 #set(CMAKE_VERBOSE_MAKEFILE ON)
 #add_subdirectory(ctpapi_linux64)
-
-
-
 set(SOURCE_FILES main.cpp MarketDataHandle.cpp MarketDataHandle.h)
 #add_library(TCPClientDemo ${SOURCE_FILES})
 #include_directories(${PROJECT_SOURCE_DIR})

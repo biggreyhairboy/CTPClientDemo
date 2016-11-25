@@ -5,27 +5,20 @@
 
 #include "MarketDataHandle.h"
 #include <cstring>
-
 #include <string>
 #include <iostream>
 using namespace std;
-MarketDataHandle::MarketDataHandle(char *front_address, TThostFtdcBrokerIDType brokerid,
+MarketDataHandle::MarketDataHandle(CThostFtdcMdApi* iMdapi, char *front_address, TThostFtdcBrokerIDType brokerid,
                                    TThostFtdcInvestorIDType investorid, TThostFtdcPasswordType password,
                                    DBDriver *dbdriver, vector<string> ppinsturment, int insturmentid)
 {
+    pUserApi = iMdapi;
     strcpy(this->FRONT_ADDR_quote, front_address);
     strcpy(this->brokerIDType, brokerid);
     strcpy(this->investorIDType, investorid);
     strcpy(this->passwordType, password);
     this->iRequestID_quote = 0;
-    int n = 0;
-    //可以使用std::copy
-    for(vector<string>::iterator iter = ppinsturment.begin(); iter != ppinsturment.end(); iter++)
-    {
-        //将vector数组转换成char* 数组
-        this->ppIntrumentID[n] = (*iter).c_str();
-        n++;
-    }
+    strppInstrument = ppinsturment;
     InstrumentID = insturmentid;
     dbDriver = dbdriver;
 }
@@ -63,6 +56,22 @@ void MarketDataHandle::OnRspUserLogin(CThostFtdcRspUserLoginField *pRspUserLogin
     {
         cerr << "--->>> current trading date = " << pUserApi->GetTradingDay() << endl;
     }
+
+    char** instrumentarry= new char*[strppInstrument.size()];
+//    int n = 0;
+//    //可以使用std::copy
+//    for(vector<string>::iterator iter = strppInstrument.begin(); iter != strppInstrument.end(); iter++)
+//    {
+//        //将vector数组转换成char* 数组
+//        strcpy(instrumentarry[n], (*iter).c_str());
+//        n++;
+//    }
+    for(size_t i = 0; i < strppInstrument.size(); ++i)
+    {
+        instrumentarry[i] = new char[strppInstrument[i].size() + 1];
+        std::strcpy(instrumentarry[i], strppInstrument[i].c_str());
+    }
+    SubscribeMarketData(instrumentarry, InstrumentID);
 }
 
 void MarketDataHandle::SubscribeMarketData(char* ppIntrumentID[], int iInstrumentID) {

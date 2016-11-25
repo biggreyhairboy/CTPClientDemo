@@ -6,9 +6,39 @@
 #define CTPCLIENTDEMO_TRADINGHANDLE_H
 
 #include "ctpapi_linux64/ThostFtdcTraderApi.h"
+#include "DBDriver.h"
 
 class TradingHandle : public CThostFtdcTraderSpi {
 public:
+    /// trader 参数
+    CThostFtdcTraderApi* pTraderApi;
+    DBDriver *dbDrvier;
+
+    /// 配置参数
+    char FRONT_ADDR_trade[50];		// 前置地址
+    TThostFtdcBrokerIDType brokerIDType;		// 经纪公司代码
+    TThostFtdcInvestorIDType investorIDType;		// 投资者代码
+    TThostFtdcPasswordType passwordType;			// 用户密码
+
+    /// 请求编号
+    int iRequestID_trade;
+    /// 会话参数
+    TThostFtdcFrontIDType	FRONT_ID;	//前置编号
+    TThostFtdcSessionIDType	SESSION_ID;	//会话编号
+    TThostFtdcOrderRefType	ORDER_REF;	//报单引用
+    TThostFtdcOrderRefType	EXECORDER_REF;	//执行宣告引用
+    TThostFtdcOrderRefType	FORQUOTE_REF;	//询价引用
+    TThostFtdcOrderRefType	QUOTE_REF;	//报价引用
+    ///报单参数
+    TThostFtdcInstrumentIDType INSTRUMENT_ID;
+    TThostFtdcPriceType LIMIT_PRICE;
+    TThostFtdcDirectionType DIRECTION;
+    int quantity;
+
+    ///构造函数
+    TradingHandle(CThostFtdcTraderApi*, char *, TThostFtdcBrokerIDType, TThostFtdcInvestorIDType, TThostFtdcPasswordType, DBDriver*,
+                  TThostFtdcInstrumentIDType, TThostFtdcPriceType, int, TThostFtdcDirectionType);
+
     ///当客户端与交易后台建立起通信连接时（还未登录前），该方法被调用。
     virtual void OnFrontConnected();
 

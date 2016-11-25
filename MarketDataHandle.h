@@ -11,17 +11,18 @@ using namespace std;
 
 class MarketDataHandle : public CThostFtdcMdSpi{
 public:
-    CThostFtdcMdApi* pUserApi;
-    char FRONT_ADDR_quote[];
+    CThostFtdcMdApi *pUserApi;
+    char FRONT_ADDR_quote[50];
     TThostFtdcBrokerIDType brokerIDType;
     TThostFtdcInvestorIDType investorIDType;
     TThostFtdcPasswordType passwordType;
-    const char* ppIntrumentID[10];
+    //char* ppIntrumentID[10];
+    vector<string> strppInstrument;
     int InstrumentID;
     DBDriver* dbDriver;
-    int iRequestID_quote = 0;
+    int iRequestID_quote;
     //double OpenPrice = 0;
-    MarketDataHandle(char *, TThostFtdcBrokerIDType, TThostFtdcInvestorIDType, TThostFtdcPasswordType, DBDriver *,
+    MarketDataHandle(CThostFtdcMdApi*, char *, TThostFtdcBrokerIDType, TThostFtdcInvestorIDType, TThostFtdcPasswordType, DBDriver *,
                      vector<string>, int);
     //virtual void OnRspError(CThostFtdcRspInfoField* pRspInfo, int nRquestID, bool bIsLast);
 

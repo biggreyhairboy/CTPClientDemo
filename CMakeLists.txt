@@ -14,7 +14,7 @@ ADD_DEFINITIONS(-DBOOST_ALL_DYN_LINK)
 
 
 #set(SOURCE_FILES main.cpp MarketDataHandle.cpp MarketDataHandle.h TradingHandle.cpp TradingHandle.h DBDriver.cpp DBDriver.h)
-set(SOURCE_FILES main.cpp MarketDataHandle.cpp MarketDataHandle.h DBDriver.cpp DBDriver.h)
+set(SOURCE_FILES main.cpp MarketDataHandle.cpp MarketDataHandle.h TradingHandle.cpp TradingHandle.h DBDriver.cpp DBDriver.h)
 
 #add_library(TCPClientDemo ${SOURCE_FILES})
 #include_directories(${PROJECT_SOURCE_DIR})
@@ -22,8 +22,8 @@ set(SOURCE_FILES main.cpp MarketDataHandle.cpp MarketDataHandle.h DBDriver.cpp D
 #link_directories(${PROJECT_SOURCE_DIR}/ctpapi_linux64/)
 #find_library(/home/biggreyhairboy/ClionProjects/CTPClientDemo/ctpapi_linux64 thostmduserapi.so )
 add_library(thostmduserapi SHARED IMPORTED)
-#add_library(thosttraderapi SHARED IMPORTED)
+add_library(thosttraderapi SHARED IMPORTED)
 SET_TARGET_PROPERTIES(thostmduserapi PROPERTIES IMPORTED_LOCATION ${PROJECT_SOURCE_DIR}/ctpapi_linux64/thostmduserapi.so)
-#SET_TARGET_PROPERTIES(thosttraderapi PROPERTIES IMPORTED_LOCATION ${PROJECT_SOURCE_DIR}/ctpapi_linux64/thosttraderapi.so)
+SET_TARGET_PROPERTIES(thosttraderapi PROPERTIES IMPORTED_LOCATION ${PROJECT_SOURCE_DIR}/ctpapi_linux64/thosttraderapi.so)
 add_executable(CTPClientDemo ${SOURCE_FILES})
-target_link_libraries(CTPClientDemo mysqlcppconn thostmduserapi ${CMAKE_THREAD_LIBS_INIT} ${Boost_LOG_LIBRARY} ${Boost_THREAD_LIBRARY} ${Boost_FILESYSTEM_LIBRARY} ${Boost_SYSTEM_LIBRARY})
+target_link_libraries(CTPClientDemo mysqlcppconn thostmduserapi thosttraderapi ${CMAKE_THREAD_LIBS_INIT} ${Boost_LOG_LIBRARY} ${Boost_THREAD_LIBRARY} ${Boost_FILESYSTEM_LIBRARY} ${Boost_SYSTEM_LIBRARY})
