@@ -6,6 +6,7 @@ set(CMAKE_VERBOSE_MAKEFILE ON)
 find_package(Threads)
 find_package(Boost 1.58 COMPONENTS log system thread filesystem)
 ADD_DEFINITIONS(-DBOOST_ALL_DYN_LINK)
+ADD_DEFINITIONS(-DBOOST_LOG_DYN_LINK)
 #find_library(mysql NAMES libmysql PATHS ${MYSQL_DIR}/lib)
 
 

@@ -75,7 +75,7 @@ int main() {
     //配置文件加上default值，防止exception
     //read config
     boost::property_tree::ptree pt;
-    boost::property_tree::ini_parser::read_ini("/home/biggreyhairboy/ClionProjects/CTPClientDemo/CTPClientDemo.ini", pt);
+    boost::property_tree::ini_parser::read_ini("/home/patrick/ClionProjects/CTPClientDemo/CTPClientDemo.ini", pt);
     //server
     string MF= pt.get<std::string>("Server_IP.MarketFront");
     string TF = pt.get<std::string>("Server_IP.TradeFront");
@@ -112,11 +112,11 @@ int main() {
     char direction = strdirection.at(0);
     strcpy(FRONT_ADDR_quote, TF.c_str());
 
-//    BOOST_LOG_TRIVIAL(info)<<"quote thread started ...";
-//    //cout << "quote thread started .... " << endl;
-//    std::thread QuoteT(quoteThread, FRONT_ADDR_quote, brokerIDType, investorIDType, passwordType,
-//                       &dbDriver, ppIntrumentID,iInstrumentID);
-//    QuoteT.detach();
+    BOOST_LOG_TRIVIAL(info)<<"quote thread started ...";
+    //cout << "quote thread started .... " << endl;
+    std::thread QuoteT(quoteThread, FRONT_ADDR_quote, brokerIDType, investorIDType, passwordType,
+                       &dbDriver, ppIntrumentID,iInstrumentID);
+    QuoteT.detach();
 
     BOOST_LOG_TRIVIAL(info)<<"trade thread started ...";
     std::thread TradingT(tradeThread, FRONT_ADDR_quote, brokerIDType, investorIDType, passwordType,
