@@ -7,6 +7,7 @@
 #include <cstring>
 #include <string>
 #include <iostream>
+#include <vector>
 using namespace std;
 MarketDataHandle::MarketDataHandle(CThostFtdcMdApi* iMdapi, char *front_address, TThostFtdcBrokerIDType brokerid,
                                    TThostFtdcInvestorIDType investorid, TThostFtdcPasswordType password,
@@ -77,7 +78,7 @@ void MarketDataHandle::OnRspUserLogin(CThostFtdcRspUserLoginField *pRspUserLogin
 void MarketDataHandle::SubscribeMarketData(char* ppIntrumentID[], int iInstrumentID) {
     int iResult = pUserApi->SubscribeMarketData(ppIntrumentID, iInstrumentID);
     cerr << "--->>> request subscribe market data: " << ((iResult == 0) ? "success" : "fail") << endl;
-    //SubscribeMarketData(ppIntrumentID, InstrumentID);
+    //SubscribeMarketData(ppIntrumentID,t InstrumentID);
     SubscribeForQuoteRsp(ppIntrumentID, InstrumentID);
 }
 void MarketDataHandle::SubscribeForQuoteRsp(char* ppIntrumentID[], int iInstrumentID) {
@@ -100,6 +101,18 @@ void MarketDataHandle::OnRspUnSubForQuoteRsp(CThostFtdcSpecificInstrumentField *
 
 void MarketDataHandle::OnRtnDepthMarketData(CThostFtdcDepthMarketDataField *pDepthMarketData){
     dbDriver->ExcuteQuery(pDepthMarketData);
+    if (ConsecutiveTime == 0)
+    {
+        PreviousPrice == pDepthMarketData->PreClosePrice;
+    }
+    //todo: matain a price queue of last five minutes
+
+    CThostFtdcDepthMarketDataField* LastTick;
+    int OpenInterestChange = 0;
+//    TThostFtdcRatioType	;
+
+    ///最后修改时间
+    TThostFtdcTimeType	UpdateTime;
 
     cerr << "DailyChangeRatio: " << (pDepthMarketData->OpenPrice - pDepthMarketData->AskPrice1) / pDepthMarketData->OpenPrice << endl;
     cerr << "OnRtnDepthMarketData: askprice" << pDepthMarketData->AskPrice1 << endl;

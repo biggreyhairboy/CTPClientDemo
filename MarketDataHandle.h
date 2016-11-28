@@ -21,7 +21,11 @@ public:
     int InstrumentID;
     DBDriver* dbDriver;
     int iRequestID_quote;
-    //double OpenPrice = 0;
+
+    //使用昨收价做为初始值
+    int ConsecutiveTime = 0;
+    double PreviousPrice = 0.0;
+
     MarketDataHandle(CThostFtdcMdApi*, char *, TThostFtdcBrokerIDType, TThostFtdcInvestorIDType, TThostFtdcPasswordType, DBDriver *,
                      vector<string>, int);
     //virtual void OnRspError(CThostFtdcRspInfoField* pRspInfo, int nRquestID, bool bIsLast);
