@@ -5,10 +5,16 @@
 #define CTPCLIENTDEMO_MARKETDATAHANDLE_H
 
 #include <string>
+#include <map>
 #include "DBDriver.h"
 #include "ctpapi_linux64/ThostFtdcMdApi.h"
 using namespace std;
 
+enum Trend{
+    green = -1,
+    white =0,
+    red = 1
+};
 class MarketDataHandle : public CThostFtdcMdSpi{
 public:
     CThostFtdcMdApi *pUserApi;
@@ -21,8 +27,10 @@ public:
     int InstrumentID;
     DBDriver* dbDriver;
     int iRequestID_quote;
-
+    CThostFtdcDepthMarketDataField* pPreDepthMarketData;
+    double OpenInterestChange = 0;
     //使用昨收价做为初始值
+    map<int, int> MarketTrend;
     int ConsecutiveTime = 0;
     double PreviousPrice = 0.0;
 

@@ -22,6 +22,9 @@ MarketDataHandle::MarketDataHandle(CThostFtdcMdApi* iMdapi, char *front_address,
     strppInstrument = ppinsturment;
     InstrumentID = insturmentid;
     dbDriver = dbdriver;
+    MarketTrend.insert({0, 0});
+    MarketTrend.insert({1, 0});
+    MarketTrend.insert({2, 0});
 }
 
 void MarketDataHandle::OnFrontDisconnected(int nReason){
@@ -67,7 +70,7 @@ void MarketDataHandle::OnRspUserLogin(CThostFtdcRspUserLoginField *pRspUserLogin
 //        strcpy(instrumentarry[n], (*iter).c_str());
 //        n++;
 //    }
-    for(size_t i = 0; i < strppInstrument.size(); ++i)
+    for(size_t i = 0; i < strppInstrument.size(); i++)
     {
         instrumentarry[i] = new char[strppInstrument[i].size() + 1];
         std::strcpy(instrumentarry[i], strppInstrument[i].c_str());
@@ -100,19 +103,87 @@ void MarketDataHandle::OnRspUnSubForQuoteRsp(CThostFtdcSpecificInstrumentField *
 }
 
 void MarketDataHandle::OnRtnDepthMarketData(CThostFtdcDepthMarketDataField *pDepthMarketData){
-    dbDriver->ExcuteQuery(pDepthMarketData);
-    if (ConsecutiveTime == 0)
+    //怎么初始化价格的指针
+    if (pPreDepthMarketData == NULL)
     {
-        PreviousPrice == pDepthMarketData->PreClosePrice;
+        //这里应该需要完全复制
+        pPreDepthMarketData = pDepthMarketData;
     }
+    dbDriver->ExcuteQuery(pDepthMarketData);
+    OpenInterestChange = pDepthMarketData->OpenInterest - pPreDepthMarketData->OpenInterest ;
+    if (pDepthMarketData->Volume == OpenInterestChange)
+    {
+        MarketTrend[0] = MarketTrend[0] + 1;
+        if (OpenInterestChange > 0)
+        {
+            //双开
+            cout << "双开" << endl;
+        }
+        else{
+            //双平
+            cout << "双平" << endl;
+        }
+    }
+    else if (pDepthMarketData->Volume >0 && OpenInterestChange == 00)
+    {
+        //空换 or 多换
+        MarketTrend[0] = MarketTrend[0] + 1;
+        if(pDepthMarketData->LastPrice >= pPreDepthMarketData->AskPrice1)
+        {
+            //多换
+            cout << "多换" << endl;
+        }
+        else
+        {
+            //空换
+            cout << "空换" << endl;
+        }
+    }
+    else if (OpenInterestChange > 0 && pDepthMarketData->Volume > OpenInterestChange)
+    {
+        MarketTrend[1] = MarketTrend[1] + 1;
+        if (pDepthMarketData->LastPrice  >= pPreDepthMarketData->AskPrice1)
+        {
+            //多开
+            cout << "多开" << endl;
+        }
+        else {
+            //空平
+            cout << "空平" << endl;
+        }
+
+    } else if (OpenInterestChange > 0 && pDepthMarketData->Volume > (-OpenInterestChange))
+    {
+        MarketTrend[2] = MarketTrend[2] + 1;
+        if (pDepthMarketData->LastPrice <= pPreDepthMarketData->BidPrice1)
+        {
+            //空开
+            cout << "空开" << endl;
+        } else {
+            //买平
+            cout << "买平" << endl;
+        }
+    }
+    for (map<int, int>::iterator itermap = MarketTrend.begin(); itermap != MarketTrend.end(); itermap++)
+    {
+        if((*itermap).second >=5)
+        {
+
+            ///最后修改时间
+            //TThostFtdcTimeType	UpdateTime;
+            //清空并下单
+            cout << "清空并下单" << endl;
+        }
+
+    }
+
+
     //todo: matain a price queue of last five minutes
 
     CThostFtdcDepthMarketDataField* LastTick;
     int OpenInterestChange = 0;
 //    TThostFtdcRatioType	;
 
-    ///最后修改时间
-    TThostFtdcTimeType	UpdateTime;
 
     cerr << "DailyChangeRatio: " << (pDepthMarketData->OpenPrice - pDepthMarketData->AskPrice1) / pDepthMarketData->OpenPrice << endl;
     cerr << "OnRtnDepthMarketData: askprice" << pDepthMarketData->AskPrice1 << endl;
@@ -139,6 +210,7 @@ bool MarketDataHandle::IsErrorRspInfo(CThostFtdcRspInfoField *pRspInfo) {
 void MarketDataHandle::OnRspError(CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast)
 {
     cerr << "error on responce"<< endl;
+    cerr << "error id " << pRspInfo->ErrorID << endl;
 }
 
 

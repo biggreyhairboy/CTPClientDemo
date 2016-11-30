@@ -118,10 +118,10 @@ int main() {
                        &dbDriver, ppIntrumentID,iInstrumentID);
     QuoteT.detach();
 
-    BOOST_LOG_TRIVIAL(info)<<"trade thread started ...";
-    std::thread TradingT(tradeThread, FRONT_ADDR_quote, brokerIDType, investorIDType, passwordType,
-                       &dbDriver, tinstrumemt, price, quantity, direction);
-    TradingT.detach();
+//    BOOST_LOG_TRIVIAL(info)<<"trade thread started ...";
+//    std::thread TradingT(tradeThread, FRONT_ADDR_quote, brokerIDType, investorIDType, passwordType,
+//                       &dbDriver, tinstrumemt, price, quantity, direction);
+//    TradingT.detach();
 
     getchar();
     return 0;
