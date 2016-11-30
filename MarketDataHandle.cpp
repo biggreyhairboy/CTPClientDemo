@@ -93,6 +93,7 @@ void MarketDataHandle::SubscribeForQuoteRsp(char* ppIntrumentID[], int iInstrume
 
 void MarketDataHandle::OnRspSubMarketData(CThostFtdcSpecificInstrumentField *pSpecificInstrument, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast){
     cerr << "OnRspSubmarketData" << endl;
+
 }
 
 void MarketDataHandle::OnRspSubForQuoteRsp(CThostFtdcSpecificInstrumentField *pSpecificInstrument, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast){
@@ -101,17 +102,18 @@ void MarketDataHandle::OnRspSubForQuoteRsp(CThostFtdcSpecificInstrumentField *pS
 
 void MarketDataHandle::OnRspUnSubForQuoteRsp(CThostFtdcSpecificInstrumentField *pSpecificInstrument, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast){
     cerr << "OnRspUnSubForQuoteRsp" << endl;
+
 }
 
 void MarketDataHandle::OnRtnDepthMarketData(CThostFtdcDepthMarketDataField *pDepthMarketData){
     //怎么初始化价格的指针
-    if (pPreDepthMarketData == NULL)
+    if (pPreDepthMarketData.LastPrice == 0)
     {
         //这里应该需要完全复制
-        pPreDepthMarketData = pDepthMarketData;
+        pPreDepthMarketData = *pDepthMarketData;
     }
     dbDriver->ExcuteQuery(pDepthMarketData);
-    OpenInterestChange = pDepthMarketData->OpenInterest - pPreDepthMarketData->OpenInterest ;
+    OpenInterestChange = pDepthMarketData->OpenInterest - pPreDepthMarketData.OpenInterest ;
     if (pDepthMarketData->Volume == OpenInterestChange)
     {
         MarketTrend[0] = MarketTrend[0] + 1;
@@ -129,7 +131,7 @@ void MarketDataHandle::OnRtnDepthMarketData(CThostFtdcDepthMarketDataField *pDep
     {
         //空换 or 多换
         MarketTrend[0] = MarketTrend[0] + 1;
-        if(pDepthMarketData->LastPrice >= pPreDepthMarketData->AskPrice1)
+        if(pDepthMarketData->LastPrice >= pPreDepthMarketData.AskPrice1)
         {
             //多换
             cout << "多换" << endl;
@@ -143,7 +145,7 @@ void MarketDataHandle::OnRtnDepthMarketData(CThostFtdcDepthMarketDataField *pDep
     else if (OpenInterestChange > 0 && pDepthMarketData->Volume > OpenInterestChange)
     {
         MarketTrend[1] = MarketTrend[1] + 1;
-        if (pDepthMarketData->LastPrice  >= pPreDepthMarketData->AskPrice1)
+        if (pDepthMarketData->LastPrice  >= pPreDepthMarketData.AskPrice1)
         {
             //多开
             cout << "多开" << endl;
@@ -156,7 +158,7 @@ void MarketDataHandle::OnRtnDepthMarketData(CThostFtdcDepthMarketDataField *pDep
     } else if (OpenInterestChange > 0 && pDepthMarketData->Volume > (-OpenInterestChange))
     {
         MarketTrend[2] = MarketTrend[2] + 1;
-        if (pDepthMarketData->LastPrice <= pPreDepthMarketData->BidPrice1)
+        if (pDepthMarketData->LastPrice <= pPreDepthMarketData.BidPrice1)
         {
             //空开
             cout << "空开" << endl;
@@ -172,7 +174,7 @@ void MarketDataHandle::OnRtnDepthMarketData(CThostFtdcDepthMarketDataField *pDep
             ///最后修改时间
             //TThostFtdcTimeType	UpdateTime;
             //清空并下单
-            cout << "清空并下单" << endl;
+            ///cout << "清空并下单" << endl;
         }
     }
 
@@ -184,8 +186,8 @@ void MarketDataHandle::OnRtnDepthMarketData(CThostFtdcDepthMarketDataField *pDep
 //    TThostFtdcRatioType	;
 
 
-    cerr << "DailyChangeRatio: " << (pDepthMarketData->OpenPrice - pDepthMarketData->AskPrice1) / pDepthMarketData->OpenPrice << endl;
-    cerr << "OnRtnDepthMarketData: askprice" << pDepthMarketData->AskPrice1 << endl;
+    //cerr << "DailyChangeRatio: " << (pDepthMarketData->OpenPrice - pDepthMarketData->AskPrice1) / pDepthMarketData->OpenPrice << endl;
+    //cerr << "OnRtnDepthMarketData: askprice" << pDepthMarketData->AskPrice1 << endl;
 
     if (iRequestID_quote > 15)
     {

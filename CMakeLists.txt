@@ -15,7 +15,7 @@ ADD_DEFINITIONS(-DBOOST_LOG_DYN_LINK)
 
 
 #set(SOURCE_FILES main.cpp MarketDataHandle.cpp MarketDataHandle.h TradingHandle.cpp TradingHandle.h DBDriver.cpp DBDriver.h)
-set(SOURCE_FILES main.cpp MarketDataHandle.cpp MarketDataHandle.h TradingHandle.cpp TradingHandle.h DBDriver.cpp DBDriver.h)
+set(SOURCE_FILES main.cpp MarketDataHandle.cpp MarketDataHandle.h TradingHandle.cpp TradingHandle.h DBDriver.cpp DBDriver.h Utility.cpp Utility.h)
 
 #add_library(TCPClientDemo ${SOURCE_FILES})
 #include_directories(${PROJECT_SOURCE_DIR})

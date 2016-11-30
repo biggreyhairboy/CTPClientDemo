@@ -27,7 +27,7 @@ public:
     int InstrumentID;
     DBDriver* dbDriver;
     int iRequestID_quote;
-    CThostFtdcDepthMarketDataField* pPreDepthMarketData;
+    CThostFtdcDepthMarketDataField pPreDepthMarketData;
     double OpenInterestChange = 0;
     //使用昨收价做为初始值
     map<int, int> MarketTrend;
@@ -87,6 +87,7 @@ private:
     void SubscribeMarketData(char* [], int);
     void SubscribeForQuoteRsp(char* [], int);
     bool IsErrorRspInfo(CThostFtdcRspInfoField *pRspInfo);
+    void PrintPriceAndQuantity();
 };
 
 
