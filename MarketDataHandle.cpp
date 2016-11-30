@@ -6,6 +6,7 @@
 #include "MarketDataHandle.h"
 #include <cstring>
 #include "boost/format.hpp"
+#include <math.h>
 #include <string>
 #include <iostream>
 #include <vector>
@@ -117,7 +118,7 @@ void MarketDataHandle::OnRtnDepthMarketData(CThostFtdcDepthMarketDataField *pDep
     dbDriver->ExcuteQuery(pDepthMarketData);
     OpenInterestChange = pDepthMarketData->OpenInterest - pPreDepthMarketData.OpenInterest;
     VolumeChange = pDepthMarketData->Volume - pPreDepthMarketData.Volume;
-    if (VolumeChange == OpenInterestChange)
+    if (VolumeChange ==  abs(OpenInterestChange))
     {
         MarketTrend[0] = MarketTrend[0] + 1;
         if (OpenInterestChange > 0)
@@ -130,7 +131,7 @@ void MarketDataHandle::OnRtnDepthMarketData(CThostFtdcDepthMarketDataField *pDep
             cout << boost::format("%1%")%string(pDepthMarketData->UpdateTime) <<" 价格" << pDepthMarketData->LastPrice <<" 现手" << " 增仓" << OpenInterestChange << VolumeChange << " 双平" << endl;
         }
     }
-    else if (VolumeChange >0 && OpenInterestChange == 00)
+    else if (VolumeChange >0 && OpenInterestChange == 0)
     {
         //空换 or 多换
         MarketTrend[0] = MarketTrend[0] + 1;
@@ -145,7 +146,7 @@ void MarketDataHandle::OnRtnDepthMarketData(CThostFtdcDepthMarketDataField *pDep
             cout << boost::format("%1%")%string(pDepthMarketData->UpdateTime) <<" 价格" << pDepthMarketData->LastPrice <<" 现手" << VolumeChange << " 增仓" << OpenInterestChange << " 空换" << endl;
         }
     }
-    else if (OpenInterestChange > 0 && VolumeChange > OpenInterestChange)
+    else if (abs(OpenInterestChange) > 0 && VolumeChange > abs(OpenInterestChange))
     {
         MarketTrend[1] = MarketTrend[1] + 1;
         if (pDepthMarketData->LastPrice  >= pPreDepthMarketData.AskPrice1)
@@ -171,7 +172,6 @@ void MarketDataHandle::OnRtnDepthMarketData(CThostFtdcDepthMarketDataField *pDep
         }
     } else{
         cout << boost::format("%1%")%string(pDepthMarketData->UpdateTime)<<" 价格" << pDepthMarketData->LastPrice <<" 现手" << VolumeChange << " 增仓" << OpenInterestChange << " 错误错误错误" << endl;
-        //cout << "no type qualify, something is wrong" << endl;
     }
     for (map<int, int>::iterator itermap = MarketTrend.begin(); itermap != MarketTrend.end(); itermap++)
     {
@@ -179,22 +179,11 @@ void MarketDataHandle::OnRtnDepthMarketData(CThostFtdcDepthMarketDataField *pDep
         {
             ///最后修改时间
             //TThostFtdcTimeType	UpdateTime;
-            //清空并下单
+            //todo: 清空并下单
             ///cout << "清空并下单" << endl;
         }
     }
-
-
     //todo: matain a price queue of last five minutes
-
-    CThostFtdcDepthMarketDataField* LastTick;
-    int OpenInterestChange = 0;
-//    TThostFtdcRatioType	;
-
-
-    //cerr << "DailyChangeRatio: " << (pDepthMarketData->OpenPrice - pDepthMarketData->AskPrice1) / pDepthMarketData->OpenPrice << endl;
-    //cerr << "OnRtnDepthMarketData: askprice" << pDepthMarketData->AskPrice1 << endl;
-
     if (iRequestID_quote > 15)
     {
         return ;
