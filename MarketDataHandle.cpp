@@ -13,6 +13,7 @@ MarketDataHandle::MarketDataHandle(CThostFtdcMdApi* iMdapi, char *front_address,
                                    TThostFtdcInvestorIDType investorid, TThostFtdcPasswordType password,
                                    DBDriver *dbdriver, vector<string> ppinsturment, int insturmentid)
 {
+    int abc;
     pUserApi = iMdapi;
     strcpy(this->FRONT_ADDR_quote, front_address);
     strcpy(this->brokerIDType, brokerid);
@@ -81,8 +82,8 @@ void MarketDataHandle::OnRspUserLogin(CThostFtdcRspUserLoginField *pRspUserLogin
 void MarketDataHandle::SubscribeMarketData(char* ppIntrumentID[], int iInstrumentID) {
     int iResult = pUserApi->SubscribeMarketData(ppIntrumentID, iInstrumentID);
     cerr << "--->>> request subscribe market data: " << ((iResult == 0) ? "success" : "fail") << endl;
-    //SubscribeMarketData(ppIntrumentID,t InstrumentID);
-    SubscribeForQuoteRsp(ppIntrumentID, InstrumentID);
+    //SubscribeMarketData(ppIntrumentID,InstrumentID);
+    //SubscribeForQuoteRsp(ppIntrumentID, InstrumentID);
 }
 void MarketDataHandle::SubscribeForQuoteRsp(char* ppIntrumentID[], int iInstrumentID) {
     int iResult = pUserApi->SubscribeForQuoteRsp(ppIntrumentID, iInstrumentID);
@@ -168,13 +169,11 @@ void MarketDataHandle::OnRtnDepthMarketData(CThostFtdcDepthMarketDataField *pDep
     {
         if((*itermap).second >=5)
         {
-
             ///最后修改时间
             //TThostFtdcTimeType	UpdateTime;
             //清空并下单
             cout << "清空并下单" << endl;
         }
-
     }
 
 
@@ -209,8 +208,7 @@ bool MarketDataHandle::IsErrorRspInfo(CThostFtdcRspInfoField *pRspInfo) {
 
 void MarketDataHandle::OnRspError(CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast)
 {
-    cerr << "error on responce"<< endl;
-    cerr << "error id " << pRspInfo->ErrorID << endl;
+    cerr << "error on responce "<<pRspInfo->ErrorID << "  " << pRspInfo->ErrorMsg << endl;
 }
 
 

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="Encoding" native2AsciiForPropertiesFiles="true" defaultCharsetForPropertiesFiles="GB18030">
+    <file url="file://$PROJECT_DIR$/MarketDataHandle.cpp" charset="GB18030" />
     <file url="PROJECT" charset="GB18030" />
   </component>
 </project>
