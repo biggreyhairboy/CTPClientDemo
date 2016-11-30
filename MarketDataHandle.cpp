@@ -5,10 +5,12 @@
 
 #include "MarketDataHandle.h"
 #include <cstring>
+#include "boost/format.hpp"
 #include <string>
 #include <iostream>
 #include <vector>
 using namespace std;
+using boost::format;
 MarketDataHandle::MarketDataHandle(CThostFtdcMdApi* iMdapi, char *front_address, TThostFtdcBrokerIDType brokerid,
                                    TThostFtdcInvestorIDType investorid, TThostFtdcPasswordType password,
                                    DBDriver *dbdriver, vector<string> ppinsturment, int insturmentid)
@@ -113,59 +115,62 @@ void MarketDataHandle::OnRtnDepthMarketData(CThostFtdcDepthMarketDataField *pDep
         pPreDepthMarketData = *pDepthMarketData;
     }
     dbDriver->ExcuteQuery(pDepthMarketData);
-    OpenInterestChange = pDepthMarketData->OpenInterest - pPreDepthMarketData.OpenInterest ;
-    if (pDepthMarketData->Volume == OpenInterestChange)
+    OpenInterestChange = pDepthMarketData->OpenInterest - pPreDepthMarketData.OpenInterest;
+    VolumeChange = pDepthMarketData->Volume - pPreDepthMarketData.Volume;
+    if (VolumeChange == OpenInterestChange)
     {
         MarketTrend[0] = MarketTrend[0] + 1;
         if (OpenInterestChange > 0)
         {
             //双开
-            cout << "双开" << endl;
+            cout << boost::format("%1%")%string(pDepthMarketData->UpdateTime) <<" 价格" << pDepthMarketData->LastPrice <<" 现手" << " 增仓" << OpenInterestChange<< VolumeChange << " 双开" << endl;
         }
         else{
             //双平
-            cout << "双平" << endl;
+            cout << boost::format("%1%")%string(pDepthMarketData->UpdateTime) <<" 价格" << pDepthMarketData->LastPrice <<" 现手" << " 增仓" << OpenInterestChange << VolumeChange << " 双平" << endl;
         }
     }
-    else if (pDepthMarketData->Volume >0 && OpenInterestChange == 00)
+    else if (VolumeChange >0 && OpenInterestChange == 00)
     {
         //空换 or 多换
         MarketTrend[0] = MarketTrend[0] + 1;
         if(pDepthMarketData->LastPrice >= pPreDepthMarketData.AskPrice1)
         {
             //多换
-            cout << "多换" << endl;
+            cout << boost::format("%1%")%string(pDepthMarketData->UpdateTime) <<" 价格" << pDepthMarketData->LastPrice <<" 现手" << VolumeChange << " 增仓" << OpenInterestChange << " 多换" << endl;
         }
         else
         {
             //空换
-            cout << "空换" << endl;
+            cout << boost::format("%1%")%string(pDepthMarketData->UpdateTime) <<" 价格" << pDepthMarketData->LastPrice <<" 现手" << VolumeChange << " 增仓" << OpenInterestChange << " 空换" << endl;
         }
     }
-    else if (OpenInterestChange > 0 && pDepthMarketData->Volume > OpenInterestChange)
+    else if (OpenInterestChange > 0 && VolumeChange > OpenInterestChange)
     {
         MarketTrend[1] = MarketTrend[1] + 1;
         if (pDepthMarketData->LastPrice  >= pPreDepthMarketData.AskPrice1)
         {
             //多开
-            cout << "多开" << endl;
+            cout <<boost::format("%1%")%string(pDepthMarketData->UpdateTime)<<" 价格" << pDepthMarketData->LastPrice <<" 现手" << VolumeChange << " 增仓" << OpenInterestChange << " 多开" << endl;
         }
         else {
             //空平
-            cout << "空平" << endl;
+            cout << boost::format("%1%")%string(pDepthMarketData->UpdateTime)<<" 价格" << pDepthMarketData->LastPrice <<" 现手" << VolumeChange << " 增仓" << OpenInterestChange << " 空平" << endl;
         }
 
-    } else if (OpenInterestChange > 0 && pDepthMarketData->Volume > (-OpenInterestChange))
+    } else if (OpenInterestChange > 0 && VolumeChange > (-OpenInterestChange))
     {
         MarketTrend[2] = MarketTrend[2] + 1;
         if (pDepthMarketData->LastPrice <= pPreDepthMarketData.BidPrice1)
         {
             //空开
-            cout << "空开" << endl;
+            cout << boost::format("%1%")%string(pDepthMarketData->UpdateTime) <<" 价格" << pDepthMarketData->LastPrice <<" 现手" << VolumeChange << " 增仓" << OpenInterestChange << " 空开" << endl;
         } else {
             //买平
-            cout << "买平" << endl;
+            cout << boost::format("%1%")%string(pDepthMarketData->UpdateTime) <<" 价格" << pDepthMarketData->LastPrice <<" 现手" << VolumeChange << " 增仓" << OpenInterestChange << " 买平" << endl;
         }
+    } else{
+        cout << "no type qualify, something is wrong" << endl;
     }
     for (map<int, int>::iterator itermap = MarketTrend.begin(); itermap != MarketTrend.end(); itermap++)
     {

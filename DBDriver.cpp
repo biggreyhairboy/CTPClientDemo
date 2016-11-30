@@ -59,8 +59,8 @@ bool DBDriver::ExcuteQuery(CThostFtdcDepthMarketDataField *pDepthMarketData){
         resultSet = statement->executeQuery(query);
     }catch (sql::SQLException ex)
     {
-        cerr << "sql error" << endl;
-        cerr << ex.what() << endl;
+        //cerr << "sql error" << endl;
+        //cerr << ex.what() << endl;
     }
     //resultSet = statement->executeQuery(query);
     //resultSet = statement->executeQuery("insert into one_day (High) values (2450)");

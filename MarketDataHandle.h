@@ -29,6 +29,7 @@ public:
     int iRequestID_quote;
     CThostFtdcDepthMarketDataField pPreDepthMarketData;
     double OpenInterestChange = 0;
+    int VolumeChange = 0;
     //使用昨收价做为初始值
     map<int, int> MarketTrend;
     int ConsecutiveTime = 0;
