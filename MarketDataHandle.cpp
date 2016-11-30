@@ -170,7 +170,8 @@ void MarketDataHandle::OnRtnDepthMarketData(CThostFtdcDepthMarketDataField *pDep
             cout << boost::format("%1%")%string(pDepthMarketData->UpdateTime) <<" 价格" << pDepthMarketData->LastPrice <<" 现手" << VolumeChange << " 增仓" << OpenInterestChange << " 买平" << endl;
         }
     } else{
-        cout << "no type qualify, something is wrong" << endl;
+        cout << boost::format("%1%")%string(pDepthMarketData->UpdateTime)<<" 价格" << pDepthMarketData->LastPrice <<" 现手" << VolumeChange << " 增仓" << OpenInterestChange << " 错误错误错误" << endl;
+        //cout << "no type qualify, something is wrong" << endl;
     }
     for (map<int, int>::iterator itermap = MarketTrend.begin(); itermap != MarketTrend.end(); itermap++)
     {
@@ -198,6 +199,8 @@ void MarketDataHandle::OnRtnDepthMarketData(CThostFtdcDepthMarketDataField *pDep
     {
         return ;
     }
+    //更新上一个最新tick
+    pPreDepthMarketData = *pDepthMarketData;
 }
 
 void MarketDataHandle::OnRtnForQuoteRsp(CThostFtdcForQuoteRspField *pForQuoteRsp){
