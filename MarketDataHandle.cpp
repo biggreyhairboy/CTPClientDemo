@@ -5,6 +5,8 @@
 
 #include "MarketDataHandle.h"
 #include <cstring>
+#include <iostream>
+#include <iomanip>
 #include "boost/format.hpp"
 #include <math.h>
 #include <string>
@@ -128,7 +130,7 @@ void MarketDataHandle::OnRtnDepthMarketData(CThostFtdcDepthMarketDataField *pDep
         }
         else{
             //双平
-            cout << boost::format("%1%")%string(pDepthMarketData->UpdateTime) <<" 价格" << pDepthMarketData->LastPrice <<" 现手" << " 增仓" << OpenInterestChange << VolumeChange << " 双平" << endl;
+            cout << boost::format("%1%")%string(pDepthMarketData->UpdateTime) <<" 价格" << pDepthMarketData->LastPrice <<" 现手"  << std::setw(10) << std::left <<OpenInterestChange << " 增仓"<< VolumeChange << " 双平" << endl;
         }
     }
     else if (VolumeChange >0 && OpenInterestChange == 0)
@@ -148,11 +150,13 @@ void MarketDataHandle::OnRtnDepthMarketData(CThostFtdcDepthMarketDataField *pDep
     }
     else if (abs(OpenInterestChange) > 0 && VolumeChange > abs(OpenInterestChange))
     {
+        //todo: 多开与空平至少在某些情况下搞反了，能否用价格做为判断是个值得商榷的因素
         MarketTrend[1] = MarketTrend[1] + 1;
         if (pDepthMarketData->LastPrice  >= pPreDepthMarketData.AskPrice1)
         {
             //多开
-            cout <<boost::format("%1%")%string(pDepthMarketData->UpdateTime)<<" 价格" << pDepthMarketData->LastPrice <<" 现手" << VolumeChange << " 增仓" << OpenInterestChange << " 多开" << endl;
+            cout << boost::format("%1%")%string(pDepthMarketData->UpdateTime)<<" 价格" << pDepthMarketData->LastPrice <<" 现手" << VolumeChange << " 增仓" << OpenInterestChange << " 多开" << endl;
+
         }
         else {
             //空平
