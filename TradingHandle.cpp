@@ -5,6 +5,7 @@
 #include <cstring>
 #include <iostream>
 #include <thread>
+#include <unistd.h>
 #include "TradingHandle.h"
 #include "ctpapi_linux64/ThostFtdcTraderApi.h"
 using namespace std;
@@ -81,6 +82,7 @@ void TradingHandle::ReqSettlementInfoConfirm()
     strcpy(req.InvestorID, investorIDType);
     int iResult = pTraderApi->ReqSettlementInfoConfirm(&req, ++iRequestID_trade);
     cerr << "trade---->>> 投资者结算结果确认: " << iResult << ((iResult == 0) ? ", 成功" : ", 失败") << endl;
+    usleep(5000);
     ReqOrderInsert();
 }
 
@@ -223,7 +225,7 @@ void TradingHandle::ReqOrderInsert()
     ///组合投机套保标志
     req.CombHedgeFlag[0] = THOST_FTDC_HF_Speculation;
     ///价格
-    req.LimitPrice = LIMIT_PRICE;
+    req.LimitPrice = lastorderprice;
     ///数量: 1
     req.VolumeTotalOriginal = quantity;
     ///有效期类型: 当日有效
@@ -525,13 +527,13 @@ void TradingHandle::OnRspQuoteAction(CThostFtdcInputQuoteActionField *pInpuQuote
 void TradingHandle::OnRtnOrder(CThostFtdcOrderField *pOrder)
 {
     cerr << "trade---->>> " << "OnRtnOrder" << endl;
-    if (IsMyOrder(pOrder))
-    {
-        if (IsTradingOrder(pOrder))
-            ReqOrderAction(pOrder);
-        else if (pOrder->OrderStatus == THOST_FTDC_OST_Canceled)
-            cout << "trade---->>> 撤单成功" << endl;
-    }
+//    if (IsMyOrder(pOrder))
+//    {
+//        if (IsTradingOrder(pOrder))
+//            ReqOrderAction(pOrder);
+//        else if (pOrder->OrderStatus == THOST_FTDC_OST_Canceled)
+//            cout << "trade---->>> 撤单成功" << endl;
+//    }
 }
 
 //执行宣告通知

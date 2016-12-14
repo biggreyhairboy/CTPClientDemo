@@ -9,6 +9,7 @@
 #include <sstream>
 #include <vector>
 #include <thread>
+#include <unistd.h>
 #include <boost/log/core.hpp>
 #include <boost/log/trivial.hpp>
 #include <boost/log/expressions.hpp>
@@ -63,7 +64,7 @@ void tradeThread(char* FRONT_ADDR_trade, TThostFtdcBrokerIDType brokerid, TThost
                  TThostFtdcPasswordType password, DBDriver* dbdriver, TThostFtdcInstrumentIDType INSTRUMENT_ID,
                  TThostFtdcPriceType LIMIT_PRICE, int quantity, TThostFtdcDirectionType DIRECTION)
 {
-    cout << "last order price print from trade thread " << lastorderprice << endl;
+//    cout << "last order price print from trade thread " << lastorderprice << endl;
     CThostFtdcTraderApi* pTraderApi = CThostFtdcTraderApi::CreateFtdcTraderApi();
     TradingHandle *pTradingHandle = new TradingHandle(pTraderApi, FRONT_ADDR_trade, brokerid, investorid, password, dbdriver,
                                                       INSTRUMENT_ID, LIMIT_PRICE, quantity,  DIRECTION);
@@ -71,7 +72,12 @@ void tradeThread(char* FRONT_ADDR_trade, TThostFtdcBrokerIDType brokerid, TThost
     pTraderApi->SubscribePublicTopic(THOST_TERT_QUICK);
     pTraderApi->SubscribePrivateTopic(THOST_TERT_QUICK);
     pTraderApi->RegisterFront(FRONT_ADDR_trade);
+    pTraderApi->Init();
 
+
+//    pTraderApi->Release();
+
+    cout << "开始下单" << endl;
     CThostFtdcInputOrderField req;
     memset(&req, 0, sizeof(req));
     ///经纪公司代码
@@ -93,7 +99,7 @@ void tradeThread(char* FRONT_ADDR_trade, TThostFtdcBrokerIDType brokerid, TThost
     ///组合投机套保标志
     req.CombHedgeFlag[0] = THOST_FTDC_HF_Speculation;
     ///价格
-    req.LimitPrice = LIMIT_PRICE;
+    req.LimitPrice = 23000;
     ///数量: 1
     req.VolumeTotalOriginal = quantity;
     ///有效期类型: 当日有效
@@ -121,7 +127,7 @@ void tradeThread(char* FRONT_ADDR_trade, TThostFtdcBrokerIDType brokerid, TThost
     int iRequestID_trade = 0;
     int iResult = pTraderApi->ReqOrderInsert(&req, ++iRequestID_trade);
     cerr << "trade---->>> 报单录入请求: " << iResult << ((iResult == 0) ? ", 成功" : ", 失败") << endl;
-    pTraderApi->Init();
+    cout << "下单完成" << endl;
     pTraderApi->Join();
     pTraderApi->Release();
 }
@@ -174,7 +180,8 @@ int main() {
                        &dbDriver, ppIntrumentID,iInstrumentID);
     QuoteT.detach();
 
-    BOOST_LOG_TRIVIAL(info)<<"trade thread started ...";
+    usleep(1000);
+    BOOST_LOG_TRIVIAL(info)<<"spi thread started ...";
     std::thread TradingT(tradeThread, FRONT_ADDR_trade, brokerIDType, investorIDType, passwordType,
                        &dbDriver, tinstrumemt, price, quantity, direction);
     TradingT.detach();

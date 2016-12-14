@@ -22,7 +22,7 @@ void UpdateLastPrice(double price)
 {
     lock_guard<mutex> guard(lastorderpricemutex);
     lastorderprice = price;
-    cout << "last mutex price is " << lastorderprice << endl;
+//    cout << "last mutex price is " << lastorderprice << endl;
 }
 MarketDataHandle::MarketDataHandle(CThostFtdcMdApi* iMdapi, char *front_address, TThostFtdcBrokerIDType brokerid,
                                    TThostFtdcInvestorIDType investorid, TThostFtdcPasswordType password,
@@ -123,88 +123,88 @@ void MarketDataHandle::OnRspUnSubForQuoteRsp(CThostFtdcSpecificInstrumentField *
 void MarketDataHandle::OnRtnDepthMarketData(CThostFtdcDepthMarketDataField *pDepthMarketData){
     UpdateLastPrice(pDepthMarketData->LastPrice);
     //怎么初始化价格的指针
-    if (pPreDepthMarketData.LastPrice == 0)
-    {
-        //这里应该需要完全复制
-        pPreDepthMarketData = *pDepthMarketData;
-    }
-    dbDriver->ExcuteQuery(pDepthMarketData);
-    OpenInterestChange = pDepthMarketData->OpenInterest - pPreDepthMarketData.OpenInterest;
-    VolumeChange = pDepthMarketData->Volume - pPreDepthMarketData.Volume;
-    if (VolumeChange ==  abs(OpenInterestChange))
-    {
-        MarketTrend[0] = MarketTrend[0] + 1;
-        if (OpenInterestChange > 0)
-        {
-            //双开
-            cout << boost::format("%1%")%string(pDepthMarketData->UpdateTime) <<" 价格" << pDepthMarketData->LastPrice <<" 现手" << " 增仓" << OpenInterestChange<< VolumeChange << " 双开" << endl;
-        }
-        else{
-            //双平
-            cout << boost::format("%1%")%string(pDepthMarketData->UpdateTime) <<" 价格" << pDepthMarketData->LastPrice <<" 现手"  << std::setw(10) << std::left <<OpenInterestChange << " 增仓"<< VolumeChange << " 双平" << endl;
-        }
-    }
-    else if (VolumeChange >0 && OpenInterestChange == 0)
-    {
-        //空换 or 多换
-        MarketTrend[0] = MarketTrend[0] + 1;
-        if(pDepthMarketData->LastPrice >= pPreDepthMarketData.AskPrice1)
-        {
-            //多换
-            cout << boost::format("%1%")%string(pDepthMarketData->UpdateTime) <<" 价格" << pDepthMarketData->LastPrice <<" 现手" << VolumeChange << " 增仓" << OpenInterestChange << " 多换" << endl;
-        }
-        else
-        {
-            //空换
-            cout << boost::format("%1%")%string(pDepthMarketData->UpdateTime) <<" 价格" << pDepthMarketData->LastPrice <<" 现手" << VolumeChange << " 增仓" << OpenInterestChange << " 空换" << endl;
-        }
-    }
-    else if (abs(OpenInterestChange) > 0 && VolumeChange > abs(OpenInterestChange))
-    {
-        //todo: 多开与空平至少在某些情况下搞反了，能否用价格做为判断是个值得商榷的因素
-        MarketTrend[1] = MarketTrend[1] + 1;
-        if (pDepthMarketData->LastPrice  >= pPreDepthMarketData.AskPrice1)
-        {
-            //多开
-            cout << boost::format("%1%")%string(pDepthMarketData->UpdateTime)<<" 价格" << pDepthMarketData->LastPrice <<" 现手" << VolumeChange << " 增仓" << OpenInterestChange << " 多开" << endl;
-
-        }
-        else {
-            //空平
-            cout << boost::format("%1%")%string(pDepthMarketData->UpdateTime)<<" 价格" << pDepthMarketData->LastPrice <<" 现手" << VolumeChange << " 增仓" << OpenInterestChange << " 空平" << endl;
-        }
-
-    } else if (OpenInterestChange > 0 && VolumeChange > (-OpenInterestChange))
-    {
-        MarketTrend[2] = MarketTrend[2] + 1;
-        if (pDepthMarketData->LastPrice <= pPreDepthMarketData.BidPrice1)
-        {
-            //空开
-            cout << boost::format("%1%")%string(pDepthMarketData->UpdateTime) <<" 价格" << pDepthMarketData->LastPrice <<" 现手" << VolumeChange << " 增仓" << OpenInterestChange << " 空开" << endl;
-        } else {
-            //买平
-            cout << boost::format("%1%")%string(pDepthMarketData->UpdateTime) <<" 价格" << pDepthMarketData->LastPrice <<" 现手" << VolumeChange << " 增仓" << OpenInterestChange << " 买平" << endl;
-        }
-    } else{
-        cout << boost::format("%1%")%string(pDepthMarketData->UpdateTime)<<" 价格" << pDepthMarketData->LastPrice <<" 现手" << VolumeChange << " 增仓" << OpenInterestChange << " 错误错误错误" << endl;
-    }
-    for (map<int, int>::iterator itermap = MarketTrend.begin(); itermap != MarketTrend.end(); itermap++)
-    {
-        if((*itermap).second >=5)
-        {
-            ///最后修改时间
-            //TThostFtdcTimeType	UpdateTime;
-            //todo: 清空并下单
-            ///cout << "清空并下单" << endl;
-        }
-    }
-    //todo: matain a price queue of last five minutes
-    if (iRequestID_quote > 15)
-    {
-        return ;
-    }
-    //更新上一个最新tick
-    pPreDepthMarketData = *pDepthMarketData;
+//    if (pPreDepthMarketData.LastPrice == 0)
+//    {
+//        //这里应该需要完全复制
+//        pPreDepthMarketData = *pDepthMarketData;
+//    }
+//    dbDriver->ExcuteQuery(pDepthMarketData);
+//    OpenInterestChange = pDepthMarketData->OpenInterest - pPreDepthMarketData.OpenInterest;
+//    VolumeChange = pDepthMarketData->Volume - pPreDepthMarketData.Volume;
+//    if (VolumeChange ==  abs(OpenInterestChange))
+//    {
+//        MarketTrend[0] = MarketTrend[0] + 1;
+//        if (OpenInterestChange > 0)
+//        {
+//            //双开
+//            cout << boost::format("%1%")%string(pDepthMarketData->UpdateTime) <<" 价格" << pDepthMarketData->LastPrice <<" 现手" << " 增仓" << OpenInterestChange<< VolumeChange << " 双开" << endl;
+//        }
+//        else{
+//            //双平
+//            cout << boost::format("%1%")%string(pDepthMarketData->UpdateTime) <<" 价格" << pDepthMarketData->LastPrice <<" 现手"  << std::setw(10) << std::left <<OpenInterestChange << " 增仓"<< VolumeChange << " 双平" << endl;
+//        }
+//    }
+//    else if (VolumeChange >0 && OpenInterestChange == 0)
+//    {
+//        //空换 or 多换
+//        MarketTrend[0] = MarketTrend[0] + 1;
+//        if(pDepthMarketData->LastPrice >= pPreDepthMarketData.AskPrice1)
+//        {
+//            //多换
+//            cout << boost::format("%1%")%string(pDepthMarketData->UpdateTime) <<" 价格" << pDepthMarketData->LastPrice <<" 现手" << VolumeChange << " 增仓" << OpenInterestChange << " 多换" << endl;
+//        }
+//        else
+//        {
+//            //空换
+//            cout << boost::format("%1%")%string(pDepthMarketData->UpdateTime) <<" 价格" << pDepthMarketData->LastPrice <<" 现手" << VolumeChange << " 增仓" << OpenInterestChange << " 空换" << endl;
+//        }
+//    }
+//    else if (abs(OpenInterestChange) > 0 && VolumeChange > abs(OpenInterestChange))
+//    {
+//        //todo: 多开与空平至少在某些情况下搞反了，能否用价格做为判断是个值得商榷的因素
+//        MarketTrend[1] = MarketTrend[1] + 1;
+//        if (pDepthMarketData->LastPrice  >= pPreDepthMarketData.AskPrice1)
+//        {
+//            //多开
+//            cout << boost::format("%1%")%string(pDepthMarketData->UpdateTime)<<" 价格" << pDepthMarketData->LastPrice <<" 现手" << VolumeChange << " 增仓" << OpenInterestChange << " 多开" << endl;
+//
+//        }
+//        else {
+//            //空平
+//            cout << boost::format("%1%")%string(pDepthMarketData->UpdateTime)<<" 价格" << pDepthMarketData->LastPrice <<" 现手" << VolumeChange << " 增仓" << OpenInterestChange << " 空平" << endl;
+//        }
+//
+//    } else if (OpenInterestChange > 0 && VolumeChange > (-OpenInterestChange))
+//    {
+//        MarketTrend[2] = MarketTrend[2] + 1;
+//        if (pDepthMarketData->LastPrice <= pPreDepthMarketData.BidPrice1)
+//        {
+//            //空开
+//            cout << boost::format("%1%")%string(pDepthMarketData->UpdateTime) <<" 价格" << pDepthMarketData->LastPrice <<" 现手" << VolumeChange << " 增仓" << OpenInterestChange << " 空开" << endl;
+//        } else {
+//            //买平
+//            cout << boost::format("%1%")%string(pDepthMarketData->UpdateTime) <<" 价格" << pDepthMarketData->LastPrice <<" 现手" << VolumeChange << " 增仓" << OpenInterestChange << " 买平" << endl;
+//        }
+//    } else{
+//        cout << boost::format("%1%")%string(pDepthMarketData->UpdateTime)<<" 价格" << pDepthMarketData->LastPrice <<" 现手" << VolumeChange << " 增仓" << OpenInterestChange << " 错误错误错误" << endl;
+//    }
+//    for (map<int, int>::iterator itermap = MarketTrend.begin(); itermap != MarketTrend.end(); itermap++)
+//    {
+//        if((*itermap).second >=5)
+//        {
+//            ///最后修改时间
+//            //TThostFtdcTimeType	UpdateTime;
+//            //todo: 清空并下单
+//            ///cout << "清空并下单" << endl;
+//        }
+//    }
+//    //todo: matain a price queue of last five minutes
+//    if (iRequestID_quote > 15)
+//    {
+//        return ;
+//    }
+//    //更新上一个最新tick
+//    pPreDepthMarketData = *pDepthMarketData;
 }
 
 void MarketDataHandle::OnRtnForQuoteRsp(CThostFtdcForQuoteRspField *pForQuoteRsp){
