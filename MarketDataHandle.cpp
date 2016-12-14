@@ -7,6 +7,7 @@
 #include <cstring>
 #include <iostream>
 #include <iomanip>
+#include <mutex>
 #include "boost/format.hpp"
 #include <math.h>
 #include <string>
@@ -14,6 +15,15 @@
 #include <vector>
 using namespace std;
 using boost::format;
+
+extern double lastorderprice;
+mutex lastorderpricemutex;
+void UpdateLastPrice(double price)
+{
+    lock_guard<mutex> guard(lastorderpricemutex);
+    lastorderprice = price;
+    cout << "last mutex price is " << lastorderprice << endl;
+}
 MarketDataHandle::MarketDataHandle(CThostFtdcMdApi* iMdapi, char *front_address, TThostFtdcBrokerIDType brokerid,
                                    TThostFtdcInvestorIDType investorid, TThostFtdcPasswordType password,
                                    DBDriver *dbdriver, vector<string> ppinsturment, int insturmentid)
@@ -111,6 +121,7 @@ void MarketDataHandle::OnRspUnSubForQuoteRsp(CThostFtdcSpecificInstrumentField *
 }
 
 void MarketDataHandle::OnRtnDepthMarketData(CThostFtdcDepthMarketDataField *pDepthMarketData){
+    UpdateLastPrice(pDepthMarketData->LastPrice);
     //怎么初始化价格的指针
     if (pPreDepthMarketData.LastPrice == 0)
     {

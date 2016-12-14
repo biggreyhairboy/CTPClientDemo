@@ -8,7 +8,7 @@
 #include "TradingHandle.h"
 #include "ctpapi_linux64/ThostFtdcTraderApi.h"
 using namespace std;
-
+extern double lastorderprice;
 TradingHandle::TradingHandle(CThostFtdcTraderApi* iTraderApi, char* front_address, TThostFtdcBrokerIDType brokerid,
                              TThostFtdcInvestorIDType investorid, TThostFtdcPasswordType password, DBDriver *dbdriver,
                              TThostFtdcInstrumentIDType INSTRUMENT_ID,
@@ -185,17 +185,18 @@ void TradingHandle::ReqQryInvestorPosition()
 
 void TradingHandle::OnRspQryInvestorPosition(CThostFtdcInvestorPositionField *pInvestorPosition, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast)
 {
+    cout << "last order price print from trade thread " << lastorderprice << endl;
     cerr << "trade---->>> " << "OnRspQryInvestorPosition" << endl;
     if (bIsLast && !IsErrorRspInfo(pRspInfo))
     {
         ///报单录入请求
-        ReqOrderInsert();
-        //执行宣告录入请求
-        ReqExecOrderInsert();
-        //询价录入
-        ReqForQuoteInsert();
-        //做市商报价录入
-        ReqQuoteInsert();
+//        ReqOrderInsert();
+//        //执行宣告录入请求
+//        ReqExecOrderInsert();
+//        //询价录入
+//        ReqForQuoteInsert();
+//        //做市商报价录入
+//        ReqQuoteInsert();
     }
 }
 

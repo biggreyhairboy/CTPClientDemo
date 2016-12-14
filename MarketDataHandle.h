@@ -9,6 +9,7 @@
 #include "DBDriver.h"
 #include "ctpapi_linux64/ThostFtdcMdApi.h"
 using namespace std;
+extern double lastorderprice;
 
 enum Trend{
     green = -1,
