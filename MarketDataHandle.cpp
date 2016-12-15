@@ -16,6 +16,8 @@
 using namespace std;
 using boost::format;
 
+
+
 extern double lastorderprice;
 mutex lastorderpricemutex;
 void UpdateLastPrice(double price)

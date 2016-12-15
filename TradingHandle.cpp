@@ -15,6 +15,7 @@ TradingHandle::TradingHandle(CThostFtdcTraderApi* iTraderApi, char* front_addres
                              TThostFtdcInstrumentIDType INSTRUMENT_ID,
                              TThostFtdcPriceType LIMIT_PRICE, int  quantity, TThostFtdcDirectionType DIRECTION)
 {
+
     this->pTraderApi = iTraderApi;
     this->dbDrvier = dbdriver;
     strcpy(this->FRONT_ADDR_trade, front_address);

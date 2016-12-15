@@ -4,8 +4,11 @@
  * Date: 20160927
  * Function: Extract data from CTP interface and store to MySQL
  */
+// todo: using valgrind to profile
+//https://startupnextdoor.com/how-to-run-valgrind-in-clion-for-c-and-c-programs/
 
 #include <iostream>
+#include <chrono>
 #include <sstream>
 #include <vector>
 #include <thread>
@@ -64,6 +67,7 @@ void tradeThread(char* FRONT_ADDR_trade, TThostFtdcBrokerIDType brokerid, TThost
                  TThostFtdcPasswordType password, DBDriver* dbdriver, TThostFtdcInstrumentIDType INSTRUMENT_ID,
                  TThostFtdcPriceType LIMIT_PRICE, int quantity, TThostFtdcDirectionType DIRECTION)
 {
+    usleep(3000);
 //    cout << "last order price print from trade thread " << lastorderprice << endl;
     CThostFtdcTraderApi* pTraderApi = CThostFtdcTraderApi::CreateFtdcTraderApi();
     TradingHandle *pTradingHandle = new TradingHandle(pTraderApi, FRONT_ADDR_trade, brokerid, investorid, password, dbdriver,
@@ -73,6 +77,8 @@ void tradeThread(char* FRONT_ADDR_trade, TThostFtdcBrokerIDType brokerid, TThost
     pTraderApi->SubscribePrivateTopic(THOST_TERT_QUICK);
     pTraderApi->RegisterFront(FRONT_ADDR_trade);
     pTraderApi->Init();
+    pTraderApi->Join();
+
 
 
 //    pTraderApi->Release();
@@ -125,11 +131,11 @@ void tradeThread(char* FRONT_ADDR_trade, TThostFtdcBrokerIDType brokerid, TThost
     ///用户强评标志: 否
     req.UserForceClose = 0;
     int iRequestID_trade = 0;
-    int iResult = pTraderApi->ReqOrderInsert(&req, ++iRequestID_trade);
-    cerr << "trade---->>> 报单录入请求: " << iResult << ((iResult == 0) ? ", 成功" : ", 失败") << endl;
-    cout << "下单完成" << endl;
-    pTraderApi->Join();
-    pTraderApi->Release();
+//    pTradingHandle
+//    int iResult = pTraderApi->ReqOrderInsert(&req, ++iRequestID_trade);
+//    cerr << "trade---->>> 报单录入请求: " << iResult << ((iResult == 0) ? ", 成功" : ", 失败") << endl;
+//    cout << "下单完成" << endl;
+//    pTraderApi->Release();
 }
 
 int main() {
@@ -179,6 +185,7 @@ int main() {
     std::thread QuoteT(quoteThread, FRONT_ADDR_quote, brokerIDType, investorIDType, passwordType,
                        &dbDriver, ppIntrumentID,iInstrumentID);
     QuoteT.detach();
+
 
     usleep(1000);
     BOOST_LOG_TRIVIAL(info)<<"spi thread started ...";
