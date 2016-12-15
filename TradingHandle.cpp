@@ -10,7 +10,7 @@
 #include "ctpapi_linux64/ThostFtdcTraderApi.h"
 using namespace std;
 extern double lastorderprice;
-TradingHandle::TradingHandle(CThostFtdcTraderApi* iTraderApi, char* front_address, TThostFtdcBrokerIDType brokerid,
+TradingHandle::TradingHandle(shared_ptr<CThostFtdcTraderApi> iTraderApi, char* front_address, TThostFtdcBrokerIDType brokerid,
                              TThostFtdcInvestorIDType investorid, TThostFtdcPasswordType password, DBDriver *dbdriver,
                              TThostFtdcInstrumentIDType INSTRUMENT_ID,
                              TThostFtdcPriceType LIMIT_PRICE, int  quantity, TThostFtdcDirectionType DIRECTION)
@@ -83,8 +83,6 @@ void TradingHandle::ReqSettlementInfoConfirm()
     strcpy(req.InvestorID, investorIDType);
     int iResult = pTraderApi->ReqSettlementInfoConfirm(&req, ++iRequestID_trade);
     cerr << "trade---->>> 投资者结算结果确认: " << iResult << ((iResult == 0) ? ", 成功" : ", 失败") << endl;
-    usleep(5000);
-    ReqOrderInsert();
 }
 
 void TradingHandle::OnRspSettlementInfoConfirm(CThostFtdcSettlementInfoConfirmField *pSettlementInfoConfirm, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast)
@@ -95,7 +93,6 @@ void TradingHandle::OnRspSettlementInfoConfirm(CThostFtdcSettlementInfoConfirmFi
         ///请求查询合约
         ReqQryInstrument();
     }
-
 }
 
 void TradingHandle::ReqQryInstrument()
@@ -125,7 +122,7 @@ void TradingHandle::OnRspQryInstrument(CThostFtdcInstrumentField *pInstrument, C
     cerr << "trade---->>> " << "OnRspQryInstrument" << endl;
     if (bIsLast && !IsErrorRspInfo(pRspInfo))
     {
-        ///请求查询合约
+        ///请求查询账户
         ReqQryTradingAccount();
     }
 }
@@ -194,7 +191,7 @@ void TradingHandle::OnRspQryInvestorPosition(CThostFtdcInvestorPositionField *pI
     {
         ///报单录入请求
 //        ReqOrderInsert();
-//        //执行宣告录入请求
+        //执行宣告录入请求
 //        ReqExecOrderInsert();
 //        //询价录入
 //        ReqForQuoteInsert();
