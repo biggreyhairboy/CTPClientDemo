@@ -124,7 +124,7 @@ int main() {
     pTraderApi->SubscribePrivateTopic(THOST_TERT_QUICK);
     pTraderApi->RegisterFront(FRONT_ADDR_trade);
     pTraderApi->Init();
-    this_thread::sleep_for(chrono::seconds(2));
+    this_thread::sleep_for(chrono::seconds(1));
     BOOST_LOG_TRIVIAL(info)<<"spi thread started ...";
     //std::thread TradingT(tradeThread, pTradingHandle,  FRONT_ADDR_trade);
 //    CThostFtdcTraderApi* orderTradeapi = CThostFtdcTraderApi::CreateFtdcTraderApi();
@@ -156,7 +156,7 @@ int main() {
     req.CombHedgeFlag[0] = THOST_FTDC_HF_Speculation;
     ///价格
     //先用22900试试
-    req.LimitPrice = 22900;
+    req.LimitPrice = 22300;
     ///数量: 1
     req.VolumeTotalOriginal = quantity;
     ///有效期类型: 当日有效
