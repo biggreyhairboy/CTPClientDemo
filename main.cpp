@@ -115,82 +115,84 @@ int main() {
     QuoteT.detach();
 
 
-    CThostFtdcTraderApi* pTraderApi = CThostFtdcTraderApi::CreateFtdcTraderApi();
-
-    TradingHandle *pTradingHandle = new TradingHandle(pTraderApi,FRONT_ADDR_trade, brokerIDType, investorIDType, passwordType, &dbDriver,
-                                                      tinstrumemt, price, quantity,  direction);
-    pTraderApi->RegisterSpi((CThostFtdcTraderSpi*) pTradingHandle);
-    pTraderApi->SubscribePublicTopic(THOST_TERT_QUICK);
-    pTraderApi->SubscribePrivateTopic(THOST_TERT_QUICK);
-    pTraderApi->RegisterFront(FRONT_ADDR_trade);
-    pTraderApi->Init();
-    this_thread::sleep_for(chrono::seconds(1));
-    BOOST_LOG_TRIVIAL(info)<<"spi thread started ...";
-    //std::thread TradingT(tradeThread, pTradingHandle,  FRONT_ADDR_trade);
-//    CThostFtdcTraderApi* orderTradeapi = CThostFtdcTraderApi::CreateFtdcTraderApi();
-//    orderTradeapi->RegisterSpi((CThostFtdcTraderSpi*) pTradingHandle);
-//    orderTradeapi->SubscribePublicTopic(THOST_TERT_QUICK);
-//    orderTradeapi->SubscribePrivateTopic(THOST_TERT_QUICK);
-//    orderTradeapi->RegisterFront(FRONT_ADDR_trade);
-
-    CThostFtdcInputOrderField req;
-    memset(&req, 0, sizeof(req));
-    ///经纪公司代码
-    strcpy(req.BrokerID, brokerIDType);
-    ///投资者代码
-    strcpy(req.InvestorID, investorIDType);
-    ///合约代码
-    strcpy(req.InstrumentID, tinstrumemt);
-    ///报单引用
-    //orderref
-    strcpy(req.OrderRef, new char[3]);
-    ///用户代码
-    //	TThostFtdcUserIDType	UserID;
-    ///报单价格条件: 限价
-    req.OrderPriceType = THOST_FTDC_OPT_LimitPrice;
-    ///买卖方向:
-    req.Direction = direction;
-    ///组合开平标志: 开仓
-    req.CombOffsetFlag[0] = THOST_FTDC_OF_Open;
-    ///组合投机套保标志
-    req.CombHedgeFlag[0] = THOST_FTDC_HF_Speculation;
-    ///价格
-    //先用22900试试
-    req.LimitPrice = 22300;
-    ///数量: 1
-    req.VolumeTotalOriginal = quantity;
-    ///有效期类型: 当日有效
-    req.TimeCondition = THOST_FTDC_TC_GFD;
-    ///GTD日期
-    //	TThostFtdcDateType	GTDDate;
-    ///成交量类型: 任何数量
-    req.VolumeCondition = THOST_FTDC_VC_AV;
-    ///最小成交量: 1
-    req.MinVolume = 1;
-    ///触发条件: 立即
-    req.ContingentCondition = THOST_FTDC_CC_Immediately;
-    ///止损价
-    //	TThostFtdcPriceType	StopPrice;
-    ///强平原因: 非强平
-    req.ForceCloseReason = THOST_FTDC_FCC_NotForceClose;
-    ///自动挂起标志: 否
-    req.IsAutoSuspend = 0;
-    ///业务单元
-    //	TThostFtdcBusinessUnitType	BusinessUnit;
-    ///请求编号
-    //	TThostFtdcRequestIDType	RequestID;
-    ///用户强评标志: 否
-    req.UserForceClose = 0;
-    int iRequestID_trade = 2;
-    int iResult = pTraderApi->ReqOrderInsert(&req, ++iRequestID_trade);
-
-    //pTraderApi->Join();
-//    TradingT.join();
-
-    //cerr << "trade---->>> 报单录入请求: " << iResult << ((iResult == 0) ? ", 成功" : ", 失败") << endl;
+//    CThostFtdcTraderApi* pTraderApi = CThostFtdcTraderApi::CreateFtdcTraderApi();
+//
+//    TradingHandle *pTradingHandle = new TradingHandle(pTraderApi,FRONT_ADDR_trade, brokerIDType, investorIDType, passwordType, &dbDriver,
+//                                                      tinstrumemt, price, quantity,  direction);
+//    pTraderApi->RegisterSpi((CThostFtdcTraderSpi*) pTradingHandle);
+//    pTraderApi->SubscribePublicTopic(THOST_TERT_QUICK);
+//    pTraderApi->SubscribePrivateTopic(THOST_TERT_QUICK);
+//    pTraderApi->RegisterFront(FRONT_ADDR_trade);
 //    pTraderApi->Init();
-    //pTraderApi->Join();
-    //orderTradeapi->Release();
+//    this_thread::sleep_for(chrono::seconds(2));
+//    BOOST_LOG_TRIVIAL(info)<<"spi thread started ...";
+//
+//
+//    //std::thread TradingT(tradeThread, pTradingHandle,  FRONT_ADDR_trade);
+////    CThostFtdcTraderApi* orderTradeapi = CThostFtdcTraderApi::CreateFtdcTraderApi();
+////    orderTradeapi->RegisterSpi((CThostFtdcTraderSpi*) pTradingHandle);
+////    orderTradeapi->SubscribePublicTopic(THOST_TERT_QUICK);
+////    orderTradeapi->SubscribePrivateTopic(THOST_TERT_QUICK);
+////    orderTradeapi->RegisterFront(FRONT_ADDR_trade);
+//
+//    CThostFtdcInputOrderField req;
+//    memset(&req, 0, sizeof(req));
+//    ///经纪公司代码
+//    strcpy(req.BrokerID, brokerIDType);
+//    ///投资者代码
+//    strcpy(req.InvestorID, investorIDType);
+//    ///合约代码
+//    strcpy(req.InstrumentID, tinstrumemt);
+//    ///报单引用
+//    //orderref
+//    strcpy(req.OrderRef, new char[3]);
+//    ///用户代码
+//    //	TThostFtdcUserIDType	UserID;
+//    ///报单价格条件: 限价
+//    req.OrderPriceType = THOST_FTDC_OPT_LimitPrice;
+//    ///买卖方向:
+//    req.Direction = direction;
+//    ///组合开平标志: 开仓
+//    req.CombOffsetFlag[0] = THOST_FTDC_OF_Open;
+//    ///组合投机套保标志
+//    req.CombHedgeFlag[0] = THOST_FTDC_HF_Speculation;
+//    ///价格
+//    //先用22900试试
+//    req.LimitPrice = 22300;
+//    ///数量: 1
+//    req.VolumeTotalOriginal = quantity;
+//    ///有效期类型: 当日有效
+//    req.TimeCondition = THOST_FTDC_TC_GFD;
+//    ///GTD日期
+//    //	TThostFtdcDateType	GTDDate;
+//    ///成交量类型: 任何数量
+//    req.VolumeCondition = THOST_FTDC_VC_AV;
+//    ///最小成交量: 1
+//    req.MinVolume = 1;
+//    ///触发条件: 立即
+//    req.ContingentCondition = THOST_FTDC_CC_Immediately;
+//    ///止损价
+//    //	TThostFtdcPriceType	StopPrice;
+//    ///强平原因: 非强平
+//    req.ForceCloseReason = THOST_FTDC_FCC_NotForceClose;
+//    ///自动挂起标志: 否
+//    req.IsAutoSuspend = 0;
+//    ///业务单元
+//    //	TThostFtdcBusinessUnitType	BusinessUnit;
+//    ///请求编号
+//    //	TThostFtdcRequestIDType	RequestID;
+//    ///用户强评标志: 否
+//    req.UserForceClose = 0;
+//    int iRequestID_trade = 2;
+//    int iResult = pTraderApi->ReqOrderInsert(&req, ++iRequestID_trade);
+//
+//    //pTraderApi->Join();
+////    TradingT.join();
+//
+//    //cerr << "trade---->>> 报单录入请求: " << iResult << ((iResult == 0) ? ", 成功" : ", 失败") << endl;
+////    pTraderApi->Init();
+//    //pTraderApi->Join();
+//    //orderTradeapi->Release();
 
 
     getchar();

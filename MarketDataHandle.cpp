@@ -122,29 +122,98 @@ void MarketDataHandle::OnRspUnSubForQuoteRsp(CThostFtdcSpecificInstrumentField *
 
 }
 
+void ColorfulConsolePrint(TThostFtdcTimeType time, double lastprice, double volumechange, double openinterestchange, string ticktype, int color)
+{
+
+    switch(color)
+    {
+        //无色
+        case 0:
+            cout << boost::format("%1%")%string(time) <<setw(10)<<  setprecision(2) << lastprice << setw(10)
+                 << boost::format("\033[;34m%1%\033[0m")%to_string((long)volumechange) << setw(10)
+                 <<boost::format("\033[;34m%1%\033[0m")%to_string((long)volumechange) << setw(10)  << fixed << right << boost::format("\033[;34m%1%\033[0m")%ticktype<< endl;
+            break;
+            //"\033[;36msome text\033[0m"; 蓝绿色
+        case 2:
+            cout << boost::format("%1%")%string(time) <<setw(10) << setprecision(2) <<lastprice << setw(10)
+                 << boost::format("\033[;32m%1%\033[0m")%to_string((long)volumechange) << setw(10)
+                 <<boost::format("\033[;32m%1%\033[0m")%to_string((long)openinterestchange)<< setw(10) << boost::format("\033[;32m%1%\033[0m")%ticktype << endl;
+            break;
+            //"\033[;31msome text\033[0m";
+        case 1:
+            cout << boost::format("%1%")%string(time) <<setw(10) << setprecision(2) << lastprice << setw(10)
+                 <<  boost::format("\033[;31m%1%\033[0m")%to_string((long)volumechange)  << setw(10)
+                 << boost::format("\033[;31m%1%\033[0m")%to_string((long)openinterestchange) << setw(10)  << boost::format("\033[;31m%1%\033[0m")%ticktype << endl;
+            break;
+        default:
+            cout << "error " << endl;
+    }
+
+
+}
+
 void MarketDataHandle::OnRtnDepthMarketData(CThostFtdcDepthMarketDataField *pDepthMarketData){
     UpdateLastPrice(pDepthMarketData->LastPrice);
     //怎么初始化价格的指针
-//    if (pPreDepthMarketData.LastPrice == 0)
-//    {
-//        //这里应该需要完全复制
-//        pPreDepthMarketData = *pDepthMarketData;
-//    }
-//    dbDriver->ExcuteQuery(pDepthMarketData);
-//    OpenInterestChange = pDepthMarketData->OpenInterest - pPreDepthMarketData.OpenInterest;
-//    VolumeChange = pDepthMarketData->Volume - pPreDepthMarketData.Volume;
+    if (pPreDepthMarketData.LastPrice == 0)
+    {
+        //这里应该需要完全复制
+        pPreDepthMarketData = *pDepthMarketData;
+    }
+    dbDriver->ExcuteQuery(pDepthMarketData);
+    OpenInterestChange = pDepthMarketData->OpenInterest - pPreDepthMarketData.OpenInterest;
+    VolumeChange = pDepthMarketData->Volume - pPreDepthMarketData.Volume;
+
+    if (OpenInterestChange > 0)
+    {
+        if(VolumeChange ==  abs(OpenInterestChange)) {
+            ColorfulConsolePrint(pDepthMarketData->UpdateTime, pDepthMarketData->LastPrice, VolumeChange, OpenInterestChange,"双开", 0);
+        }
+        else {
+            if(pDepthMarketData->LastPrice >= pPreDepthMarketData.LastPrice) {
+                ColorfulConsolePrint(pDepthMarketData->UpdateTime, pDepthMarketData->LastPrice, VolumeChange, OpenInterestChange,"多开", 1);
+            }
+            else{
+            ColorfulConsolePrint(pDepthMarketData->UpdateTime, pDepthMarketData->LastPrice, VolumeChange, OpenInterestChange,"空开", 2);
+            }
+        }
+    }
+    else if (OpenInterestChange < 0)
+    {
+        if(VolumeChange ==  abs(OpenInterestChange)) {
+            ColorfulConsolePrint(pDepthMarketData->UpdateTime, pDepthMarketData->LastPrice, VolumeChange, OpenInterestChange,"双平", 0);
+        }
+        else {
+            if(pDepthMarketData->LastPrice >= pPreDepthMarketData.LastPrice) {
+                ColorfulConsolePrint(pDepthMarketData->UpdateTime, pDepthMarketData->LastPrice, VolumeChange, OpenInterestChange,"空平", 1);
+            }
+            else{
+                ColorfulConsolePrint(pDepthMarketData->UpdateTime, pDepthMarketData->LastPrice, VolumeChange, OpenInterestChange,"多平", 2);
+            }
+        }
+    }
+    else if (OpenInterestChange == 0) {
+        if(pDepthMarketData->LastPrice >= pPreDepthMarketData.LastPrice) {
+            ColorfulConsolePrint(pDepthMarketData->UpdateTime, pDepthMarketData->LastPrice, VolumeChange, OpenInterestChange,"多换", 0);
+        }
+        else{
+            ColorfulConsolePrint(pDepthMarketData->UpdateTime, pDepthMarketData->LastPrice, VolumeChange, OpenInterestChange,"空换", 0);
+        }
+    }
+    else {
+        ColorfulConsolePrint(pDepthMarketData->UpdateTime, pDepthMarketData->LastPrice, VolumeChange, OpenInterestChange,"其他类型", 0);
+    }
+
+//
+//    MarketTrend[0] = MarketTrend[0] + 1;
 //    if (VolumeChange ==  abs(OpenInterestChange))
 //    {
-//        MarketTrend[0] = MarketTrend[0] + 1;
-//        if (OpenInterestChange > 0)
-//        {
-//            //双开
-//            cout << boost::format("%1%")%string(pDepthMarketData->UpdateTime) <<" 价格" << pDepthMarketData->LastPrice <<" 现手" << " 增仓" << OpenInterestChange<< VolumeChange << " 双开" << endl;
-//        }
-//        else{
-//            //双平
-//            cout << boost::format("%1%")%string(pDepthMarketData->UpdateTime) <<" 价格" << pDepthMarketData->LastPrice <<" 现手"  << std::setw(10) << std::left <<OpenInterestChange << " 增仓"<< VolumeChange << " 双平" << endl;
-//        }
+//        //双开
+//        ColorfulConsolePrint(pDepthMarketData->UpdateTime, pDepthMarketData->LastPrice, VolumeChange, OpenInterestChange,"双开", 0);
+//    }
+//    else{
+//        //双平
+//        ColorfulConsolePrint(pDepthMarketData->UpdateTime, pDepthMarketData->LastPrice, VolumeChange, OpenInterestChange,"双平", 0);
 //    }
 //    else if (VolumeChange >0 && OpenInterestChange == 0)
 //    {
@@ -153,12 +222,12 @@ void MarketDataHandle::OnRtnDepthMarketData(CThostFtdcDepthMarketDataField *pDep
 //        if(pDepthMarketData->LastPrice >= pPreDepthMarketData.AskPrice1)
 //        {
 //            //多换
-//            cout << boost::format("%1%")%string(pDepthMarketData->UpdateTime) <<" 价格" << pDepthMarketData->LastPrice <<" 现手" << VolumeChange << " 增仓" << OpenInterestChange << " 多换" << endl;
+//            ColorfulConsolePrint(pDepthMarketData->UpdateTime, pDepthMarketData->LastPrice, VolumeChange, OpenInterestChange,"多换", 0);
 //        }
 //        else
 //        {
 //            //空换
-//            cout << boost::format("%1%")%string(pDepthMarketData->UpdateTime) <<" 价格" << pDepthMarketData->LastPrice <<" 现手" << VolumeChange << " 增仓" << OpenInterestChange << " 空换" << endl;
+//            ColorfulConsolePrint(pDepthMarketData->UpdateTime, pDepthMarketData->LastPrice, VolumeChange, OpenInterestChange,"空换", 0);
 //        }
 //    }
 //    else if (abs(OpenInterestChange) > 0 && VolumeChange > abs(OpenInterestChange))
@@ -168,12 +237,12 @@ void MarketDataHandle::OnRtnDepthMarketData(CThostFtdcDepthMarketDataField *pDep
 //        if (pDepthMarketData->LastPrice  >= pPreDepthMarketData.AskPrice1)
 //        {
 //            //多开
-//            cout << boost::format("%1%")%string(pDepthMarketData->UpdateTime)<<" 价格" << pDepthMarketData->LastPrice <<" 现手" << VolumeChange << " 增仓" << OpenInterestChange << " 多开" << endl;
+//            ColorfulConsolePrint(pDepthMarketData->UpdateTime, pDepthMarketData->LastPrice, VolumeChange, OpenInterestChange,"多开", 1);
 //
 //        }
 //        else {
 //            //空平
-//            cout << boost::format("%1%")%string(pDepthMarketData->UpdateTime)<<" 价格" << pDepthMarketData->LastPrice <<" 现手" << VolumeChange << " 增仓" << OpenInterestChange << " 空平" << endl;
+//            ColorfulConsolePrint(pDepthMarketData->UpdateTime, pDepthMarketData->LastPrice, VolumeChange, OpenInterestChange,"空平", 1);
 //        }
 //
 //    } else if (OpenInterestChange > 0 && VolumeChange > (-OpenInterestChange))
@@ -182,13 +251,13 @@ void MarketDataHandle::OnRtnDepthMarketData(CThostFtdcDepthMarketDataField *pDep
 //        if (pDepthMarketData->LastPrice <= pPreDepthMarketData.BidPrice1)
 //        {
 //            //空开
-//            cout << boost::format("%1%")%string(pDepthMarketData->UpdateTime) <<" 价格" << pDepthMarketData->LastPrice <<" 现手" << VolumeChange << " 增仓" << OpenInterestChange << " 空开" << endl;
+//            ColorfulConsolePrint(pDepthMarketData->UpdateTime, pDepthMarketData->LastPrice, VolumeChange, OpenInterestChange,"空开", 2);
 //        } else {
 //            //买平
-//            cout << boost::format("%1%")%string(pDepthMarketData->UpdateTime) <<" 价格" << pDepthMarketData->LastPrice <<" 现手" << VolumeChange << " 增仓" << OpenInterestChange << " 买平" << endl;
+//            ColorfulConsolePrint(pDepthMarketData->UpdateTime, pDepthMarketData->LastPrice, VolumeChange, OpenInterestChange,"买平", 2);
 //        }
 //    } else{
-//        cout << boost::format("%1%")%string(pDepthMarketData->UpdateTime)<<" 价格" << pDepthMarketData->LastPrice <<" 现手" << VolumeChange << " 增仓" << OpenInterestChange << " 错误错误错误" << endl;
+//        ColorfulConsolePrint(pDepthMarketData->UpdateTime, pDepthMarketData->LastPrice, VolumeChange, OpenInterestChange,"双平", 0);
 //    }
 //    for (map<int, int>::iterator itermap = MarketTrend.begin(); itermap != MarketTrend.end(); itermap++)
 //    {
@@ -200,13 +269,13 @@ void MarketDataHandle::OnRtnDepthMarketData(CThostFtdcDepthMarketDataField *pDep
 //            ///cout << "清空并下单" << endl;
 //        }
 //    }
-//    //todo: matain a price queue of last five minutes
-//    if (iRequestID_quote > 15)
-//    {
-//        return ;
-//    }
-//    //更新上一个最新tick
-//    pPreDepthMarketData = *pDepthMarketData;
+    //todo: matain a price queue of last five minutes
+    if (iRequestID_quote > 15)
+    {
+        return ;
+    }
+    //更新上一个最新tick
+    pPreDepthMarketData = *pDepthMarketData;
 }
 
 void MarketDataHandle::OnRtnForQuoteRsp(CThostFtdcForQuoteRspField *pForQuoteRsp){
