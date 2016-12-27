@@ -1168,7 +1168,8 @@ struct CThostFtdcLoginInfoField
 	TThostFtdcTimeType	DCETime;
 	///郑商所时间
 	TThostFtdcTimeType	CZCETime;
-	///中金所时间
+	///中金所时间gei
+
 	TThostFtdcTimeType	FFEXTime;
 	///Mac地址
 	TThostFtdcMacAddressType	MacAddress;

@@ -116,9 +116,6 @@ int main() {
     std::thread QuoteT(quoteThread, pTraderApi, FRONT_ADDR_quote, brokerIDType, investorIDType, passwordType,
                        &dbDriver, ppIntrumentID,iInstrumentID);
     QuoteT.detach();
-
-
-
     TradingHandle *pTradingHandle = new TradingHandle(pTraderApi,FRONT_ADDR_trade, brokerIDType, investorIDType, passwordType, &dbDriver,
                                                       tinstrumemt, price, quantity,  direction);
     pTraderApi->RegisterSpi((CThostFtdcTraderSpi*) pTradingHandle);
@@ -133,7 +130,7 @@ int main() {
 //
 //    //std::thread TradingT(tradeThread, pTradingHandle,  FRONT_ADDR_trade);
 ////    CThostFtdcTraderApi* orderTradeapi = CThostFtdcTraderApi::CreateFtdcTraderApi();
-////    orderTradeapi->RegisterSpi((CThostFtdcTraderSpi*) pTradingHandle);
+////    orderTradeapi->RegisterS;pi((CThostFtdcTraderSpi*) pTradingHandle);
 ////    orderTradeapi->SubscribePublicTopic(THOST_TERT_QUICK);
 ////    orderTradeapi->SubscribePrivateTopic(THOST_TERT_QUICK);
 ////    orderTradeapi->RegisterFront(FRONT_ADDR_trade);

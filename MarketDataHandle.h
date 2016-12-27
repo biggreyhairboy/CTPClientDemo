@@ -8,6 +8,7 @@
 #include <map>
 #include "DBDriver.h"
 #include "ctpapi_linux64/ThostFtdcMdApi.h"
+#include "ctpapi_linux64/ThostFtdcTraderApi.h"
 using namespace std;
 extern double lastorderprice;
 
@@ -18,6 +19,7 @@ enum Trend{
 };
 class MarketDataHandle : public CThostFtdcMdSpi{
 public:
+    CThostFtdcTraderApi *pTraderApi;
     CThostFtdcMdApi *pUserApi;
     char FRONT_ADDR_quote[50];
     TThostFtdcBrokerIDType brokerIDType;
@@ -35,8 +37,9 @@ public:
     map<int, int> MarketTrend;
     int ConsecutiveTime = 0;
     double PreviousPrice = 0.0;
+    string ticktype = "";
 
-    MarketDataHandle(CThostFtdcMdApi*, char *, TThostFtdcBrokerIDType, TThostFtdcInvestorIDType, TThostFtdcPasswordType, DBDriver *,
+    MarketDataHandle(CThostFtdcMdApi*, CThostFtdcTraderApi *pTraderApi, char *, TThostFtdcBrokerIDType, TThostFtdcInvestorIDType, TThostFtdcPasswordType, DBDriver *,
                      vector<string>, int);
     //virtual void OnRspError(CThostFtdcRspInfoField* pRspInfo, int nRquestID, bool bIsLast);
 
