@@ -8,11 +8,14 @@ LINK_DIRECTORIES(/usr/local/lib/)
 find_package(Boost 1.58 COMPONENTS log system thread filesystem)
 ADD_DEFINITIONS(-DBOOST_LOG_DYN_LINK)
 ADD_DEFINITIONS(-DBOOST_ALL_DYN_LINK)
+find_package(Qt5Widgets REQUIRED)
+
+find_package(Qt5Sql REQUIRED)
 
 #find_library(mysql NAMES libmysql PATHS ${MYSQL_DIR}/lib)
 #add_subdirectory(ctpapi_linux64)
 #set(SOURCE_FILES main.cpp MarketDataHandle.cpp MarketDataHandle.h TradingHandle.cpp TradingHandle.h DBDriver.cpp DBDriver.h)
-set(SOURCE_FILES main.cpp MarketDataHandle.cpp MarketDataHandle.h TradingHandle.cpp TradingHandle.h DBDriver.cpp DBDriver.h Utility.cpp Utility.h)
+set(SOURCE_FILES main.cpp MarketDataHandle.cpp MarketDataHandle.h TradingHandle.cpp TradingHandle.h DBDriver.cpp DBDriver.h Utility.cpp Utility.h DBWriter.cpp DBWriter.h GVAR.cpp GVAR.h initialize.cpp initialize.h sociDB.cpp sociDB.h)
 #add_library(TCPClientDemo ${SOURCE_FILES})
 #include_directories(${PROJECT_SOURCE_DIR})
 #include_directories(${PROJECT_SOURCE_DIR}}/ctpapi_linux64)
@@ -24,7 +27,7 @@ SET_TARGET_PROPERTIES(thostmduserapi PROPERTIES IMPORTED_LOCATION ${PROJECT_SOUR
 SET_TARGET_PROPERTIES(thosttraderapi PROPERTIES IMPORTED_LOCATION ${PROJECT_SOURCE_DIR}/ctpapi_linux64/thosttraderapi.so)
 add_executable(CTPClientDemo ${SOURCE_FILES})
 #target_link_libraries(CTPClientDemo mysqlcppconn thostmduserapi thosttraderapi ${CMAKE_THREAD_LIBS_INIT} ${Boost_LOG_LIBRARY} ${Boost_THREAD_LIBRARY} ${Boost_FILESYSTEM_LIBRARY} ${Boost_SYSTEM_LIBRARY})
-target_link_libraries(CTPClientDemo mysqlcppconn thostmduserapi thosttraderapi -lpthread "/usr/local/lib/libboost_thread.so" "/usr/local/lib/libboost_system.so"  "/usr/local/lib/libboost_log.so")
+target_link_libraries(CTPClientDemo mysqlcppconn thostmduserapi thosttraderapi -lpthread Qt5::Widgets Qt5::Sql "/usr/local/lib/libboost_thread.so" "/usr/local/lib/libboost_system.so"  "/usr/local/lib/libboost_log.so")
 
 #
 #

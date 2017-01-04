@@ -23,6 +23,7 @@
 #include "ctpapi_linux64/ThostFtdcTraderApi.h"
 #include "MarketDataHandle.h"
 #include "TradingHandle.h"
+#include "initialize.h"
 
 double lastorderprice = 0;
 using namespace std;
@@ -69,6 +70,10 @@ void tradeThread(TradingHandle *pTradingHandle,CThostFtdcTraderApi  *pTraderApi,
 }
 
 int main() {
+    cout << "新加入部分" << endl;
+    iniFrontAdress();
+    iniDB();
+
     cout << "开始吧" <<endl;
     //配置文件加上default值，防止exception
     //read config
@@ -126,7 +131,7 @@ int main() {
     this_thread::sleep_for(chrono::seconds(2));
     BOOST_LOG_TRIVIAL(info)<<"spi thread started ...";
 
-//
+
 //
 //    //std::thread TradingT(tradeThread, pTradingHandle,  FRONT_ADDR_trade);
 ////    CThostFtdcTraderApi* orderTradeapi = CThostFtdcTraderApi::CreateFtdcTraderApi();
@@ -158,7 +163,7 @@ int main() {
 //    req.CombHedgeFlag[0] = THOST_FTDC_HF_Speculation;
 //    ///价格
 //    //先用22900试试
-//    req.LimitPrice = 22300;
+//    req.LimitPrice = 2900;
 //    ///数量: 1
 //    req.VolumeTotalOriginal = quantity;
 //    ///有效期类型: 当日有效
@@ -193,7 +198,7 @@ int main() {
 ////    pTraderApi->Init();
 //    //pTraderApi->Join();
 //    //orderTradeapi->Release();
-
+//
 
     getchar();
     return 0;

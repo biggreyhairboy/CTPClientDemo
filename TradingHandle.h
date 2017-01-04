@@ -7,6 +7,7 @@
 
 #include "ctpapi_linux64/ThostFtdcTraderApi.h"
 #include "DBDriver.h"
+#include "DBWriter.h"
 
 class TradingHandle : public CThostFtdcTraderSpi {
 public:
@@ -33,6 +34,7 @@ public:
     TThostFtdcInstrumentIDType INSTRUMENT_ID;
     TThostFtdcPriceType LIMIT_PRICE;
     TThostFtdcDirectionType DIRECTION;
+//    DBWriter *writer = DBWriter::getInstance();
     int quantity;
 
     ///¹¹Ôìº¯Êý

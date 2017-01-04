@@ -9,6 +9,7 @@
 #include "DBDriver.h"
 #include "ctpapi_linux64/ThostFtdcMdApi.h"
 #include "ctpapi_linux64/ThostFtdcTraderApi.h"
+#include "DBWriter.h"
 using namespace std;
 extern double lastorderprice;
 
@@ -38,6 +39,8 @@ public:
     int ConsecutiveTime = 0;
     double PreviousPrice = 0.0;
     string ticktype = "";
+
+
 
     MarketDataHandle(CThostFtdcMdApi*, CThostFtdcTraderApi *pTraderApi, char *, TThostFtdcBrokerIDType, TThostFtdcInvestorIDType, TThostFtdcPasswordType, DBDriver *,
                      vector<string>, int);

@@ -151,6 +151,8 @@ void ColorfulConsolePrint(TThostFtdcTimeType time, double lastprice, double volu
 }
 
 void MarketDataHandle::OnRtnDepthMarketData(CThostFtdcDepthMarketDataField *pDepthMarketData){
+    DBWriter::getInstance()->InsertTickData("all_futures_ticks", pDepthMarketData);
+//    为了调试查询positionde 的接口，把这个屏蔽了
     //todo:写日志，方便后续分析
     UpdateLastPrice(pDepthMarketData->LastPrice);
 
@@ -314,10 +316,6 @@ void MarketDataHandle::OnRtnDepthMarketData(CThostFtdcDepthMarketDataField *pDep
         }
 
     }
-
-
-
-
 //    //todo: matain a price queue of last five minutes
 //    if (iRequestID_quote > 15)
 //    {

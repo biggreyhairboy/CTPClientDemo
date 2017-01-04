@@ -167,7 +167,8 @@ void TradingHandle::ReqQryInvestorPosition()
     memset(&req, 0, sizeof(req));
     strcpy(req.BrokerID, brokerIDType);
     strcpy(req.InvestorID, investorIDType);
-    strcpy(req.InstrumentID, INSTRUMENT_ID);
+    //为什么需要一个一个合约查询，r不能一次性查询，试验一下是否可以通过设为空来解决查询的问题。
+    //strcpy(req.InstrumentID, INSTRUMENT_ID);
     while (true)
     {
         int iResult = pTraderApi->ReqQryInvestorPosition(&req, ++iRequestID_trade);
@@ -186,7 +187,9 @@ void TradingHandle::ReqQryInvestorPosition()
 
 void TradingHandle::OnRspQryInvestorPosition(CThostFtdcInvestorPositionField *pInvestorPosition, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast)
 {
-    cout << "last order price print from trade thread " << lastorderprice << endl;
+//    cout << "last order price print from trade thread " << lastorderprice << endl;
+    DBWriter::getInstance()->InsertOrUpdateAccountPostion("account_position", pInvestorPosition);
+//    cout << pInvestorPosition->InstrumentID << "  有默认合约吗"  << endl;
     cerr << "trade---->>> " << "OnRspQryInvestorPosition" << endl;
     if (bIsLast && !IsErrorRspInfo(pRspInfo))
     {
@@ -571,6 +574,7 @@ void TradingHandle::OnRtnQuote(CThostFtdcQuoteField *pQuote)
 ///成交通知
 void TradingHandle::OnRtnTrade(CThostFtdcTradeField *pTrade)
 {
+
     cerr << "trade---->>> " << "OnRtnTrade" << endl;
 }
 
