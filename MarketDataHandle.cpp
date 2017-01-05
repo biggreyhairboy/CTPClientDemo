@@ -62,7 +62,6 @@ void MarketDataHandle::OnFrontConnected()
     ReqUserLogin();
 }
 
-
 void MarketDataHandle::ReqUserLogin() {
     CThostFtdcReqUserLoginField req;
     memset(&req, 0, sizeof(req));
@@ -93,7 +92,10 @@ void MarketDataHandle::OnRspUserLogin(CThostFtdcRspUserLoginField *pRspUserLogin
     {
         instrumentarry[i] = new char[strppInstrument[i].size() + 1];
         std::strcpy(instrumentarry[i], strppInstrument[i].c_str());
+        //todo:不能订阅多个行情了
+//        SubscribeForQuoteRsp(instrumentarry, instrumentarry[i]);
     }
+    //订阅单个产品
     SubscribeMarketData(instrumentarry, InstrumentID);
 }
 
@@ -124,26 +126,50 @@ void MarketDataHandle::OnRspUnSubForQuoteRsp(CThostFtdcSpecificInstrumentField *
 
 void ColorfulConsolePrint(TThostFtdcTimeType time, double lastprice, double volumechange, double openinterestchange, string ticktype, int color)
 {
+    const int dwidth = 6;
     switch(color)
     {
         //无色
+//        case 0:
+//            cout << boost::format("%1%")%string(time) <<setw(10)<<  setprecision(2) << lastprice
+//                 << left << setw(10) << boost::format("\033[;m%1%\033[0m")%to_string((long)volumechange)
+//                 << left << setw(10) <<boost::format("\033[;m%1%\033[0m")%to_string((long)openinterestchange)
+//                 << right  << setw(10) << boost::format("\033[;m%1%\033[0m")%ticktype<< endl;
+//            break;
+//            //"\033[;36msome text\033[0m"; 蓝绿色
+//        case 1:
+//            cout << boost::format("%1%")%string(time) <<setw(10) << setprecision(2) << lastprice
+//                 << left << setw(10) <<  boost::format("\033[;31m%1%\033[0m")%to_string((long)volumechange)
+//                 << left << setw(10) << boost::format("\033[;31m%1%\033[0m")%to_string((long)openinterestchange)
+//                 << right << setw(10) <<boost::format("\033[;31m%1%\033[0m")%ticktype << endl;
+//            break;
+//        case 2:
+//            cout << boost::format("%1%")%string(time) <<setw(10) << setprecision(2) <<lastprice
+//                 << left << setw(10) << boost::format("\033[;32m%1%\033[0m")%to_string((long)volumechange)
+//                 << left << setw(10) <<boost::format("\033[;32m%1%\033[0m")%to_string((long)openinterestchange)
+//                 << right <<setw(10) << boost::format("\033[;32m%1%\033[0m")%ticktype << endl;
+//            break;
+            //"\033[;31msome text\033[0m";
+
         case 0:
-            cout << boost::format("%1%")%string(time) <<setw(10)<<  setprecision(2) << lastprice << setw(10)
-                 << boost::format("\033[;m%1%\033[0m")%to_string((long)volumechange) << setw(10)
-                 <<boost::format("\033[;m%1%\033[0m")%to_string((long)volumechange) << setw(10)  << fixed << right << boost::format("\033[;m%1%\033[0m")%ticktype<< endl;
+            cout << boost::format("%1%")%string(time) << "  " << left << setw(dwidth) << lastprice
+                 << right << setw(dwidth) << (long)volumechange
+                 << right << setw(dwidth) <<(long)openinterestchange
+                 << "  " << boost::format("\033[;m%1%\033[0m")%ticktype<< endl;
             break;
             //"\033[;36msome text\033[0m"; 蓝绿色
         case 1:
-            cout << boost::format("%1%")%string(time) <<setw(10) << setprecision(2) << lastprice << setw(10)
-                 <<  boost::format("\033[;31m%1%\033[0m")%to_string((long)volumechange)  << setw(10)
-                 << boost::format("\033[;31m%1%\033[0m")%to_string((long)openinterestchange) << setw(10)  << boost::format("\033[;31m%1%\033[0m")%ticktype << endl;
+            cout << boost::format("%1%")%string(time) << "  " << left << setw(dwidth) << lastprice
+                 << right << setw(dwidth) << (long)volumechange
+                 << right << setw(dwidth) <<(long)openinterestchange
+                 << "  " << boost::format("\033[;31m%1%\033[0m")%ticktype<< endl;
             break;
         case 2:
-            cout << boost::format("%1%")%string(time) <<setw(10) << setprecision(2) <<lastprice << setw(10)
-                 << boost::format("\033[;32m%1%\033[0m")%to_string((long)volumechange) << setw(10)
-                 <<boost::format("\033[;32m%1%\033[0m")%to_string((long)openinterestchange)<< setw(10) << boost::format("\033[;32m%1%\033[0m")%ticktype << endl;
+            cout << boost::format("%1%")%string(time) << "  " << left << setw(dwidth) << lastprice
+                 << right << setw(dwidth) << (long)volumechange
+                 << right << setw(dwidth) <<(long)openinterestchange
+                 << "  " << boost::format("\033[0;32m%1%\033[0m")%ticktype<< endl;
             break;
-            //"\033[;31msome text\033[0m";
 
         default:
             cout << "error " << endl;
@@ -151,7 +177,6 @@ void ColorfulConsolePrint(TThostFtdcTimeType time, double lastprice, double volu
 }
 
 void MarketDataHandle::OnRtnDepthMarketData(CThostFtdcDepthMarketDataField *pDepthMarketData){
-    DBWriter::getInstance()->InsertTickData("all_futures_ticks", pDepthMarketData);
 //    为了调试查询positionde 的接口，把这个屏蔽了
     //todo:写日志，方便后续分析
     UpdateLastPrice(pDepthMarketData->LastPrice);
@@ -162,6 +187,7 @@ void MarketDataHandle::OnRtnDepthMarketData(CThostFtdcDepthMarketDataField *pDep
         //这里应该需要完全复制
         pPreDepthMarketData = *pDepthMarketData;
     }
+    //原来的插入数据库的流程
     dbDriver->ExcuteQuery(pDepthMarketData);
     OpenInterestChange = pDepthMarketData->OpenInterest - pPreDepthMarketData.OpenInterest;
     VolumeChange = pDepthMarketData->Volume - pPreDepthMarketData.Volume;
@@ -252,70 +278,72 @@ void MarketDataHandle::OnRtnDepthMarketData(CThostFtdcDepthMarketDataField *pDep
         ticktype = "其他类型";
         ColorfulConsolePrint(pDepthMarketData->UpdateTime, pDepthMarketData->LastPrice, VolumeChange, OpenInterestChange,"其他类型", 0);
     }
-    //todo: 线程detach之后是否可以调用回调函数
-    for(map<int, int>::iterator mapiter = MarketTrend.begin(); mapiter != MarketTrend.end(); mapiter++)
-    {
-        if(mapiter->second == 5){
-            //order
-            if(pTraderApi->GetApiVersion() != NULL)
-            {
-                CThostFtdcInputOrderField req;
-                memset(&req, 0, sizeof(req));
-                ///经纪公司代码
-                strcpy(req.BrokerID, brokerIDType);
-                ///投资者代码
-                strcpy(req.InvestorID, investorIDType);
-                ///合约代码
-                char abc[] = "rb1705";
-                strcpy(req.InstrumentID, abc);
-                ///报单引用
-                //orderref
-                strcpy(req.OrderRef, new char[3]);
-                ///用户代码
-                //	TThostFtdcUserIDType	UserID;
-                ///报单价格条件: 限价
-                req.OrderPriceType = THOST_FTDC_OPT_LimitPrice;
-                ///买卖方向:
-                req.Direction = '0';
-                ///组合开平标志: 开仓
-                req.CombOffsetFlag[0] = THOST_FTDC_OF_Open;
-                ///组合投机套保标志
-                req.CombHedgeFlag[0] = THOST_FTDC_HF_Speculation;
-                ///价格
-                //先用22900试试
-                req.LimitPrice = 22300;
-                ///数量: 1
-                req.VolumeTotalOriginal = 1;
-                ///有效期类型: 当日有效
-                req.TimeCondition = THOST_FTDC_TC_GFD;
-                ///GTD日期
-                //	TThostFtdcDateType	GTDDate;
-                ///成交量类型: 任何数量
-                req.VolumeCondition = THOST_FTDC_VC_AV;
-                ///最小成交量: 1
-                req.MinVolume = 1;
-                ///触发条件: 立即
-                req.ContingentCondition = THOST_FTDC_CC_Immediately;
-                ///止损价
-                //	TThostFtdcPriceType	StopPrice;
-                ///强平原因: 非强平
-                req.ForceCloseReason = THOST_FTDC_FCC_NotForceClose;
-                ///自动挂起标志: 否
-                req.IsAutoSuspend = 0;
-                ///业务单元
-                //	TThostFtdcBusinessUnitType	BusinessUnit;
-                ///请求编号
-                //	TThostFtdcRequestIDType	RequestID;
-                ///用户强评标志: 否
-                req.UserForceClose = 0;
-                int iRequestID_trade = 2;
-                int iResult = pTraderApi->ReqOrderInsert(&req, ++iRequestID_trade);
-            }
-            MarketTrend.clear();
-            break;
-        }
-
-    }
+    //todo: 插入到数据库的double 的位数不对
+    DBWriter::getInstance()->InsertTickData("all_futures_ticks", pDepthMarketData, ticktype);
+//    //todo: 线程detach之后是否可以调用回调函数
+//    for(map<int, int>::iterator mapiter = MarketTrend.begin(); mapiter != MarketTrend.end(); mapiter++)
+//    {
+//        if(mapiter->second == 5){
+//            //order
+//            if(pTraderApi->GetApiVersion() != NULL)
+//            {
+//                CThostFtdcInputOrderField req;
+//                memset(&req, 0, sizeof(req));
+//                ///经纪公司代码
+//                strcpy(req.BrokerID, brokerIDType);
+//                ///投资者代码
+//                strcpy(req.InvestorID, investorIDType);
+//                ///合约代码
+//                char abc[] = "rb1705";
+//                strcpy(req.InstrumentID, abc);
+//                ///报单引用
+//                //orderref
+//                strcpy(req.OrderRef, new char[3]);
+//                ///用户代码
+//                //	TThostFtdcUserIDType	UserID;
+//                ///报单价格条件: 限价
+//                req.OrderPriceType = THOST_FTDC_OPT_LimitPrice;
+//                ///买卖方向:
+//                req.Direction = '0';
+//                ///组合开平标志: 开仓
+//                req.CombOffsetFlag[0] = THOST_FTDC_OF_Open;
+//                ///组合投机套保标志
+//                req.CombHedgeFlag[0] = THOST_FTDC_HF_Speculation;
+//                ///价格
+//                //先用22900试试
+//                req.LimitPrice = 22300;
+//                ///数量: 1
+//                req.VolumeTotalOriginal = 1;
+//                ///有效期类型: 当日有效
+//                req.TimeCondition = THOST_FTDC_TC_GFD;
+//                ///GTD日期
+//                //	TThostFtdcDateType	GTDDate;
+//                ///成交量类型: 任何数量
+//                req.VolumeCondition = THOST_FTDC_VC_AV;
+//                ///最小成交量: 1
+//                req.MinVolume = 1;
+//                ///触发条件: 立即
+//                req.ContingentCondition = THOST_FTDC_CC_Immediately;
+//                ///止损价
+//                //	TThostFtdcPriceType	StopPrice;
+//                ///强平原因: 非强平
+//                req.ForceCloseReason = THOST_FTDC_FCC_NotForceClose;
+//                ///自动挂起标志: 否
+//                req.IsAutoSuspend = 0;
+//                ///业务单元
+//                //	TThostFtdcBusinessUnitType	BusinessUnit;
+//                ///请求编号
+//                //	TThostFtdcRequestIDType	RequestID;
+//                ///用户强评标志: 否
+//                req.UserForceClose = 0;
+//                cout << "iRequestID_trade = " << iRequestID_trade << endl;
+//                int iResult = pTraderApi->ReqOrderInsert(&req, ++iRequestID_trade);
+//            }
+//            MarketTrend.clear();
+//            break;
+//        }
+//
+//    }
 //    //todo: matain a price queue of last five minutes
 //    if (iRequestID_quote > 15)
 //    {
