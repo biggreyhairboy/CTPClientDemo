@@ -9,7 +9,7 @@
 #include <QTextStream>
 #include "GVAR.h"
 #include "ctpapi_linux64/ThostFtdcUserApiStruct.h"
-
+#include <string>
 
 #include <QString>
 
@@ -19,7 +19,7 @@ class DBWriter {
 public:
     static DBWriter *getInstance();
 //    ~DBWriter();
-    void InsertTickData(QString tableName, CThostFtdcDepthMarketDataField *pDepthMarketData);
+    void InsertTickData(QString tableName, CThostFtdcDepthMarketDataField *pDepthMarketData, std::string tickdata);
     void InsertOrUpdateAccountPostion(QString tableName, CThostFtdcInvestorPositionField *positionField);
     void DBClose();
 private:

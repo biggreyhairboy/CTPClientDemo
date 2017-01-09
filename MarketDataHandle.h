@@ -40,7 +40,8 @@ public:
     double PreviousPrice = 0.0;
     string ticktype = "";
 
-
+    int iRequestID_trade = 2;
+    bool MarketDataInitialized = false;
 
     MarketDataHandle(CThostFtdcMdApi*, CThostFtdcTraderApi *pTraderApi, char *, TThostFtdcBrokerIDType, TThostFtdcInvestorIDType, TThostFtdcPasswordType, DBDriver *,
                      vector<string>, int);

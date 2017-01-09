@@ -35,10 +35,10 @@ DBWriter::DBWriter() {
     }
 }
 
-void DBWriter::InsertTickData(QString tableName, CThostFtdcDepthMarketDataField *pDepthMarketData) {
+void DBWriter::InsertTickData(QString tableName, CThostFtdcDepthMarketDataField *pDepthMarketData, string ticktype) {
     QSqlQuery insert;
     //24ÁÐ
-    insert.prepare("insert into " + tableName + " values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+    insert.prepare("insert into " + tableName + " values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
     //°ó¶¨²éÑ¯
     QString tdate                 = pDepthMarketData->TradingDay;
     QString InstrumentID         = pDepthMarketData->InstrumentID;
@@ -50,20 +50,21 @@ void DBWriter::InsertTickData(QString tableName, CThostFtdcDepthMarketDataField 
     double HighestPrice         = pDepthMarketData->HighestPrice;
     double LowestPrice          = pDepthMarketData->LowestPrice;
     int    Volume               = pDepthMarketData->Volume;
-    double Turnover             = pDepthMarketData->Turnover;//0
-    double OpenInterest         = pDepthMarketData->OpenInterest; //0
-    double ClosePrice           = pDepthMarketData->ClosePrice;
-    double SettlementPrie       = pDepthMarketData->SettlementPrice;
+    double Turnover             = pDepthMarketData->Turnover;
+    double OpenInterest         = pDepthMarketData->OpenInterest;
+    double ClosePrice           = 0;//pDepthMarketData->ClosePrice;
+    double SettlementPrie       = 0;// pDepthMarketData->SettlementPrice;
     double UpperLimitPrice      = pDepthMarketData->UpperLimitPrice;
     double LowerLimitPirce      = pDepthMarketData->LowerLimitPrice;
-    QString UpdateTime           = pDepthMarketData->UpdateTime;
+    QString UpdateTime          = pDepthMarketData->UpdateTime;
     int    UpdateMillisec       = pDepthMarketData->UpdateMillisec;
     double BidPrice1            = pDepthMarketData->BidPrice1;
     int    BidVolume1           = pDepthMarketData->BidVolume1;
     double AskPrice1            = pDepthMarketData->AskPrice1;
     int    AskVolume1           = pDepthMarketData->AskVolume1;
     double AveragePrice         = pDepthMarketData->AveragePrice;
-    QString ActionDay            = pDepthMarketData->ActionDay;
+    QString ActionDay           = pDepthMarketData->ActionDay;
+    QString TickType             = QString::fromStdString(ticktype);
 
     insert.bindValue(0, tdate);
     insert.bindValue(1, InstrumentID);
@@ -89,6 +90,7 @@ void DBWriter::InsertTickData(QString tableName, CThostFtdcDepthMarketDataField 
     insert.bindValue(21, AskVolume1);
     insert.bindValue(22, AveragePrice);
     insert.bindValue(23, ActionDay);
+    insert.bindValue(24, TickType);
 
     bool result = insert.exec();
 //    qDebug() << result;

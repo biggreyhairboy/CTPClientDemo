@@ -101,9 +101,10 @@ int main() {
     string Scheme = pt.get<std::string>("Database.Scheme");
     DBDriver dbDriver(Server, User, Password, Scheme);
     //market
-    int iInstrumentID = 2;
+
     string SubscribeSymbolList = pt.get<std::string>("MarketData.SubscribeSymbolList");
     vector<string> ppIntrumentID(split(SubscribeSymbolList, ','));
+    int iInstrumentID = ppIntrumentID.size();
     logging::add_file_log(pt.get<std::string>("CTPClientDemo.LogPath"));
     //trading
     string tradeinstrument = pt.get<std::string>("Trading.tradeinstrument");

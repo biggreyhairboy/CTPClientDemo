@@ -97,6 +97,7 @@ void MarketDataHandle::OnRspUserLogin(CThostFtdcRspUserLoginField *pRspUserLogin
     }
     //订阅单个产品
     SubscribeMarketData(instrumentarry, InstrumentID);
+    //SubscribeMarketData(instrumentarry, 1);
 }
 
 void MarketDataHandle::SubscribeMarketData(char* ppIntrumentID[], int iInstrumentID) {
@@ -126,7 +127,7 @@ void MarketDataHandle::OnRspUnSubForQuoteRsp(CThostFtdcSpecificInstrumentField *
 
 void ColorfulConsolePrint(TThostFtdcTimeType time, double lastprice, double volumechange, double openinterestchange, string ticktype, int color)
 {
-    const int dwidth = 6;
+    const int dwidth = 15;
     switch(color)
     {
         //无色
@@ -152,20 +153,20 @@ void ColorfulConsolePrint(TThostFtdcTimeType time, double lastprice, double volu
             //"\033[;31msome text\033[0m";
 
         case 0:
-            cout << boost::format("%1%")%string(time) << "  " << left << setw(dwidth) << lastprice
+            cout << boost::format("%1%")%string(time) << "  " << right << setw(dwidth) << lastprice
                  << right << setw(dwidth) << (long)volumechange
                  << right << setw(dwidth) <<(long)openinterestchange
                  << "  " << boost::format("\033[;m%1%\033[0m")%ticktype<< endl;
             break;
             //"\033[;36msome text\033[0m"; 蓝绿色
         case 1:
-            cout << boost::format("%1%")%string(time) << "  " << left << setw(dwidth) << lastprice
+            cout << boost::format("%1%")%string(time) << "  " << right << setw(dwidth) << lastprice
                  << right << setw(dwidth) << (long)volumechange
                  << right << setw(dwidth) <<(long)openinterestchange
                  << "  " << boost::format("\033[;31m%1%\033[0m")%ticktype<< endl;
             break;
         case 2:
-            cout << boost::format("%1%")%string(time) << "  " << left << setw(dwidth) << lastprice
+            cout << boost::format("%1%")%string(time) << "  " << right << setw(dwidth) << lastprice
                  << right << setw(dwidth) << (long)volumechange
                  << right << setw(dwidth) <<(long)openinterestchange
                  << "  " << boost::format("\033[0;32m%1%\033[0m")%ticktype<< endl;
@@ -173,6 +174,7 @@ void ColorfulConsolePrint(TThostFtdcTimeType time, double lastprice, double volu
 
         default:
             cout << "error " << endl;
+            break;
     }
 }
 
@@ -181,169 +183,203 @@ void MarketDataHandle::OnRtnDepthMarketData(CThostFtdcDepthMarketDataField *pDep
     //todo:写日志，方便后续分析
     UpdateLastPrice(pDepthMarketData->LastPrice);
 
-    //怎么初始化价格的指针
-    if (pPreDepthMarketData.LastPrice == 0)
-    {
-        //这里应该需要完全复制
-        pPreDepthMarketData = *pDepthMarketData;
-    }
-    //原来的插入数据库的流程
-    dbDriver->ExcuteQuery(pDepthMarketData);
-    OpenInterestChange = pDepthMarketData->OpenInterest - pPreDepthMarketData.OpenInterest;
-    VolumeChange = pDepthMarketData->Volume - pPreDepthMarketData.Volume;
+    try {
+        //怎么初始化价格的指针
 
-    if (OpenInterestChange > 0)
-    {
-        if(VolumeChange ==  abs(OpenInterestChange)) {
-            ticktype = "双开";
-            ColorfulConsolePrint(pDepthMarketData->UpdateTime, pDepthMarketData->LastPrice, VolumeChange, OpenInterestChange,"双开", 0);
-            MarketTrend[1] = MarketTrend[1] + 1;
+        if (!MarketDataInitialized) {
+            //这里应该需要完全复制
+            pPreDepthMarketData = *pDepthMarketData;
+            //OpenInterestChange = pPreDepthMarketData.OpenInterest;
+            MarketDataInitialized = true;
+            return ;
         }
-        else {
-            if(pDepthMarketData->LastPrice > pPreDepthMarketData.LastPrice) {
-                ticktype = "多开";
-                ColorfulConsolePrint(pDepthMarketData->UpdateTime, pDepthMarketData->LastPrice, VolumeChange, OpenInterestChange,"多开", 1);
-                MarketTrend[1] = MarketTrend[1] + 1;
-            }
-            else if (pDepthMarketData->LastPrice > pPreDepthMarketData.LastPrice){
-                ticktype = "空开";
-                ColorfulConsolePrint(pDepthMarketData->UpdateTime, pDepthMarketData->LastPrice, VolumeChange, OpenInterestChange,"空开", 2);
-                MarketTrend[2] = MarketTrend[2] + 1;
-            } else {
-                if (pDepthMarketData->LastPrice >= pPreDepthMarketData.AskPrice1){
-                    ticktype = "多开";
-                    ColorfulConsolePrint(pDepthMarketData->UpdateTime, pDepthMarketData->LastPrice, VolumeChange, OpenInterestChange,"多开", 1);
-                    MarketTrend[1] = MarketTrend[1] + 1;
-                } else if (pDepthMarketData->LastPrice <= pPreDepthMarketData.BidPrice1){
-                    ticktype = "空开";
-                    ColorfulConsolePrint(pDepthMarketData->UpdateTime, pDepthMarketData->LastPrice, VolumeChange, OpenInterestChange,"空开", 2);
-                    MarketTrend[2] = MarketTrend[2] + 1;
-                } else {
-                    ticktype = "开仓类型待定";
-                    ColorfulConsolePrint(pDepthMarketData->UpdateTime, pDepthMarketData->LastPrice, VolumeChange, OpenInterestChange,"开仓类型待定", 2);
-                    //无法归类的tick直接drop
-                    // MarketTrend[2] = MarketTrend[2] + 1;
-                }
-            }
-        }
-    }
-    else if (OpenInterestChange < 0)
-    {
-        if(VolumeChange ==  abs(OpenInterestChange)) {
-            ticktype = "双平";
-            ColorfulConsolePrint(pDepthMarketData->UpdateTime, pDepthMarketData->LastPrice, VolumeChange, OpenInterestChange,"双平", 0);
-            MarketTrend[2] = MarketTrend[2] + 1;
-        }
-
-        else {
-            if(pDepthMarketData->LastPrice > pPreDepthMarketData.LastPrice) {
-                ticktype = "空平";
-                ColorfulConsolePrint(pDepthMarketData->UpdateTime, pDepthMarketData->LastPrice, VolumeChange, OpenInterestChange,"空平", 1);
-                MarketTrend[1] = MarketTrend[1] + 1;
-            }
-            else if (pDepthMarketData->LastPrice < pPreDepthMarketData.LastPrice){
-                ticktype = "多平";
-                ColorfulConsolePrint(pDepthMarketData->UpdateTime, pDepthMarketData->LastPrice, VolumeChange, OpenInterestChange,"多平", 2);
-                MarketTrend[2] = MarketTrend[2] + 1;
-            } else {
-                if (pDepthMarketData->LastPrice >= pPreDepthMarketData.AskPrice1){
-                    ticktype = "多平";
-                    ColorfulConsolePrint(pDepthMarketData->UpdateTime, pDepthMarketData->LastPrice, VolumeChange, OpenInterestChange,"多平", 2);
-                    MarketTrend[2] = MarketTrend[2] + 1;
-                } else if (pDepthMarketData->LastPrice <= pPreDepthMarketData.BidPrice1){
-                    ticktype = "空平";
-                    ColorfulConsolePrint(pDepthMarketData->UpdateTime, pDepthMarketData->LastPrice, VolumeChange, OpenInterestChange,"空平", 1);
-                    MarketTrend[1] = MarketTrend[1] + 1;
-                } else {
-                    ticktype = "平仓类型待定";
-                    ColorfulConsolePrint(pDepthMarketData->UpdateTime, pDepthMarketData->LastPrice, VolumeChange, OpenInterestChange,"平仓类型待定", 1);
-                    //无法归类的tick直接drop
-                    //MarketTrend[1] = MarketTrend[1] + 1;
-                }
-            }
-        }
-    }
-    else if (OpenInterestChange == 0) {
-        MarketTrend[0] = MarketTrend[0] + 1;
-        if(pDepthMarketData->LastPrice >= pPreDepthMarketData.LastPrice) {
-            ticktype = "多换";
-            ColorfulConsolePrint(pDepthMarketData->UpdateTime, pDepthMarketData->LastPrice, VolumeChange, OpenInterestChange,"多换", 1);
-        }
-        else{
-            ticktype = "空换";
-            ColorfulConsolePrint(pDepthMarketData->UpdateTime, pDepthMarketData->LastPrice, VolumeChange, OpenInterestChange,"空换", 2);
-        }
-    }
-    else {
-        ticktype = "其他类型";
-        ColorfulConsolePrint(pDepthMarketData->UpdateTime, pDepthMarketData->LastPrice, VolumeChange, OpenInterestChange,"其他类型", 0);
-    }
-    //todo: 插入到数据库的double 的位数不对
-    DBWriter::getInstance()->InsertTickData("all_futures_ticks", pDepthMarketData, ticktype);
-//    //todo: 线程detach之后是否可以调用回调函数
-//    for(map<int, int>::iterator mapiter = MarketTrend.begin(); mapiter != MarketTrend.end(); mapiter++)
-//    {
-//        if(mapiter->second == 5){
-//            //order
-//            if(pTraderApi->GetApiVersion() != NULL)
-//            {
-//                CThostFtdcInputOrderField req;
-//                memset(&req, 0, sizeof(req));
-//                ///经纪公司代码
-//                strcpy(req.BrokerID, brokerIDType);
-//                ///投资者代码
-//                strcpy(req.InvestorID, investorIDType);
-//                ///合约代码
-//                char abc[] = "rb1705";
-//                strcpy(req.InstrumentID, abc);
-//                ///报单引用
-//                //orderref
-//                strcpy(req.OrderRef, new char[3]);
-//                ///用户代码
-//                //	TThostFtdcUserIDType	UserID;
-//                ///报单价格条件: 限价
-//                req.OrderPriceType = THOST_FTDC_OPT_LimitPrice;
-//                ///买卖方向:
-//                req.Direction = '0';
-//                ///组合开平标志: 开仓
-//                req.CombOffsetFlag[0] = THOST_FTDC_OF_Open;
-//                ///组合投机套保标志
-//                req.CombHedgeFlag[0] = THOST_FTDC_HF_Speculation;
-//                ///价格
-//                //先用22900试试
-//                req.LimitPrice = 22300;
-//                ///数量: 1
-//                req.VolumeTotalOriginal = 1;
-//                ///有效期类型: 当日有效
-//                req.TimeCondition = THOST_FTDC_TC_GFD;
-//                ///GTD日期
-//                //	TThostFtdcDateType	GTDDate;
-//                ///成交量类型: 任何数量
-//                req.VolumeCondition = THOST_FTDC_VC_AV;
-//                ///最小成交量: 1
-//                req.MinVolume = 1;
-//                ///触发条件: 立即
-//                req.ContingentCondition = THOST_FTDC_CC_Immediately;
-//                ///止损价
-//                //	TThostFtdcPriceType	StopPrice;
-//                ///强平原因: 非强平
-//                req.ForceCloseReason = THOST_FTDC_FCC_NotForceClose;
-//                ///自动挂起标志: 否
-//                req.IsAutoSuspend = 0;
-//                ///业务单元
-//                //	TThostFtdcBusinessUnitType	BusinessUnit;
-//                ///请求编号
-//                //	TThostFtdcRequestIDType	RequestID;
-//                ///用户强评标志: 否
-//                req.UserForceClose = 0;
-//                cout << "iRequestID_trade = " << iRequestID_trade << endl;
-//                int iResult = pTraderApi->ReqOrderInsert(&req, ++iRequestID_trade);
-//            }
-//            MarketTrend.clear();
-//            break;
+        //原来的插入数据库的流程
+        //dbDriver->ExcuteQuery(pDepthMarketData);
+        //为什么总是出现0 0 的情况
+        OpenInterestChange = pDepthMarketData->OpenInterest - pPreDepthMarketData.OpenInterest;
+//        if(OpenInterestChange == 0)
+//        {
+//            cout << "PreOpenInterect = " << pPreDepthMarketData.OpenInterest << endl;
+//            cout << "OpenInterect = " << pDepthMarketData->OpenInterest << endl;
+//            cout << "PreVolume" << pPreDepthMarketData.Volume << endl;
+//            cout << "Volume " << pDepthMarketData->Volume << endl;
+//            //cout << "VolumeChange" << VolumeChange << endl;
 //        }
-//
-//    }
+        VolumeChange = pDepthMarketData->Volume - pPreDepthMarketData.Volume;
+        if(OpenInterestChange == 0 and VolumeChange == 0)
+        {
+            ColorfulConsolePrint(pDepthMarketData->UpdateTime, pDepthMarketData->LastPrice, VolumeChange,
+                                 OpenInterestChange, "notrade", 0);
+        }
+        else {
+            if (OpenInterestChange > 0) {
+                if (VolumeChange == abs(OpenInterestChange)) {
+                    ticktype = "shuangkai";
+                    ColorfulConsolePrint(pDepthMarketData->UpdateTime, pDepthMarketData->LastPrice, VolumeChange,
+                                         OpenInterestChange, "shuangkai", 0);
+                    MarketTrend[1] = MarketTrend[1] + 1;
+                } else {
+                    if (pDepthMarketData->LastPrice > pPreDepthMarketData.LastPrice) {
+                        ticktype = "duokai";
+                        ColorfulConsolePrint(pDepthMarketData->UpdateTime, pDepthMarketData->LastPrice, VolumeChange,
+                                             OpenInterestChange, "duokai", 1);
+                        MarketTrend[1] = MarketTrend[1] + 1;
+                    } else if (pDepthMarketData->LastPrice > pPreDepthMarketData.LastPrice) {
+                        ticktype = "kongkai";
+                        ColorfulConsolePrint(pDepthMarketData->UpdateTime, pDepthMarketData->LastPrice, VolumeChange,
+                                             OpenInterestChange, "kongkai", 2);
+                        MarketTrend[2] = MarketTrend[2] + 1;
+                    } else {
+                        if (pDepthMarketData->LastPrice >= pPreDepthMarketData.AskPrice1) {
+                            ticktype = "duokai";
+                            ColorfulConsolePrint(pDepthMarketData->UpdateTime, pDepthMarketData->LastPrice,
+                                                 VolumeChange,
+                                                 OpenInterestChange, "duokai", 1);
+                            MarketTrend[1] = MarketTrend[1] + 1;
+                        } else if (pDepthMarketData->LastPrice <= pPreDepthMarketData.BidPrice1) {
+                            ticktype = "kongkai";
+                            ColorfulConsolePrint(pDepthMarketData->UpdateTime, pDepthMarketData->LastPrice,
+                                                 VolumeChange,
+                                                 OpenInterestChange, "kongkai", 2);
+                            MarketTrend[2] = MarketTrend[2] + 1;
+                        } else {
+                            ticktype = "daiding";
+                            ColorfulConsolePrint(pDepthMarketData->UpdateTime, pDepthMarketData->LastPrice,
+                                                 VolumeChange,
+                                                 OpenInterestChange, "daiding", 2);
+                            //无法归类的tick直接drop
+                            // MarketTrend[2] = MarketTrend[2] + 1;
+                        }
+                    }
+                }
+            } else if (OpenInterestChange < 0) {
+                if (VolumeChange == abs(OpenInterestChange)) {
+                    ticktype = "shuangping";
+                    ColorfulConsolePrint(pDepthMarketData->UpdateTime, pDepthMarketData->LastPrice, VolumeChange,
+                                         OpenInterestChange, "shuangping", 0);
+                    MarketTrend[2] = MarketTrend[2] + 1;
+                } else {
+                    if (pDepthMarketData->LastPrice > pPreDepthMarketData.LastPrice) {
+                        ticktype = "kongping";
+                        ColorfulConsolePrint(pDepthMarketData->UpdateTime, pDepthMarketData->LastPrice, VolumeChange,
+                                             OpenInterestChange, "kongping", 1);
+                        MarketTrend[1] = MarketTrend[1] + 1;
+                    } else if (pDepthMarketData->LastPrice < pPreDepthMarketData.LastPrice) {
+                        ticktype = "duoping";
+                        ColorfulConsolePrint(pDepthMarketData->UpdateTime, pDepthMarketData->LastPrice, VolumeChange,
+                                             OpenInterestChange, "duoping", 2);
+                        MarketTrend[2] = MarketTrend[2] + 1;
+                    } else {
+                        if (pDepthMarketData->LastPrice >= pPreDepthMarketData.AskPrice1) {
+                            ticktype = "duoping";
+                            ColorfulConsolePrint(pDepthMarketData->UpdateTime, pDepthMarketData->LastPrice,
+                                                 VolumeChange,
+                                                 OpenInterestChange, "duoping", 2);
+                            MarketTrend[2] = MarketTrend[2] + 1;
+                        } else if (pDepthMarketData->LastPrice <= pPreDepthMarketData.BidPrice1) {
+                            ticktype = "kongping";
+                            ColorfulConsolePrint(pDepthMarketData->UpdateTime, pDepthMarketData->LastPrice,
+                                                 VolumeChange,
+                                                 OpenInterestChange, "kongping", 1);
+                            MarketTrend[1] = MarketTrend[1] + 1;
+                        } else {
+                            ticktype = "daiding";
+                            ColorfulConsolePrint(pDepthMarketData->UpdateTime, pDepthMarketData->LastPrice,
+                                                 VolumeChange,
+                                                 OpenInterestChange, "daiding", 1);
+                            //无法归类的tick直接drop
+                            //MarketTrend[1] = MarketTrend[1] + 1;
+                        }
+                    }
+                }
+            } else if (OpenInterestChange == 0) {
+                MarketTrend[0] = MarketTrend[0] + 1;
+                if (pDepthMarketData->LastPrice >= pPreDepthMarketData.LastPrice) {
+                    ticktype = "duohuan";
+                    ColorfulConsolePrint(pDepthMarketData->UpdateTime, pDepthMarketData->LastPrice, VolumeChange,
+                                         OpenInterestChange, "duohuan", 1);
+                } else {
+                    ticktype = "konghuan";
+                    ColorfulConsolePrint(pDepthMarketData->UpdateTime, pDepthMarketData->LastPrice, VolumeChange,
+                                         OpenInterestChange, "konghuan", 2);
+                }
+            } else {
+                ticktype = "qitaleixing";
+                ColorfulConsolePrint(pDepthMarketData->UpdateTime, pDepthMarketData->LastPrice, VolumeChange,
+                                     OpenInterestChange, "qitaleixing", 0);
+            }
+        }
+        //todo: 插入到数据库的double 的位数不对
+        DBWriter::getInstance()->InsertTickData("all_futures_ticks", pDepthMarketData, ticktype);
+
+
+    //todo: 线程detach之后是否可以调用回调函数
+        //todo: 是否可以使用观察者模式观察
+    for(map<int, int>::iterator mapiter = MarketTrend.begin(); mapiter != MarketTrend.end(); mapiter++)
+    {
+
+        if(mapiter->second == 5){
+            //order
+            if(pTraderApi->GetApiVersion() != NULL)
+            {
+                CThostFtdcInputOrderField req;
+                memset(&req, 0, sizeof(req));
+                ///经纪公司代码
+                strcpy(req.BrokerID, brokerIDType);
+                ///投资者代码
+                strcpy(req.InvestorID, investorIDType);
+                ///合约代码
+                char abc[] = "rb1705";
+                strcpy(req.InstrumentID, abc);
+                ///报单引用
+                //orderref
+                strcpy(req.OrderRef, new char[3]);
+                ///用户代码
+                //	TThostFtdcUserIDType	UserID;
+                ///报单价格条件: 限价
+                req.OrderPriceType = THOST_FTDC_OPT_LimitPrice;
+                ///买卖方向:
+                req.Direction = '0';
+                ///组合开平标志: 开仓
+                req.CombOffsetFlag[0] = THOST_FTDC_OF_Open;
+                ///组合投机套保标志
+                req.CombHedgeFlag[0] = THOST_FTDC_HF_Speculation;
+                ///价格
+                //先用22900试试
+                req.LimitPrice = 22300;
+                ///数量: 1
+                req.VolumeTotalOriginal = 1;
+                ///有效期类型: 当日有效
+                req.TimeCondition = THOST_FTDC_TC_GFD;
+                ///GTD日期
+                //	TThostFtdcDateType	GTDDate;
+                ///成交量类型: 任何数量
+                req.VolumeCondition = THOST_FTDC_VC_AV;
+                ///最小成交量: 1
+                req.MinVolume = 1;
+                ///触发条件: 立即
+                req.ContingentCondition = THOST_FTDC_CC_Immediately;
+                ///止损价
+                //	TThostFtdcPriceType	StopPrice;
+                req.StopPrice =
+                ///强平原因: 非强平
+                req.ForceCloseReason = THOST_FTDC_FCC_NotForceClose;
+                ///自动挂起标志: 否
+                req.IsAutoSuspend = 0;
+                ///业务单元
+                //	TThostFtdcBusinessUnitType	BusinessUnit;
+                ///请求编号
+                //	TThostFtdcRequestIDType	RequestID;
+                ///用户强评标志: 否
+                req.UserForceClose = 0;
+                cout << "iRequestID_trade = " << iRequestID_trade << endl;
+                int iResult = pTraderApi->ReqOrderInsert(&req, ++iRequestID_trade);
+            }
+            MarketTrend.clear();
+            break;
+        }
+
+    }
 //    //todo: matain a price queue of last five minutes
 //    if (iRequestID_quote > 15)
 //    {
@@ -351,6 +387,12 @@ void MarketDataHandle::OnRtnDepthMarketData(CThostFtdcDepthMarketDataField *pDep
 //    }
     //更新上一个最新tick
     pPreDepthMarketData = *pDepthMarketData;
+    }
+    catch (exception ex)
+    {
+        cout << "exception in market data insert " << endl;
+        cout << ex.what();
+    }
 }
 
 void MarketDataHandle::OnRtnForQuoteRsp(CThostFtdcForQuoteRspField *pForQuoteRsp){
