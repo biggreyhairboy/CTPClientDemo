@@ -9,11 +9,18 @@
 #include <QTextStream>
 #include <QSettings>
 #include <iostream>
+#include <QtCore>
 
 using namespace std;
 
 //读取文档找到前置机地址
 void iniFrontAdress(){
+    //QString path = QCoreApplication::applicationDirPath();
+//    QString path = QDir::current().path();
+//    std::cout << path.toStdString() << endl;
+//    path.append("/ini/front.ini");
+//    cout << path.toStdString() << endl;
+//    QFile iniFile(path);
     QFile iniFile("/home/patrick/ClionProjects/CTPClientDemo/ini/front.ini");
     if (!iniFile.open(QIODevice::ReadOnly|QIODevice::Text)){
         qDebug() << "cannot find front.ini";

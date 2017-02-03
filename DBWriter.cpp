@@ -66,6 +66,7 @@ void DBWriter::InsertTickData(QString tableName, CThostFtdcDepthMarketDataField 
     QString ActionDay           = pDepthMarketData->ActionDay;
     QString TickType             = QString::fromStdString(ticktype);
 
+
     insert.bindValue(0, tdate);
     insert.bindValue(1, InstrumentID);
     insert.bindValue(2, LastPrice);
@@ -173,6 +174,7 @@ void DBWriter::DBClose(){
     QString connection;
     connection = db.connectionName();
     db.close();
+    db = QSqlDatabase();
     db.removeDatabase(connection);
 
 }

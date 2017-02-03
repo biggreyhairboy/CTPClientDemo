@@ -12,6 +12,7 @@
 #include <sstream>
 #include <vector>
 #include <thread>
+#include <QtCore>
 #include <unistd.h>
 #include <boost/log/core.hpp>
 #include <boost/log/trivial.hpp>
@@ -78,7 +79,7 @@ int main() {
     //配置文件加上default值，防止exception
     //read config
     boost::property_tree::ptree pt;
-    boost::property_tree::ini_parser::read_ini("/home/patrick/ClionProjects/CTPClientDemo/CTPClientDemo.ini", pt);
+    boost::property_tree::ini_parser::read_ini("/home/patrick/ClionProjects/CTPClientDemo/ini/CTPClientDemo.ini", pt);
     //server
     string MF= pt.get<std::string>("Server_IP.MarketFront");
     string TF = pt.get<std::string>("Server_IP.TradeFront");

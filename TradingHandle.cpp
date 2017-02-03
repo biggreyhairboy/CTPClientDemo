@@ -124,7 +124,7 @@ void TradingHandle::OnRspQryInstrument(CThostFtdcInstrumentField *pInstrument, C
     if (bIsLast && !IsErrorRspInfo(pRspInfo))
     {
         ///«Î«Û≤È—Ø’Àªß
-        //ReqQryTradingAccount();
+        ReqQryTradingAccount();
     }
 }
 

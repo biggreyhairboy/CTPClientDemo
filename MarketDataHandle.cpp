@@ -97,7 +97,8 @@ void MarketDataHandle::OnRspUserLogin(CThostFtdcRspUserLoginField *pRspUserLogin
     }
     //订阅单个产品
     SubscribeMarketData(instrumentarry, InstrumentID);
-    //SubscribeMarketData(instrumentarry, 1);
+    SubscribeForQuoteRsp(instrumentarry, InstrumentID);
+//    SubscribeMarketData(instrumentarry, 1);
 }
 
 void MarketDataHandle::SubscribeMarketData(char* ppIntrumentID[], int iInstrumentID) {
@@ -118,7 +119,12 @@ void MarketDataHandle::OnRspSubMarketData(CThostFtdcSpecificInstrumentField *pSp
 }
 
 void MarketDataHandle::OnRspSubForQuoteRsp(CThostFtdcSpecificInstrumentField *pSpecificInstrument, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast){
-    cerr << "OnRspSubForQuoteRsp" << endl;
+    cerr << "OnRspSubForQuoteRsp" << pSpecificInstrument->InstrumentID << endl;
+
+}
+
+void MarketDataHandle::OnRtnForQuoteRsp(CThostFtdcForQuoteRspField *pForQuoteRsp) {
+
 }
 
 void MarketDataHandle::OnRspUnSubForQuoteRsp(CThostFtdcSpecificInstrumentField *pSpecificInstrument, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast){
@@ -314,72 +320,74 @@ void MarketDataHandle::OnRtnDepthMarketData(CThostFtdcDepthMarketDataField *pDep
 
 
     //todo: 线程detach之后是否可以调用回调函数
-        //todo: 是否可以使用观察者模式观察
-    for(map<int, int>::iterator mapiter = MarketTrend.begin(); mapiter != MarketTrend.end(); mapiter++)
-    {
+//        //todo: 是否可以使用观察者模式观察
+//    for(map<int, int>::iterator mapiter = MarketTrend.begin(); mapiter != MarketTrend.end(); mapiter++)
+//    {
+//
+//        if(mapiter->second == 5){
+//            //order
+//            if(pTraderApi->GetApiVersion() != NULL)
+//            {
+//                CThostFtdcInputOrderField req;
+//                memset(&req, 0, sizeof(req));
+//                ///经纪公司代码
+//                strcpy(req.BrokerID, brokerIDType);
+//                ///投资者代码
+//                strcpy(req.InvestorID, investorIDType);
+//                ///合约代码
+//                char abc[] = "rb1705";
+//                strcpy(req.InstrumentID, abc);
+//                ///报单引用
+//                //orderref
+//                strcpy(req.OrderRef, new char[3]);
+//                ///用户代码
+//                //	TThostFtdcUserIDType	UserID;
+//                ///报单价格条件: 限价
+//                req.OrderPriceType = THOST_FTDC_OPT_LimitPrice;
+//                ///买卖方向:
+//                req.Direction = '0';
+//                ///组合开平标志: 开仓
+//                req.CombOffsetFlag[0] = THOST_FTDC_OF_Open;
+//                ///组合投机套保标志
+//                req.CombHedgeFlag[0] = THOST_FTDC_HF_Speculation;
+//                ///价格
+//                //先用22900试试
+//                req.LimitPrice = 22300;
+//                ///数量: 1
+//                req.VolumeTotalOriginal = 1;
+//                ///有效期类型: 当日有效
+//                req.TimeCondition = THOST_FTDC_TC_GFD;
+//                ///GTD日期
+//                //	TThostFtdcDateType	GTDDate;
+//                ///成交量类型: 任何数量
+//                req.VolumeCondition = THOST_FTDC_VC_AV;
+//                ///最小成交量: 1
+//                req.MinVolume = 1;
+//                ///触发条件: 立即
+//                req.ContingentCondition = THOST_FTDC_CC_Immediately;
+//                ///止损价
+//                //	TThostFtdcPriceType	StopPrice;
+//                req.StopPrice =
+//                ///强平原因: 非强平
+//                req.ForceCloseReason = THOST_FTDC_FCC_NotForceClose;
+//                ///自动挂起标志: 否
+//                req.IsAutoSuspend = 0;
+//                ///业务单元
+//                //	TThostFtdcBusinessUnitType	BusinessUnit;
+//                ///请求编号
+//                //	TThostFtdcRequestIDType	RequestID;
+//                ///用户强评标志: 否
+//                req.UserForceClose = 0;
+//                cout << "iRequestID_trade = " << iRequestID_trade << endl;
+//                int iResult = pTraderApi->ReqOrderInsert(&req, ++iRequestID_trade);
+//            }
+//            MarketTrend.clear();
+//            break;
+//        }
+//
+//    }
 
-        if(mapiter->second == 5){
-            //order
-            if(pTraderApi->GetApiVersion() != NULL)
-            {
-                CThostFtdcInputOrderField req;
-                memset(&req, 0, sizeof(req));
-                ///经纪公司代码
-                strcpy(req.BrokerID, brokerIDType);
-                ///投资者代码
-                strcpy(req.InvestorID, investorIDType);
-                ///合约代码
-                char abc[] = "rb1705";
-                strcpy(req.InstrumentID, abc);
-                ///报单引用
-                //orderref
-                strcpy(req.OrderRef, new char[3]);
-                ///用户代码
-                //	TThostFtdcUserIDType	UserID;
-                ///报单价格条件: 限价
-                req.OrderPriceType = THOST_FTDC_OPT_LimitPrice;
-                ///买卖方向:
-                req.Direction = '0';
-                ///组合开平标志: 开仓
-                req.CombOffsetFlag[0] = THOST_FTDC_OF_Open;
-                ///组合投机套保标志
-                req.CombHedgeFlag[0] = THOST_FTDC_HF_Speculation;
-                ///价格
-                //先用22900试试
-                req.LimitPrice = 22300;
-                ///数量: 1
-                req.VolumeTotalOriginal = 1;
-                ///有效期类型: 当日有效
-                req.TimeCondition = THOST_FTDC_TC_GFD;
-                ///GTD日期
-                //	TThostFtdcDateType	GTDDate;
-                ///成交量类型: 任何数量
-                req.VolumeCondition = THOST_FTDC_VC_AV;
-                ///最小成交量: 1
-                req.MinVolume = 1;
-                ///触发条件: 立即
-                req.ContingentCondition = THOST_FTDC_CC_Immediately;
-                ///止损价
-                //	TThostFtdcPriceType	StopPrice;
-                req.StopPrice =
-                ///强平原因: 非强平
-                req.ForceCloseReason = THOST_FTDC_FCC_NotForceClose;
-                ///自动挂起标志: 否
-                req.IsAutoSuspend = 0;
-                ///业务单元
-                //	TThostFtdcBusinessUnitType	BusinessUnit;
-                ///请求编号
-                //	TThostFtdcRequestIDType	RequestID;
-                ///用户强评标志: 否
-                req.UserForceClose = 0;
-                cout << "iRequestID_trade = " << iRequestID_trade << endl;
-                int iResult = pTraderApi->ReqOrderInsert(&req, ++iRequestID_trade);
-            }
-            MarketTrend.clear();
-            break;
-        }
 
-    }
 //    //todo: matain a price queue of last five minutes
 //    if (iRequestID_quote > 15)
 //    {
@@ -395,9 +403,9 @@ void MarketDataHandle::OnRtnDepthMarketData(CThostFtdcDepthMarketDataField *pDep
     }
 }
 
-void MarketDataHandle::OnRtnForQuoteRsp(CThostFtdcForQuoteRspField *pForQuoteRsp){
-    cerr << "OnRtnForQuoteRsp" << endl;
-}
+//void MarketDataHandle::OnRtnForQuoteRsp(CThostFtdcForQuoteRspField *pForQuoteRsp){
+//    cerr << "OnRtnForQuoteRsp" << pForQuoteRsp->InstrumentID  << "    "<< pForQuoteRsp->ActionDay<< endl;
+//}
 
 bool MarketDataHandle::IsErrorRspInfo(CThostFtdcRspInfoField *pRspInfo) {
     bool bResult = ((pRspInfo) && (pRspInfo->ErrorID != 0));
