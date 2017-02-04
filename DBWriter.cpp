@@ -30,7 +30,7 @@ DBWriter::DBWriter() {
     db.setUserName(USER_NAME);
     db.setPassword(PASSWORD);
     if (!db.open()) {
-        cout << "数据库错误,无法打开数据库";
+        cout << "database error, cannot connect to database";
         abort();
     }
 }
@@ -112,7 +112,7 @@ void DBWriter::InsertOrUpdateAccountPostion(QString tableName, CThostFtdcInvesto
         //如果存在就更新
         QSqlQuery update(this->db);
         if (positionInfo->PosiDirection == THOST_FTDC_PD_Long) {    //多头持仓
-            update.prepare(" update account_position set long_position=:long_position , long_profit=:long_profit, "
+            update.prepare("update account_position set long_position=:long_position , long_profit=:long_profit, "
                                    " long_margin=:long_margin,query_date=:date where investor_id=:id and instrument_id=:instru ");
             update.bindValue(":long_position", positionInfo->Position);
             update.bindValue(":long_profit", positionInfo->PositionProfit);
@@ -120,7 +120,11 @@ void DBWriter::InsertOrUpdateAccountPostion(QString tableName, CThostFtdcInvesto
             update.bindValue(":date", positionInfo->TradingDay);
             update.bindValue(":id", positionInfo->InvestorID);
             update.bindValue(":instru", positionInfo->InstrumentID);
-            update.exec();
+            bool update_result = update.exec();
+            if(update_result)
+            {
+                cout << "update success"<<endl;
+            }
             //qDebug() << "111:"<<update.lastError().databaseText();
         }
         if (positionInfo->PosiDirection == THOST_FTDC_PD_Short) { //空头持仓
@@ -132,7 +136,12 @@ void DBWriter::InsertOrUpdateAccountPostion(QString tableName, CThostFtdcInvesto
             update.bindValue(":date", positionInfo->TradingDay);
             update.bindValue(":id", positionInfo->InvestorID);
             update.bindValue(":instru", positionInfo->InstrumentID);
-            update.exec();
+            bool update_result = update.exec();
+            if(update_result)
+            {
+                cout << "update success"<<endl;
+            }
+
             //qDebug() << "222:" << update.lastError().databaseText();
         }
     } else {
@@ -149,10 +158,10 @@ void DBWriter::InsertOrUpdateAccountPostion(QString tableName, CThostFtdcInvesto
 //            cout << insert << endl;
 
             bool insert_result = insert.exec();
-//            if(insert_result)
-//            {
-//                cout << "insert success" <<endl;
-//            }
+            if(insert_result)
+            {
+                cout << "insert success" <<endl;
+            }
             //qDebug() << "333:" << insert.lastError().databaseText();
         }
         if (positionInfo->PosiDirection == THOST_FTDC_PD_Short) { //空头持仓

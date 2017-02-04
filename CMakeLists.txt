@@ -27,8 +27,8 @@ SET_TARGET_PROPERTIES(thostmduserapi PROPERTIES IMPORTED_LOCATION ${PROJECT_SOUR
 SET_TARGET_PROPERTIES(thosttraderapi PROPERTIES IMPORTED_LOCATION ${PROJECT_SOURCE_DIR}/ctpapi_linux64/thosttraderapi.so)
 add_executable(CTPClientDemo ${SOURCE_FILES})
 #target_link_libraries(CTPClientDemo mysqlcppconn thostmduserapi thosttraderapi ${CMAKE_THREAD_LIBS_INIT} ${Boost_LOG_LIBRARY} ${Boost_THREAD_LIBRARY} ${Boost_FILESYSTEM_LIBRARY} ${Boost_SYSTEM_LIBRARY})
-target_link_libraries(CTPClientDemo mysqlcppconn thostmduserapi thosttraderapi -lpthread Qt5::Widgets Qt5::Sql "/usr/local/lib/libboost_thread.so" "/usr/local/lib/libboost_system.so"  "/usr/local/lib/libboost_log.so")
-
+#target_link_libraries(CTPClientDemo mysqlcppconn thostmduserapi thosttraderapi -lpthread Qt5::Widgets Qt5::Sql "/usr/local/lib/libboost_thread.so" "/usr/local/lib/libboost_system.so"  "/usr/local/lib/libboost_log.so")
+target_link_libraries(CTPClientDemo mysqlcppconn thostmduserapi thosttraderapi -lpthread Qt5::Widgets Qt5::Sql libboost_thread.so libboost_system.so libboost_log.so)
 #
 #
 #cmake_minimum_required(VERSION 3.5)

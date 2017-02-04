@@ -92,7 +92,6 @@ void MarketDataHandle::OnRspUserLogin(CThostFtdcRspUserLoginField *pRspUserLogin
     {
         instrumentarry[i] = new char[strppInstrument[i].size() + 1];
         std::strcpy(instrumentarry[i], strppInstrument[i].c_str());
-        //todo:不能订阅多个行情了
 //        SubscribeForQuoteRsp(instrumentarry, instrumentarry[i]);
     }
     //订阅单个产品
@@ -186,7 +185,7 @@ void ColorfulConsolePrint(TThostFtdcTimeType time, double lastprice, double volu
 
 void MarketDataHandle::OnRtnDepthMarketData(CThostFtdcDepthMarketDataField *pDepthMarketData){
 //    为了调试查询positionde 的接口，把这个屏蔽了
-    //todo:写日志，方便后续分析
+    //todo: log for exception analysis
     UpdateLastPrice(pDepthMarketData->LastPrice);
 
     try {
@@ -315,12 +314,14 @@ void MarketDataHandle::OnRtnDepthMarketData(CThostFtdcDepthMarketDataField *pDep
                                      OpenInterestChange, "qitaleixing", 0);
             }
         }
-        //todo: 插入到数据库的double 的位数不对
+        //set digits of double while insert into database
         DBWriter::getInstance()->InsertTickData("all_futures_ticks", pDepthMarketData, ticktype);
 
 
-    //todo: 线程detach之后是否可以调用回调函数
-//        //todo: 是否可以使用观察者模式观察
+    //todo: is a thread be able to callback after detaching
+        // 线程detach之后是否可以调用回调函数
+//        //todo: using observation pattern to simplify code
+// 是否可以使用观察者模式观察
 //    for(map<int, int>::iterator mapiter = MarketTrend.begin(); mapiter != MarketTrend.end(); mapiter++)
 //    {
 //

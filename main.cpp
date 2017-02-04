@@ -5,6 +5,10 @@
  * Function: Extract data from CTP interface and store to MySQL
  */
 // todo: using valgrind to profile
+// change log/console output to english
+// deployment and debug cannot share the same code because of configuration path
+// qsql dependency problem on production environment
+// get account position for a fixed interval(now it is set to 10 seconds)
 //https://startupnextdoor.com/how-to-run-valgrind-in-clion-for-c-and-c-programs/
 
 #include <iostream>
@@ -70,16 +74,33 @@ void tradeThread(TradingHandle *pTradingHandle,CThostFtdcTraderApi  *pTraderApi,
     pTraderApi->Init();
 }
 
+void queryT(TThostFtdcBrokerIDType brokerIDType, TThostFtdcInvestorIDType investorIDType, CThostFtdcTraderApi* pTraderApi)
+{
+    while(true) {
+        CThostFtdcQryInvestorPositionField req;
+        memset(&req, 0, sizeof(req));
+        strcpy(req.BrokerID, brokerIDType);
+        strcpy(req.InvestorID, investorIDType);
+        int iRequestID_trade = 1;
+        pTraderApi->ReqQryInvestorPosition(&req, ++iRequestID_trade);
+        //sleep for 10 seconds
+        std::this_thread::sleep_for(std::chrono::milliseconds(10000));
+    }
+
+}
+
 int main() {
-    cout << "新加入部分" << endl;
+    cout << "new added part" << endl;
     iniFrontAdress();
     iniDB();
 
-    cout << "开始吧" <<endl;
+    cout << "starting" <<endl;
     //配置文件加上default值，防止exception
     //read config
     boost::property_tree::ptree pt;
-    boost::property_tree::ini_parser::read_ini("/home/patrick/ClionProjects/CTPClientDemo/ini/CTPClientDemo.ini", pt);
+    boost::property_tree::ini_parser::read_ini("./ini/CTPClientDemo.ini", pt);
+    string iniflag = pt.get<std::string>("Flag.iniflag");
+    cout << "which ini is being loaded " << iniflag << endl;
     //server
     string MF= pt.get<std::string>("Server_IP.MarketFront");
     string TF = pt.get<std::string>("Server_IP.TradeFront");
@@ -132,6 +153,12 @@ int main() {
     pTraderApi->Init();
     this_thread::sleep_for(chrono::seconds(2));
     BOOST_LOG_TRIVIAL(info)<<"spi thread started ...";
+
+    //query investor postion /account postion at a fixed interval and save to db
+    //using detached thread to achieve it
+    std::thread QueryPostionT(queryT, brokerIDType, investorIDType, pTraderApi);
+    QueryPostionT.detach();
+
 
 
 //
@@ -192,7 +219,7 @@ int main() {
 //    req.UserForceClose = 0;
 //    int iRequestID_trade = 2;
 //    int iResult = pTraderApi->ReqOrderInsert(&req, ++iRequestID_trade);
-//
+
 //    //pTraderApi->Join();
 ////    TradingT.join();
 //

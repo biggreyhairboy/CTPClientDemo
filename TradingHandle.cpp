@@ -50,7 +50,7 @@ void TradingHandle::ReqUserLogin()
     strcpy(req.UserID, investorIDType);
     strcpy(req.Password, passwordType);
     int iResult = pTraderApi->ReqUserLogin(&req, ++iRequestID_trade);
-    cerr << "trade---->>> 发送用户登录请求: " << iResult << ((iResult == 0) ? ", 成功" : ", 失败") << endl;
+    cerr << "trade---->>> send login request: " << iResult << ((iResult == 0) ? ", success" : ", fail") << endl;
 }
 
 void TradingHandle::OnRspUserLogin(CThostFtdcRspUserLoginField *pRspUserLogin,
@@ -69,7 +69,7 @@ void TradingHandle::OnRspUserLogin(CThostFtdcRspUserLoginField *pRspUserLogin,
         sprintf(FORQUOTE_REF, "%d", 1);
         sprintf(QUOTE_REF, "%d", 1);
         ///获取当前交易日
-        cerr << "trade---->>> 获取当前交易日 = " << pTraderApi->GetTradingDay() << endl;
+        cerr << "trade---->>> get current trading date = " << pTraderApi->GetTradingDay() << endl;
         ///投资者结算结果确认
         ReqSettlementInfoConfirm();
     }
@@ -82,7 +82,7 @@ void TradingHandle::ReqSettlementInfoConfirm()
     strcpy(req.BrokerID, brokerIDType);
     strcpy(req.InvestorID, investorIDType);
     int iResult = pTraderApi->ReqSettlementInfoConfirm(&req, ++iRequestID_trade);
-    cerr << "trade---->>> 投资者结算结果确认: " << iResult << ((iResult == 0) ? ", 成功" : ", 失败") << endl;
+    cerr << "trade---->>> confirm settlement result: " << iResult << ((iResult == 0) ? ", success" : ", fail") << endl;
 
 }
 
@@ -106,12 +106,12 @@ void TradingHandle::ReqQryInstrument()
         int iResult = pTraderApi->ReqQryInstrument(&req, ++iRequestID_trade);
         if (!IsFlowControl(iResult))
         {
-            cerr << "trade---->>> 请求查询合约: " << iResult << ((iResult == 0) ? ", 成功" : ", 失败") << endl;
+            cerr << "trade---->>> reuqest symbol list: " << iResult << ((iResult == 0) ? ", success" : ", fail") << endl;
             break;
         }
         else
         {
-            cerr << "trade---->>> 请求查询合约: " << iResult << ", 受到流控" << endl;
+            cerr << "trade---->>> reuqest symbol list:: " << iResult << ", flow control" << endl;
             //Sleep(1000);
             std::this_thread::sleep_for(std::chrono::microseconds(1000));
         }
@@ -157,7 +157,7 @@ void TradingHandle::OnRspQryTradingAccount(CThostFtdcTradingAccountField *pTradi
     if (bIsLast && !IsErrorRspInfo(pRspInfo))
     {
         ///请求查询投资者持仓
-        ReqQryInvestorPosition();
+        //ReqQryInvestorPosition();
     }
 }
 
@@ -167,7 +167,8 @@ void TradingHandle::ReqQryInvestorPosition()
     memset(&req, 0, sizeof(req));
     strcpy(req.BrokerID, brokerIDType);
     strcpy(req.InvestorID, investorIDType);
-    //为什么需要一个一个合约查询，r不能一次性查询，试验一下是否可以通过设为空来解决查询的问题。
+    //为什么需要一个一个合约查询，r不能一次性查询，试验一下是否可以通过设为空来解决查询的问题。 是可以的,传递一个不包含instrumentid
+    //的req过去
     //strcpy(req.InstrumentID, INSTRUMENT_ID);
     while (true)
     {
@@ -180,7 +181,7 @@ void TradingHandle::ReqQryInvestorPosition()
         else
         {
 //            cerr << "trade---->>> 请求查询投资者持仓: " << iResult << ", 受到流控" << endl;
-            std::this_thread::sleep_for(std::chrono::microseconds(1000));
+            std::this_thread::sleep_for(std::chrono::microseconds(10000));
         }
     }
 }
@@ -254,7 +255,7 @@ void TradingHandle::ReqOrderInsert()
     req.UserForceClose = 0;
 
     int iResult = pTraderApi->ReqOrderInsert(&req, ++iRequestID_trade);
-    cerr << "trade---->>> 报单录入请求: " << iResult << ((iResult == 0) ? ", 成功" : ", 失败") << endl;
+    cerr << "trade---->>> request order insert: " << iResult << ((iResult == 0) ? ", success" : ", fail") << endl;
 }
 
 
@@ -299,7 +300,7 @@ void TradingHandle::ReqExecOrderInsert()
     req.CloseFlag = THOST_FTDC_EOCF_AutoClose;//这是中金所的填法，大商所郑商所填THOST_FTDC_EOCF_NotToClose
 
     int iResult = pTraderApi->ReqExecOrderInsert(&req, ++iRequestID_trade);
-    cerr << "trade---->>> 执行宣告录入请求: " << iResult << ((iResult == 0) ? ", 成功" : ", 失败") << endl;
+    cerr << "trade---->>> excute order insert: " << iResult << ((iResult == 0) ? ", success" : ", fail") << endl;
 }
 
 //询价录入请求
@@ -319,7 +320,7 @@ void TradingHandle::ReqForQuoteInsert()
     //	TThostFtdcUserIDType	UserID;
 
     int iResult = pTraderApi->ReqForQuoteInsert(&req, ++iRequestID_trade);
-    cerr << "trade---->>> 询价录入请求: " << iResult << ((iResult == 0) ? ", 成功" : ", 失败") << endl;
+    cerr << "trade---->>> request quote insert: " << iResult << ((iResult == 0) ? ", sucess" : ", fail") << endl;
 }
 //报价录入请求
 void TradingHandle::ReqQuoteInsert()
@@ -356,7 +357,7 @@ void TradingHandle::ReqQuoteInsert()
     req.BidHedgeFlag = THOST_FTDC_HF_Speculation;
 
     int iResult = pTraderApi->ReqQuoteInsert(&req, ++iRequestID_trade);
-    cerr << "trade---->>> 报价录入请求: " << iResult << ((iResult == 0) ? ", 成功" : ", 失败") << endl;
+    cerr << "trade---->>> quote insert: " << iResult << ((iResult == 0) ? ", success" : ", fail") << endl;
 }
 
 void TradingHandle::OnRspOrderInsert(CThostFtdcInputOrderField *pInputOrder, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast)
@@ -424,7 +425,7 @@ void TradingHandle::ReqOrderAction(CThostFtdcOrderField *pOrder)
     strcpy(req.InstrumentID, pOrder->InstrumentID);
 
     int iResult = pTraderApi->ReqOrderAction(&req, ++iRequestID_trade);
-    cerr << "trade---->>> 报单操作请求: " << iResult << ((iResult == 0) ? ", 成功" : ", 失败") << endl;
+    cerr << "trade---->>> request order action : " << iResult << ((iResult == 0) ? ", success" : ", fail") << endl;
     ORDER_ACTION_SENT = true;
 }
 
@@ -463,7 +464,7 @@ void TradingHandle::ReqExecOrderAction(CThostFtdcExecOrderField *pExecOrder)
     strcpy(req.InstrumentID, pExecOrder->InstrumentID);
 
     int iResult = pTraderApi->ReqExecOrderAction(&req, ++iRequestID_trade);
-    cerr << "trade---->>> 执行宣告操作请求: " << iResult << ((iResult == 0) ? ", 成功" : ", 失败") << endl;
+    cerr << "trade---->>> request excute order action: " << iResult << ((iResult == 0) ? ", sucess" : ", fail") << endl;
     EXECORDER_ACTION_SENT = true;
 }
 
@@ -501,7 +502,7 @@ void TradingHandle::ReqQuoteAction(CThostFtdcQuoteField *pQuote)
     strcpy(req.InstrumentID, pQuote->InstrumentID);
 
     int iResult = pTraderApi->ReqQuoteAction(&req, ++iRequestID_trade);
-    cerr << "trade---->>> 报价操作请求: " << iResult << ((iResult == 0) ? ", 成功" : ", 失败") << endl;
+    cerr << "trade---->>> request quote action: " << iResult << ((iResult == 0) ? ", success" : ", fail") << endl;
     QUOTE_ACTION_SENT = true;
 }
 
@@ -547,7 +548,7 @@ void TradingHandle::OnRtnExecOrder(CThostFtdcExecOrderField *pExecOrder)
         if (IsTradingExecOrder(pExecOrder))
             ReqExecOrderAction(pExecOrder);
         else if (pExecOrder->ExecResult == THOST_FTDC_OER_Canceled)
-            cout << "trade---->>> 执行宣告撤单成功" << endl;
+            cout << "trade---->>> successfully excute cancel order " << endl;
     }
 }
 
@@ -567,7 +568,7 @@ void TradingHandle::OnRtnQuote(CThostFtdcQuoteField *pQuote)
         if (IsTradingQuote(pQuote))
             ReqQuoteAction(pQuote);
         else if (pQuote->QuoteStatus == THOST_FTDC_OST_Canceled)
-            cout << "trade---->>> 报价撤单成功" << endl;
+            cout << "trade---->>> quote withdraw successfully" << endl;
     }
 }
 

@@ -6,7 +6,6 @@
 #include "GVAR.h"
 #include <QDebug>
 #include <QFile>
-#include <QTextStream>
 #include <QSettings>
 #include <iostream>
 #include <QtCore>
@@ -21,7 +20,7 @@ void iniFrontAdress(){
 //    path.append("/ini/front.ini");
 //    cout << path.toStdString() << endl;
 //    QFile iniFile(path);
-    QFile iniFile("/home/patrick/ClionProjects/CTPClientDemo/ini/front.ini");
+    QFile iniFile("./ini/front.ini");
     if (!iniFile.open(QIODevice::ReadOnly|QIODevice::Text)){
         qDebug() << "cannot find front.ini";
         cerr << "错误,找不到front.ini" << endl;
@@ -54,7 +53,7 @@ void iniFrontAdress(){
 
 //读取文件初始化数据库信息
 void iniDB(){
-    QSettings setting("/home/patrick/ClionProjects/CTPClientDemo/ini/db.ini", QSettings::IniFormat);
+    QSettings setting("./ini/db.ini", QSettings::IniFormat);
     DB_DRIVER_NAME = setting.value("DB_DRIVER_NAME").toString();
     DB_HOST_NAME = setting.value("DB_HOST_NAME").toString();
     DATABASE_NAME = setting.value("DATABASE_NAME").toString();
