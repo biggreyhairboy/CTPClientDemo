@@ -1,0 +1,1440 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CMakeRunConfigurationManager" shouldGenerate="true" buildAllGenerated="true">
+    <generated>
+      <config projectName="CTPClientDemo" targetName="CTPClientDemo" />
+      <config projectName="CTPClientDemo" targetName="TCPClientDemo" />
+    </generated>
+  </component>
+  <component name="CMakeSettings" AUTO_RELOAD="true">
+    <configurations>
+      <configuration CONFIG_NAME="Debug" GENERATION_DIR="Debug" />
+      <configuration CONFIG_NAME="Release" GENERATION_DIR="Release" />
+      <configuration CONFIG_NAME="MinSizeRel" />
+    </configurations>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="315ce06a-1fc4-4fce-ac00-adc47ba3e6bc" name="Default" comment="succesfully get investor position at fixed interval">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.Rhistory" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Debug/CMakeFiles/3.6.3/CMakeDetermineCompilerABI_C.bin" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Debug/CMakeFiles/3.6.3/CMakeDetermineCompilerABI_CXX.bin" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Debug/CMakeFiles/3.6.3/CompilerIdC/a.out" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Debug/CMakeFiles/3.6.3/CompilerIdCXX/a.out" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Debug/CMakeFiles/CTPClientDemo.dir/DBDriver.cpp.o" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Debug/CMakeFiles/CTPClientDemo.dir/DBWriter.cpp.o" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Debug/CMakeFiles/CTPClientDemo.dir/GVAR.cpp.o" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Debug/CMakeFiles/CTPClientDemo.dir/MarketDataHandle.cpp.o" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Debug/CMakeFiles/CTPClientDemo.dir/TradingHandle.cpp.o" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Debug/CMakeFiles/CTPClientDemo.dir/Utility.cpp.o" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Debug/CMakeFiles/CTPClientDemo.dir/initialize.cpp.o" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Debug/CMakeFiles/CTPClientDemo.dir/main.cpp.o" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Debug/CMakeFiles/CTPClientDemo.dir/sociDB.cpp.o" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Debug/CMakeFiles/feature_tests.bin" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Debug/CTPClientDemo" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Release/CMakeFiles/3.6.3/CMakeDetermineCompilerABI_C.bin" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Release/CMakeFiles/3.6.3/CMakeDetermineCompilerABI_CXX.bin" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Release/CMakeFiles/3.6.3/CompilerIdC/a.out" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Release/CMakeFiles/3.6.3/CompilerIdCXX/a.out" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Release/CMakeFiles/CTPClientDemo.dir/DBDriver.cpp.o" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Release/CMakeFiles/CTPClientDemo.dir/DBWriter.cpp.o" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Release/CMakeFiles/CTPClientDemo.dir/GVAR.cpp.o" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Release/CMakeFiles/CTPClientDemo.dir/MarketDataHandle.cpp.o" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Release/CMakeFiles/CTPClientDemo.dir/TradingHandle.cpp.o" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Release/CMakeFiles/CTPClientDemo.dir/Utility.cpp.o" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Release/CMakeFiles/CTPClientDemo.dir/initialize.cpp.o" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Release/CMakeFiles/CTPClientDemo.dir/main.cpp.o" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Release/CMakeFiles/CTPClientDemo.dir/sociDB.cpp.o" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Release/CMakeFiles/feature_tests.bin" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Release/CTPClientDemo" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/cmake-build-minsizerel/CMakeFiles/3.6.3/CMakeDetermineCompilerABI_C.bin" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/cmake-build-minsizerel/CMakeFiles/3.6.3/CMakeDetermineCompilerABI_CXX.bin" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/cmake-build-minsizerel/CMakeFiles/3.6.3/CompilerIdC/a.out" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/cmake-build-minsizerel/CMakeFiles/3.6.3/CompilerIdCXX/a.out" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/cmake-build-minsizerel/CMakeFiles/CTPClientDemo.dir/DBDriver.cpp.o" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/cmake-build-minsizerel/CMakeFiles/CTPClientDemo.dir/DBWriter.cpp.o" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/cmake-build-minsizerel/CMakeFiles/CTPClientDemo.dir/GVAR.cpp.o" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/cmake-build-minsizerel/CMakeFiles/CTPClientDemo.dir/MarketDataHandle.cpp.o" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/cmake-build-minsizerel/CMakeFiles/CTPClientDemo.dir/TradingHandle.cpp.o" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/cmake-build-minsizerel/CMakeFiles/CTPClientDemo.dir/Utility.cpp.o" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/cmake-build-minsizerel/CMakeFiles/CTPClientDemo.dir/initialize.cpp.o" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/cmake-build-minsizerel/CMakeFiles/CTPClientDemo.dir/main.cpp.o" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/cmake-build-minsizerel/CMakeFiles/CTPClientDemo.dir/sociDB.cpp.o" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/cmake-build-minsizerel/CMakeFiles/feature_tests.bin" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/cmake-build-minsizerel/CTPClientDemo" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Debug/CMakeCache.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Debug/CMakeFiles/3.6.3/CMakeCCompiler.cmake" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Debug/CMakeFiles/3.6.3/CMakeCXXCompiler.cmake" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Debug/CMakeFiles/3.6.3/CMakeSystem.cmake" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Debug/CMakeFiles/3.6.3/CompilerIdC/CMakeCCompilerId.c" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Debug/CMakeFiles/3.6.3/CompilerIdCXX/CMakeCXXCompilerId.cpp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Debug/CMakeFiles/CMakeDirectoryInformation.cmake" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Debug/CMakeFiles/CMakeError.log" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Debug/CMakeFiles/CMakeOutput.log" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Debug/CMakeFiles/CTPClientDemo.dir/CXX.includecache" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Debug/CMakeFiles/CTPClientDemo.dir/DependInfo.cmake" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Debug/CMakeFiles/CTPClientDemo.dir/build.make" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Debug/CMakeFiles/CTPClientDemo.dir/cmake_clean.cmake" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Debug/CMakeFiles/CTPClientDemo.dir/depend.internal" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Debug/CMakeFiles/CTPClientDemo.dir/depend.make" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Debug/CMakeFiles/CTPClientDemo.dir/flags.make" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Debug/CMakeFiles/CTPClientDemo.dir/link.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Debug/CMakeFiles/CTPClientDemo.dir/progress.make" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Debug/CMakeFiles/Makefile.cmake" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Debug/CMakeFiles/Makefile2" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Debug/CMakeFiles/TargetDirectories.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Debug/CMakeFiles/clion-environment.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Debug/CMakeFiles/clion-log.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Debug/CMakeFiles/cmake.check_cache" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Debug/CMakeFiles/feature_tests.c" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Debug/CMakeFiles/feature_tests.cxx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Debug/CMakeFiles/progress.marks" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Debug/CTPClientDemo.cbp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Debug/CTPClientDemo.log" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Debug/DialogRsp.con" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Debug/Makefile" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Debug/Private.con" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Debug/Public.con" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Debug/QueryRsp.con" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Debug/TradingDay.con" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Debug/cmake_install.cmake" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Debug/ini/CTPClientDemo.ini" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Debug/ini/db.ini" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Debug/ini/front.ini" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Release/CMakeCache.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Release/CMakeFiles/3.6.3/CMakeCCompiler.cmake" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Release/CMakeFiles/3.6.3/CMakeCXXCompiler.cmake" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Release/CMakeFiles/3.6.3/CMakeSystem.cmake" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Release/CMakeFiles/3.6.3/CompilerIdC/CMakeCCompilerId.c" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Release/CMakeFiles/3.6.3/CompilerIdCXX/CMakeCXXCompilerId.cpp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Release/CMakeFiles/CMakeDirectoryInformation.cmake" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Release/CMakeFiles/CMakeError.log" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Release/CMakeFiles/CMakeOutput.log" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Release/CMakeFiles/CTPClientDemo.dir/CXX.includecache" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Release/CMakeFiles/CTPClientDemo.dir/DependInfo.cmake" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Release/CMakeFiles/CTPClientDemo.dir/build.make" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Release/CMakeFiles/CTPClientDemo.dir/cmake_clean.cmake" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Release/CMakeFiles/CTPClientDemo.dir/depend.internal" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Release/CMakeFiles/CTPClientDemo.dir/depend.make" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Release/CMakeFiles/CTPClientDemo.dir/flags.make" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Release/CMakeFiles/CTPClientDemo.dir/link.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Release/CMakeFiles/CTPClientDemo.dir/progress.make" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Release/CMakeFiles/Makefile.cmake" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Release/CMakeFiles/Makefile2" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Release/CMakeFiles/TargetDirectories.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Release/CMakeFiles/clion-environment.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Release/CMakeFiles/clion-log.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Release/CMakeFiles/cmake.check_cache" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Release/CMakeFiles/feature_tests.c" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Release/CMakeFiles/feature_tests.cxx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Release/CMakeFiles/progress.marks" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Release/CTPClientDemo.cbp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Release/CTPClientDemo.log" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Release/DialogRsp.con" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Release/Makefile" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Release/Private.con" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Release/Public.con" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Release/QueryRsp.con" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Release/TradingDay.con" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Release/cmake_install.cmake" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Release/ini/CTPClientDemo.ini" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Release/ini/db.ini" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Release/ini/front.ini" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/cmake-build-minsizerel/CMakeCache.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/cmake-build-minsizerel/CMakeFiles/3.6.3/CMakeCCompiler.cmake" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/cmake-build-minsizerel/CMakeFiles/3.6.3/CMakeCXXCompiler.cmake" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/cmake-build-minsizerel/CMakeFiles/3.6.3/CMakeSystem.cmake" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/cmake-build-minsizerel/CMakeFiles/3.6.3/CompilerIdC/CMakeCCompilerId.c" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/cmake-build-minsizerel/CMakeFiles/3.6.3/CompilerIdCXX/CMakeCXXCompilerId.cpp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/cmake-build-minsizerel/CMakeFiles/CMakeDirectoryInformation.cmake" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/cmake-build-minsizerel/CMakeFiles/CMakeError.log" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/cmake-build-minsizerel/CMakeFiles/CMakeOutput.log" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/cmake-build-minsizerel/CMakeFiles/CTPClientDemo.dir/CXX.includecache" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/cmake-build-minsizerel/CMakeFiles/CTPClientDemo.dir/DependInfo.cmake" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/cmake-build-minsizerel/CMakeFiles/CTPClientDemo.dir/build.make" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/cmake-build-minsizerel/CMakeFiles/CTPClientDemo.dir/cmake_clean.cmake" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/cmake-build-minsizerel/CMakeFiles/CTPClientDemo.dir/depend.internal" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/cmake-build-minsizerel/CMakeFiles/CTPClientDemo.dir/depend.make" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/cmake-build-minsizerel/CMakeFiles/CTPClientDemo.dir/flags.make" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/cmake-build-minsizerel/CMakeFiles/CTPClientDemo.dir/link.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/cmake-build-minsizerel/CMakeFiles/CTPClientDemo.dir/progress.make" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/cmake-build-minsizerel/CMakeFiles/Makefile.cmake" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/cmake-build-minsizerel/CMakeFiles/Makefile2" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/cmake-build-minsizerel/CMakeFiles/TargetDirectories.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/cmake-build-minsizerel/CMakeFiles/clion-environment.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/cmake-build-minsizerel/CMakeFiles/clion-log.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/cmake-build-minsizerel/CMakeFiles/cmake.check_cache" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/cmake-build-minsizerel/CMakeFiles/feature_tests.c" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/cmake-build-minsizerel/CMakeFiles/feature_tests.cxx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/cmake-build-minsizerel/CMakeFiles/progress.marks" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/cmake-build-minsizerel/CTPClientDemo.cbp" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/cmake-build-minsizerel/CTPClientDemo.log" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/cmake-build-minsizerel/DialogRsp.con" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/cmake-build-minsizerel/Makefile" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/cmake-build-minsizerel/Private.con" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/cmake-build-minsizerel/Public.con" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/cmake-build-minsizerel/QueryRsp.con" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/cmake-build-minsizerel/TradingDay.con" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/cmake-build-minsizerel/cmake_install.cmake" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/cmake-build-minsizerel/ini/CTPClientDemo.ini" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/cmake-build-minsizerel/ini/db.ini" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/cmake-build-minsizerel/ini/front.ini" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/DBWriter.cpp" afterPath="$PROJECT_DIR$/DBWriter.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarketDataHandle.cpp" afterPath="$PROJECT_DIR$/MarketDataHandle.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main.cpp" afterPath="$PROJECT_DIR$/main.cpp" />
+    </list>
+    <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
+    <ignored path="$PROJECT_DIR$/build/" />
+    <ignored path="$PROJECT_DIR$/Release/" />
+    <ignored path="$PROJECT_DIR$/Debug/" />
+    <ignored path="$PROJECT_DIR$/cmake-build-minsizerel/" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CreatePatchCommitExecutor">
+    <option name="PATCH_PATH" value="" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
+  <component name="FavoritesManager">
+    <favorites_list name="CTPClientDemo" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="DBDriver.h" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/DBDriver.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="288">
+              <caret line="24" column="19" lean-forward="false" selection-start-line="24" selection-start-column="19" selection-end-line="24" selection-end-column="19" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="main.cpp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/main.cpp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="180">
+              <caret line="10" column="25" lean-forward="false" selection-start-line="10" selection-start-column="25" selection-end-line="10" selection-end-column="25" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="initialize.h" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/initialize.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="288">
+              <caret line="16" column="0" lean-forward="false" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="GVAR.h" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/GVAR.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="396">
+              <caret line="22" column="0" lean-forward="false" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="GVAR.cpp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/GVAR.cpp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="180">
+              <caret line="10" column="23" lean-forward="false" selection-start-line="10" selection-start-column="23" selection-end-line="10" selection-end-column="23" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Utility.cpp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Utility.cpp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DBWriter.cpp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/DBWriter.cpp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1638">
+              <caret line="91" column="39" lean-forward="false" selection-start-line="91" selection-start-column="39" selection-end-line="91" selection-end-column="39" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DBDriver.cpp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/DBDriver.cpp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="612">
+              <caret line="34" column="74" lean-forward="false" selection-start-line="34" selection-start-column="58" selection-end-line="34" selection-end-column="74" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DBWriter.h" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/DBWriter.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="270">
+              <caret line="15" column="14" lean-forward="false" selection-start-line="5" selection-start-column="27" selection-end-line="15" selection-end-column="14" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>双平</find>
+      <find>reqRqy</find>
+      <find>error</find>
+      <find>reqqryins</find>
+      <find>onrtnordr</find>
+      <find>OnRtnOrder</find>
+      <find>OnRspQryTradingAccount</find>
+      <find>detail</find>
+      <find>S</find>
+      <find>其他类型</find>
+      <find>insert_result</find>
+      <find>pingcangleixingdaiding</find>
+      <find>boost</find>
+      <find>InstrumentID</find>
+      <find>abc</find>
+      <find>dbDriver</find>
+      <find>dbdriver</find>
+      <find>iRequestID_trade</find>
+      <find>std</find>
+      <find>请求查询</find>
+      <find>请求</find>
+      <find>acou</find>
+      <find>cout</find>
+      <find>否</find>
+      <find>accountpo</find>
+      <find>while</find>
+      <find>cerr</find>
+      <find>update</find>
+      <find>ReqOrderInsert</find>
+      <find>insert</find>
+    </findStrings>
+    <replaceStrings>
+      <replace>VolumeChange</replace>
+      <replace>right</replace>
+      <replace>仓位</replace>
+      <replace>qitaleixing</replace>
+      <replace>daiding</replace>
+    </replaceStrings>
+    <dirStrings>
+      <dir>$PROJECT_DIR$</dir>
+    </dirStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="for_cmake_testing" />
+      </map>
+    </option>
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/README.md" />
+        <option value="$PROJECT_DIR$/Utility.h" />
+        <option value="$PROJECT_DIR$/devlog.md" />
+        <option value="$PROJECT_DIR$/ctpapi_linux64/ThostFtdcUserApiStruct.h" />
+        <option value="$PROJECT_DIR$/ctpapi_linux64/ThostFtdcTraderApi.h" />
+        <option value="$PROJECT_DIR$/DB/DBWriter.cpp" />
+        <option value="$PROJECT_DIR$/DB/DBWriter.h" />
+        <option value="$PROJECT_DIR$/GVAR.cpp" />
+        <option value="$PROJECT_DIR$/ini/front.ini" />
+        <option value="$PROJECT_DIR$/cmake-build-debug/initialize.h" />
+        <option value="$PROJECT_DIR$/cmake-build-debug/initialize.cpp" />
+        <option value="$PROJECT_DIR$/initialize.h" />
+        <option value="$PROJECT_DIR$/sociDB.h" />
+        <option value="$PROJECT_DIR$/GVAR.h" />
+        <option value="$PROJECT_DIR$/TradingHandle.h" />
+        <option value="$PROJECT_DIR$/MarketDataHandle.h" />
+        <option value="$PROJECT_DIR$/DBWriter.h" />
+        <option value="$PROJECT_DIR$/ini/db.ini" />
+        <option value="$PROJECT_DIR$/CTPClientDemo.ini" />
+        <option value="$PROJECT_DIR$/DBDriver.cpp" />
+        <option value="$PROJECT_DIR$/ini/CTPClientDemo.ini" />
+        <option value="$PROJECT_DIR$/initialize.cpp" />
+        <option value="$PROJECT_DIR$/Release/ini/CTPClientDemo.ini" />
+        <option value="$PROJECT_DIR$/Debug/ini/db.ini" />
+        <option value="$PROJECT_DIR$/Debug/ini/CTPClientDemo.ini" />
+        <option value="$PROJECT_DIR$/TradingHandle.cpp" />
+        <option value="$PROJECT_DIR$/DBWriter.cpp" />
+        <option value="$PROJECT_DIR$/MarketDataHandle.cpp" />
+        <option value="$PROJECT_DIR$/cmake-build-minsizerel/ini/CTPClientDemo.ini" />
+        <option value="$PROJECT_DIR$/cmake-build-minsizerel/ini/db.ini" />
+        <option value="$PROJECT_DIR$/main.cpp" />
+        <option value="$PROJECT_DIR$/CMakeLists.txt" />
+      </list>
+    </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="OCFindUsagesOptions" text="false" ivars="false" properties="true" derivedClasses="false" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="65" />
+    <option name="y" value="24" />
+    <option name="width" value="1375" />
+    <option name="height" value="876" />
+  </component>
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectView">
+    <navigator currentView="ProjectPane" proportions="" version="1">
+      <flattenPackages />
+      <showMembers />
+      <showModules />
+      <showLibraryContents />
+      <hideEmptyPackages />
+      <abbreviatePackageNames />
+      <autoscrollToSource />
+      <autoscrollFromSource />
+      <sortByType />
+      <manualOrder />
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="CTPClientDemo" />
+              <option name="myItemType" value="com.jetbrains.cidr.projectView.CidrFilesViewHelper$MyProjectTreeStructure$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="CTPClientDemo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="js.eslint.eslintPackage" value="" />
+    <property name="settings.editor.selected.configurable" value="CMakeSettings" />
+    <property name="SearchEverywhereHistoryKey" value="flow control&#9;null&#9;null&#10;.close&#9;null&#9;null&#10;removeData&#9;null&#9;null&#10;  &#9;FILE&#9;file:///home/patrick/ClionProjects/CTPClientDemo/CTPClientDemo.ini" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../AutoHedge/CMakeLists.txt" />
+    <property name="ToolWindowVersion Control.ShowToolbar" value="false" />
+    <property name="prop_add_unversioned_files" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/ini" />
+      <recent name="$PROJECT_DIR$" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/cmake-build-minsizerel" />
+      <recent name="$PROJECT_DIR$/Debug" />
+      <recent name="$PROJECT_DIR$/Release" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.Release">
+    <configuration default="true" type="CMakeGoogleTestRunConfigurationType" factoryName="Google Test" PASS_PARENT_ENVS_2="true" PROJECT_NAME="CTPClientDemo" TARGET_NAME="CTPClientDemo" CONFIG_NAME="Debug" TEST_MODE="SUITE_TEST">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="CTPClientDemo" TARGET_NAME="CTPClientDemo" CONFIG_NAME="Debug">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="JavaScriptTestRunnerProtractor" factoryName="Protractor">
+      <config-file value="" />
+      <node-interpreter value="project" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
+      <method />
+    </configuration>
+    <configuration default="true" type="PythonConfigurationType" factoryName="Python">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="CTPClientDemo" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <method />
+    </configuration>
+    <configuration default="true" type="Tox" factoryName="Tox">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="CTPClientDemo" />
+      <method />
+    </configuration>
+    <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
+      <node-interpreter>project</node-interpreter>
+      <node-options />
+      <gulpfile />
+      <tasks />
+      <arguments />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="js.build_tools.npm" factoryName="npm">
+      <command value="run" />
+      <scripts />
+      <node-interpreter value="project" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="tests" factoryName="Attests">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="CTPClientDemo" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="FOLDER_NAME" value="" />
+      <option name="TEST_TYPE" value="TEST_SCRIPT" />
+      <option name="PATTERN" value="" />
+      <option name="USE_PATTERN" value="false" />
+      <method />
+    </configuration>
+    <configuration default="true" type="tests" factoryName="Doctests">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="CTPClientDemo" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="FOLDER_NAME" value="" />
+      <option name="TEST_TYPE" value="TEST_SCRIPT" />
+      <option name="PATTERN" value="" />
+      <option name="USE_PATTERN" value="false" />
+      <method />
+    </configuration>
+    <configuration default="true" type="tests" factoryName="Nosetests">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="CTPClientDemo" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="FOLDER_NAME" value="" />
+      <option name="TEST_TYPE" value="TEST_SCRIPT" />
+      <option name="PATTERN" value="" />
+      <option name="USE_PATTERN" value="false" />
+      <option name="PARAMS" value="" />
+      <option name="USE_PARAM" value="false" />
+      <method />
+    </configuration>
+    <configuration default="true" type="tests" factoryName="Unittests">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="CTPClientDemo" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="FOLDER_NAME" value="" />
+      <option name="TEST_TYPE" value="TEST_SCRIPT" />
+      <option name="PATTERN" value="" />
+      <option name="USE_PATTERN" value="false" />
+      <option name="PUREUNITTEST" value="true" />
+      <option name="PARAMS" value="" />
+      <option name="USE_PARAM" value="false" />
+      <method />
+    </configuration>
+    <configuration default="true" type="tests" factoryName="py.test">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="CTPClientDemo" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="FOLDER_NAME" value="" />
+      <option name="TEST_TYPE" value="TEST_SCRIPT" />
+      <option name="PATTERN" value="" />
+      <option name="USE_PATTERN" value="false" />
+      <option name="testToRun" value="" />
+      <option name="keywords" value="" />
+      <option name="params" value="" />
+      <option name="USE_PARAM" value="false" />
+      <option name="USE_KEYWORD" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="Release" type="CMakeRunConfiguration" factoryName="Application" WORKING_DIR="" PASS_PARENT_ENVS_2="true" PROJECT_NAME="CTPClientDemo" TARGET_NAME="CTPClientDemo" CONFIG_NAME="Release" RUN_TARGET_PROJECT_NAME="CTPClientDemo" RUN_TARGET_NAME="CTPClientDemo">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="Debug" type="CMakeRunConfiguration" factoryName="Application" WORKING_DIR="" PASS_PARENT_ENVS_2="true" PROJECT_NAME="CTPClientDemo" TARGET_NAME="CTPClientDemo" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="CTPClientDemo" RUN_TARGET_NAME="CTPClientDemo">
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="Minisizerel" type="CMakeRunConfiguration" factoryName="Application" WORKING_DIR="" PASS_PARENT_ENVS_2="true" PROJECT_NAME="CTPClientDemo" TARGET_NAME="CTPClientDemo" CONFIG_NAME="MinSizeRel" RUN_TARGET_PROJECT_NAME="CTPClientDemo" RUN_TARGET_NAME="CTPClientDemo">
+      <envs />
+      <method />
+    </configuration>
+    <list size="3">
+      <item index="0" class="java.lang.String" itemvalue="Application.Release" />
+      <item index="1" class="java.lang.String" itemvalue="Application.Debug" />
+      <item index="2" class="java.lang.String" itemvalue="Application.Minisizerel" />
+    </list>
+  </component>
+  <component name="ShelveChangesManager" show_recycled="false">
+    <option name="remove_strategy" value="false" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="315ce06a-1fc4-4fce-ac00-adc47ba3e6bc" name="Default" comment="" />
+      <created>1480091952378</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1480091952378</updated>
+      <workItem from="1480091954532" duration="1300000" />
+      <workItem from="1480093631225" duration="779000" />
+      <workItem from="1480094533192" duration="2250000" />
+      <workItem from="1480116544359" duration="471000" />
+      <workItem from="1480118653419" duration="3212000" />
+      <workItem from="1480133247873" duration="10000" />
+      <workItem from="1480154976635" duration="3386000" />
+      <workItem from="1480164252638" duration="933000" />
+      <workItem from="1480165241460" duration="2231000" />
+      <workItem from="1480214338887" duration="102000" />
+      <workItem from="1480214921780" duration="2449000" />
+      <workItem from="1480220046844" duration="5357000" />
+      <workItem from="1480255929898" duration="3015000" />
+      <workItem from="1480300805106" duration="3290000" />
+      <workItem from="1480341279864" duration="693000" />
+      <workItem from="1480379631814" duration="14240000" />
+      <workItem from="1480420905854" duration="12016000" />
+      <workItem from="1480490775083" duration="3717000" />
+      <workItem from="1480494513241" duration="3231000" />
+      <workItem from="1480500722188" duration="8214000" />
+      <workItem from="1480510857521" duration="2816000" />
+      <workItem from="1480553176105" duration="1253000" />
+      <workItem from="1480559551651" duration="3059000" />
+      <workItem from="1480575797857" duration="624000" />
+      <workItem from="1480607415718" duration="311000" />
+      <workItem from="1480636672082" duration="2185000" />
+      <workItem from="1480643934696" duration="684000" />
+      <workItem from="1480947145869" duration="709000" />
+      <workItem from="1481265686599" duration="468000" />
+      <workItem from="1481267050154" duration="633000" />
+      <workItem from="1481268142873" duration="8000" />
+      <workItem from="1481286990649" duration="2637000" />
+      <workItem from="1481541824950" duration="103000" />
+      <workItem from="1481542186877" duration="14828000" />
+      <workItem from="1481616519356" duration="37000" />
+      <workItem from="1481616558911" duration="4097000" />
+      <workItem from="1481683487256" duration="807000" />
+      <workItem from="1481684382214" duration="18765000" />
+      <workItem from="1481724737308" duration="13738000" />
+      <workItem from="1481779188764" duration="49055000" />
+      <workItem from="1481896132586" duration="601000" />
+      <workItem from="1481934803835" duration="15667000" />
+      <workItem from="1482535977132" duration="7684000" />
+      <workItem from="1482733721922" duration="10914000" />
+      <workItem from="1482841844811" duration="1754000" />
+      <workItem from="1482849939055" duration="1221000" />
+      <workItem from="1483158096078" duration="823000" />
+      <workItem from="1483163407627" duration="5543000" />
+      <workItem from="1483257639365" duration="1574000" />
+      <workItem from="1483259246899" duration="4039000" />
+      <workItem from="1483323783367" duration="641000" />
+      <workItem from="1483324918534" duration="611000" />
+      <workItem from="1483363493745" duration="122000" />
+      <workItem from="1483419591992" duration="61000" />
+      <workItem from="1483419989577" duration="1483000" />
+      <workItem from="1483430168428" duration="6487000" />
+      <workItem from="1483446602647" duration="4037000" />
+      <workItem from="1483490485681" duration="21663000" />
+      <workItem from="1483527231890" duration="8935000" />
+      <workItem from="1483576864559" duration="10733000" />
+      <workItem from="1483661722523" duration="7018000" />
+      <workItem from="1483681873729" duration="8740000" />
+      <workItem from="1483696646596" duration="39000" />
+      <workItem from="1483841840275" duration="9315000" />
+      <workItem from="1483931017052" duration="25808000" />
+      <workItem from="1484285232560" duration="3332000" />
+      <workItem from="1484313807764" duration="4747000" />
+      <workItem from="1484620214577" duration="8524000" />
+      <workItem from="1484732742409" duration="606000" />
+      <workItem from="1484814536608" duration="4609000" />
+      <workItem from="1485149506782" duration="8224000" />
+      <workItem from="1485502707042" duration="869000" />
+      <workItem from="1485917944735" duration="1086000" />
+      <workItem from="1485932715500" duration="1144000" />
+      <workItem from="1486085128980" duration="24604000" />
+      <workItem from="1486165541171" duration="6771000" />
+      <workItem from="1486175891336" duration="531000" />
+      <workItem from="1486259095474" duration="2000" />
+      <workItem from="1486619110512" duration="9619000" />
+      <workItem from="1487160726771" duration="1232000" />
+      <workItem from="1487301627113" duration="15532000" />
+      <workItem from="1487729409451" duration="122000" />
+      <workItem from="1487729561738" duration="397000" />
+      <workItem from="1487730887895" duration="1089000" />
+      <workItem from="1487731992408" duration="7144000" />
+      <workItem from="1487761590014" duration="15254000" />
+      <workItem from="1488178827846" duration="278000" />
+      <workItem from="1488179110321" duration="16000" />
+    </task>
+    <task id="LOCAL-00001" summary="work on macbook ubuntu by add boost log link">
+      <created>1480120131387</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1480120131388</updated>
+    </task>
+    <task id="LOCAL-00002" summary="work on macbook ubuntu by add boost log link">
+      <created>1480165293027</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1480165293027</updated>
+    </task>
+    <task id="LOCAL-00003" summary="每天写日记">
+      <created>1480216723952</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1480216723952</updated>
+    </task>
+    <task id="LOCAL-00004" summary="每天写日记">
+      <created>1480297369656</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1480297369656</updated>
+    </task>
+    <task id="LOCAL-00005" summary="情况的分析基本弄清楚来一个版本了，需要实现来检验">
+      <created>1480341955978</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1480341955978</updated>
+    </task>
+    <task id="LOCAL-00006" summary="成交量也是按两倍计算的，已经修改，等待验证，目前又拿不到行情了。">
+      <created>1480490124841</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1480490124841</updated>
+    </task>
+    <task id="LOCAL-00007" summary="搞错了端口，出现ctp 77 错误  无此功能">
+      <created>1480495655016</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1480495655016</updated>
+    </task>
+    <task id="LOCAL-00008" summary="可以区分类型了，现在检测分类是否正确。并且要输出正确的格式方便比较，是否做单元测试需要看情况。">
+      <created>1480504673778</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1480504673778</updated>
+    </task>
+    <task id="LOCAL-00009" summary="模拟环境擦的现手（成交量）不对，需要等带开盘时间来检测simonow的正式检测环境，另外如果可以的话，申请生产环境来测试">
+      <created>1480507312047</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1480507312047</updated>
+    </task>
+    <task id="LOCAL-00010" summary="修正里不能正确计算现手与持仓变化的bug，不过有些成交类型不对。">
+      <created>1480511717522</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1480511717522</updated>
+    </task>
+    <task id="LOCAL-00011" summary="为什么出现这么多现手为0的情况">
+      <created>1480513893517</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1480513893517</updated>
+    </task>
+    <task id="LOCAL-00012" summary="一日一记">
+      <created>1480636887757</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1480636887757</updated>
+    </task>
+    <task id="LOCAL-00013" summary="可以考虑先用单线程的来下单">
+      <created>1481593016773</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1481593016773</updated>
+    </task>
+    <task id="LOCAL-00014" summary="把下单的逻辑提取出来了，下午改进一下">
+      <created>1481686197675</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1481686197675</updated>
+    </task>
+    <task id="LOCAL-00015" summary="不断的重构， for victory">
+      <created>1481703988663</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1481703988663</updated>
+    </task>
+    <task id="LOCAL-00016" summary="从这里开始分开spi与api">
+      <created>1481766736591</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1481766736591</updated>
+    </task>
+    <task id="LOCAL-00017" summary="似乎是完全错误的shared_ptr的用法">
+      <created>1481807787468</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1481807787468</updated>
+    </task>
+    <task id="LOCAL-00018" summary="果然还是初始化时间的问题，现在通过延迟基本解决了这一问题，应该可以 通过回调函数来更精确的控制，终于可以开始下单了，今天从github上找的trade-server是个非常好的例子，虽然用到qt，不过几乎很少设计，模块化的封装思想与shared_ptr的使用挺值得学习和借鉴的。相信自己的想法，然后不断的试错与学习。多看别人的代码">
+      <created>1481808681042</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1481808681042</updated>
+    </task>
+    <task id="LOCAL-00019" summary="不用要join， 不管是线程还是ctp的api函数">
+      <created>1481809247656</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1481809247656</updated>
+    </task>
+    <task id="LOCAL-00020" summary="输出还是没有完全对其，先处理好业务逻辑">
+      <created>1481890932167</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1481890932167</updated>
+    </task>
+    <task id="LOCAL-00021" summary="基本实现了趋势下单的逻辑，需要验证逻辑是否正确，增强参数的可配置性。增强异常case的处理，模块化的程度要求提高。">
+      <created>1481940213876</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1481940213876</updated>
+    </task>
+    <task id="LOCAL-00022" summary="在加入qt 数据库模块之前，保存一次，放开手去重构把">
+      <created>1482844224236</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1482844224236</updated>
+    </task>
+    <task id="LOCAL-00023" summary="可以存position 了，但是拿行情有点问题，现在把trader api里面下单的部分屏蔽调">
+      <created>1483524845852</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1483524845852</updated>
+    </task>
+    <task id="LOCAL-00024" summary="忘了还有两个文件需要add 了">
+      <created>1483524898439</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1483524898439</updated>
+    </task>
+    <task id="LOCAL-00025" summary="保存最重要的一个ｐｒｏｊｅｃｔ，防止ｍａｃｂｏｏｋ　挂了">
+      <created>1483595552360</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1483595552360</updated>
+    </task>
+    <task id="LOCAL-00026" summary="在切换到ｓｑｌ　ｓｅｖｅｒ　之前">
+      <created>1483947981245</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1483947981245</updated>
+    </task>
+    <task id="LOCAL-00027" summary="记得随时ｃｏｍｍｉｔ来保存信息">
+      <created>1486099950815</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1486099950815</updated>
+    </task>
+    <task id="LOCAL-00028" summary="succesfully get investor position at fixed interval">
+      <created>1486175941055</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1486175941055</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="458958000" />
+  </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="65" y="24" width="1375" height="876" extended-state="6" />
+    <editor active="false" />
+    <layout>
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17455621" sideWeight="0.5092025" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32795697" sideWeight="0.49569893" order="11" side_tool="false" content_ui="tabs" x="49" y="455" width="1897" height="306" />
+      <window_info id="CMake" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.29866666" sideWeight="0.43015286" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.34301075" sideWeight="0.54454404" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25591397" sideWeight="0.52903223" order="5" side_tool="false" content_ui="tabs" x="2739" y="347" width="357" height="466" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.30430108" sideWeight="0.42030567" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2497332" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.37311828" sideWeight="0.49569893" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.17521834" sideWeight="0.49079755" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31827956" sideWeight="0.69050217" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="true" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31505376" sideWeight="0.3094978" order="7" side_tool="false" content_ui="tabs" x="2016" y="52" width="960" height="1028" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32903227" sideWeight="0.49563318" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+    </layout>
+    <layout-to-restore>
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32795697" sideWeight="0.49569893" order="11" side_tool="false" content_ui="tabs" x="49" y="455" width="1897" height="306" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="true" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31827956" sideWeight="0.3094978" order="7" side_tool="false" content_ui="tabs" x="2016" y="52" width="960" height="1028" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="CMake" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3107527" sideWeight="0.43015286" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.34301075" sideWeight="0.54454404" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.46989247" sideWeight="0.52903223" order="5" side_tool="false" content_ui="tabs" x="2739" y="347" width="357" height="466" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.28387097" sideWeight="0.42030567" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.37419355" sideWeight="0.49569893" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16648471" sideWeight="0.4731861" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32903227" sideWeight="0.49563318" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2497332" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.16648471" sideWeight="0.52681386" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.31827956" sideWeight="0.69050217" order="2" side_tool="false" content_ui="tabs" />
+    </layout-to-restore>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="processedProjectFiles" value="true" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="BEK_SORT_TYPE" value="1" />
+              <option name="RECENTLY_FILTERED_USER_GROUPS">
+                <collection />
+              </option>
+              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+                <collection />
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="每天写日记" />
+    <MESSAGE value="情况的分析基本弄清楚来一个版本了，需要实现来检验" />
+    <MESSAGE value="成交量也是按两倍计算的，已经修改，等待验证，目前又拿不到行情了。" />
+    <MESSAGE value="搞错了端口，出现ctp 77 错误  无此功能" />
+    <MESSAGE value="可以区分类型了，现在检测分类是否正确。并且要输出正确的格式方便比较，是否做单元测试需要看情况。" />
+    <MESSAGE value="模拟环境擦的现手（成交量）不对，需要等带开盘时间来检测simonow的正式检测环境，另外如果可以的话，申请生产环境来测试" />
+    <MESSAGE value="修正里不能正确计算现手与持仓变化的bug，不过有些成交类型不对。" />
+    <MESSAGE value="为什么出现这么多现手为0的情况" />
+    <MESSAGE value="一日一记" />
+    <MESSAGE value="可以考虑先用单线程的来下单" />
+    <MESSAGE value="把下单的逻辑提取出来了，下午改进一下" />
+    <MESSAGE value="不断的重构， for victory" />
+    <MESSAGE value="从这里开始分开spi与api" />
+    <MESSAGE value="似乎是完全错误的shared_ptr的用法" />
+    <MESSAGE value="果然还是初始化时间的问题，现在通过延迟基本解决了这一问题，应该可以 通过回调函数来更精确的控制，终于可以开始下单了，今天从github上找的trade-server是个非常好的例子，虽然用到qt，不过几乎很少设计，模块化的封装思想与shared_ptr的使用挺值得学习和借鉴的。相信自己的想法，然后不断的试错与学习。多看别人的代码" />
+    <MESSAGE value="不用要join， 不管是线程还是ctp的api函数" />
+    <MESSAGE value="输出还是没有完全对其，先处理好业务逻辑" />
+    <MESSAGE value="基本实现了趋势下单的逻辑，需要验证逻辑是否正确，增强参数的可配置性。增强异常case的处理，模块化的程度要求提高。" />
+    <MESSAGE value="在加入qt 数据库模块之前，保存一次，放开手去重构把" />
+    <MESSAGE value="可以存position 了，但是拿行情有点问题，现在把trader api里面下单的部分屏蔽调" />
+    <MESSAGE value="忘了还有两个文件需要add 了" />
+    <MESSAGE value="保存最重要的一个ｐｒｏｊｅｃｔ，防止ｍａｃｂｏｏｋ　挂了" />
+    <MESSAGE value="在切换到ｓｑｌ　ｓｅｖｅｒ　之前" />
+    <MESSAGE value="记得随时ｃｏｍｍｉｔ来保存信息" />
+    <MESSAGE value="succesfully get investor position at fixed interval" />
+    <option name="LAST_COMMIT_MESSAGE" value="succesfully get investor position at fixed interval" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/TradingHandle.cpp</url>
+          <line>174</line>
+          <option name="timeStamp" value="112" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/DBWriter.cpp</url>
+          <line>106</line>
+          <option name="timeStamp" value="113" />
+        </line-breakpoint>
+      </breakpoints>
+      <option name="time" value="114" />
+    </breakpoint-manager>
+    <watches-manager>
+      <configuration name="CMakeRunConfiguration">
+        <watch expression="*pTraderApi" language="ObjectiveC" />
+        <watch expression="FRONT_ADDRESS" />
+        <watch expression="result" />
+        <watch expression="insert_result" />
+      </configuration>
+    </watches-manager>
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file:///usr/include/c++/5/functional">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="1520" column="0" lean-forward="false" selection-start-line="1520" selection-start-column="0" selection-end-line="1520" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///usr/include/c++/5/bits/shared_ptr_base.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="373" column="0" lean-forward="false" selection-start-line="373" selection-start-column="0" selection-end-line="373" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///usr/include/c++/5/bits/ios_base.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="182">
+          <caret line="1040" column="2" lean-forward="false" selection-start-line="1040" selection-start-column="2" selection-end-line="1040" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///usr/include/x86_64-linux-gnu/qt5/QtCore/qrefcount.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="363">
+          <caret line="67" column="0" lean-forward="false" selection-start-line="67" selection-start-column="0" selection-end-line="67" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///usr/include/x86_64-linux-gnu/qt5/QtSql/qsqlquery.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="99" column="35" lean-forward="true" selection-start-line="99" selection-start-column="35" selection-end-line="99" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ctpapi_linux64/ThostFtdcUserApiDataType.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="147">
+          <caret line="74" column="17" lean-forward="false" selection-start-line="74" selection-start-column="17" selection-end-line="74" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_HOME_DIR$/bin/cmake/share/cmake-3.6/Modules/FindBoost.cmake">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15138">
+          <caret line="841" column="0" lean-forward="false" selection-start-line="841" selection-start-column="0" selection-end-line="841" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ctpapi_linux64/ThostFtdcMdApi.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-55">
+          <caret line="131" column="16" lean-forward="false" selection-start-line="131" selection-start-column="16" selection-end-line="131" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="18">
+          <caret line="1" column="0" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ini/front.ini">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="27" lean-forward="false" selection-start-line="0" selection-start-column="27" selection-end-line="0" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cmake-build-debug/cmake_install.cmake" />
+    <entry file="file:///usr/include/x86_64-linux-gnu/qt5/QtSql/qsqldatabase.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="99" column="21" lean-forward="true" selection-start-line="99" selection-start-column="21" selection-end-line="99" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Release/Makefile">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1998">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Release/ctpapi_linux64/md5.txt" />
+    <entry file="file://$PROJECT_DIR$/Debug/ctpapi_linux64/md5.txt" />
+    <entry file="file://$PROJECT_DIR$/Debug/CTPClientDemo.cbp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Utility.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="36">
+          <caret line="2" column="2" lean-forward="true" selection-start-line="2" selection-start-column="2" selection-end-line="2" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///usr/include/x86_64-linux-gnu/qt5/QtCore/qstring.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="219">
+          <caret line="650" column="0" lean-forward="false" selection-start-line="650" selection-start-column="0" selection-end-line="650" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Release/ini/db.ini">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="8" column="0" lean-forward="true" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///usr/include/c++/5/thread">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="220">
+          <caret line="132" column="6" lean-forward="false" selection-start-line="132" selection-start-column="6" selection-end-line="132" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Release/ini/CTPClientDemo.ini">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="432">
+          <caret line="24" column="18" lean-forward="true" selection-start-line="24" selection-start-column="18" selection-end-line="24" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ctpapi_linux64/ThostFtdcTraderApi.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-464">
+          <caret line="355" column="15" lean-forward="false" selection-start-line="355" selection-start-column="15" selection-end-line="355" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ctpapi_linux64/ThostFtdcUserApiStruct.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="508">
+          <caret line="2433" column="0" lean-forward="false" selection-start-line="2433" selection-start-column="0" selection-end-line="2433" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CTPClientDemo.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TradingHandle.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="756">
+          <caret line="126" column="31" lean-forward="false" selection-start-line="126" selection-start-column="31" selection-end-line="126" selection-end-column="31" />
+          <folding>
+            <element signature="e#48#66#0" expanded="true" />
+            <element signature="e#17238#17661#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TradingHandle.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="116" column="31" lean-forward="false" selection-start-line="116" selection-start-column="9" selection-end-line="116" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sociDB.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sociDB.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="9" column="14" lean-forward="false" selection-start-line="9" selection-start-column="14" selection-end-line="9" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/initialize.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="504">
+          <caret line="28" column="29" lean-forward="false" selection-start-line="28" selection-start-column="29" selection-end-line="28" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Debug/ini/db.ini">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="72">
+          <caret line="4" column="1" lean-forward="false" selection-start-line="4" selection-start-column="1" selection-end-line="4" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cmake-build-minsizerel/ini/CTPClientDemo.ini">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="468">
+          <caret line="26" column="17" lean-forward="false" selection-start-line="26" selection-start-column="17" selection-end-line="26" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cmake-build-minsizerel/ini/front.ini">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="16" lean-forward="false" selection-start-line="0" selection-start-column="16" selection-end-line="0" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cmake-build-minsizerel/ini/db.ini">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="72">
+          <caret line="4" column="29" lean-forward="false" selection-start-line="4" selection-start-column="29" selection-end-line="4" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ini/CTPClientDemo.ini">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="154">
+          <caret line="42" column="0" lean-forward="true" selection-start-line="42" selection-start-column="0" selection-end-line="42" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Debug/ini/front.ini">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ini/db.ini">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="8" column="0" lean-forward="false" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Debug/ini/CTPClientDemo.ini">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="9" column="38" lean-forward="false" selection-start-line="9" selection-start-column="38" selection-end-line="9" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MarketDataHandle.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="586">
+          <caret line="301" column="38" lean-forward="false" selection-start-line="301" selection-start-column="38" selection-end-line="301" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/devlog.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SECOND">
+          <first_editor relative-caret-position="560">
+            <caret line="34" column="15" lean-forward="true" selection-start-line="34" selection-start-column="15" selection-end-line="34" selection-end-column="15" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MarketDataHandle.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="298">
+          <caret line="91" column="33" lean-forward="false" selection-start-line="91" selection-start-column="17" selection-end-line="91" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="FIRST">
+          <first_editor relative-caret-position="216">
+            <caret line="12" column="10" lean-forward="false" selection-start-line="12" selection-start-column="10" selection-end-line="12" selection-end-column="10" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DBWriter.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1638">
+          <caret line="91" column="39" lean-forward="false" selection-start-line="91" selection-start-column="39" selection-end-line="91" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="9" column="26" lean-forward="false" selection-start-line="9" selection-start-column="26" selection-end-line="9" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DBDriver.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="612">
+          <caret line="34" column="74" lean-forward="false" selection-start-line="34" selection-start-column="58" selection-end-line="34" selection-end-column="74" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DBWriter.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="15" column="14" lean-forward="false" selection-start-line="5" selection-start-column="27" selection-end-line="15" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/initialize.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="288">
+          <caret line="16" column="0" lean-forward="false" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GVAR.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="396">
+          <caret line="22" column="0" lean-forward="false" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GVAR.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="10" column="23" lean-forward="false" selection-start-line="10" selection-start-column="23" selection-end-line="10" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Utility.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="10" column="25" lean-forward="false" selection-start-line="10" selection-start-column="25" selection-end-line="10" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DBDriver.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="288">
+          <caret line="24" column="19" lean-forward="false" selection-start-line="24" selection-start-column="19" selection-end-line="24" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>

@@ -5,6 +5,7 @@
  * Function: Extract data from CTP interface and store to MySQL
  */
 // todo: using valgrind to profile
+// todo: query position at start and on return order
 // change log/console output to english
 // deployment and debug cannot share the same code because of configuration path
 // qsql dependency problem on production environment
@@ -31,6 +32,7 @@
 #include "initialize.h"
 
 double lastorderprice = 0;
+int account_position_query_counter = 1;
 using namespace std;
 namespace  logging = boost::log;
 //CThostFtdcTraderApi* pTraderApi;
@@ -68,8 +70,10 @@ void quoteThread(CThostFtdcTraderApi* ptraderapi, char* FRONT_ADDR_quote, TThost
 void tradeThread(TradingHandle *pTradingHandle,CThostFtdcTraderApi  *pTraderApi, char *FRONT_ADDR_trade)
 {
     pTraderApi->RegisterSpi((CThostFtdcTraderSpi*) pTradingHandle);
-    pTraderApi->SubscribePublicTopic(THOST_TERT_QUICK);
-    pTraderApi->SubscribePrivateTopic(THOST_TERT_QUICK);
+//    pTraderApi->SubscribePublicTopic(THOST_TERT_QUICK);
+//    pTraderApi->SubscribePrivateTopic(THOST_TERT_QUICK);
+    pTraderApi->SubscribePublicTopic(THOST_TERT_RESTART);
+    pTraderApi->SubscribePrivateTopic(THOST_TERT_RESTART);
     pTraderApi->RegisterFront(FRONT_ADDR_trade);
     pTraderApi->Init();
 }
@@ -77,6 +81,7 @@ void tradeThread(TradingHandle *pTradingHandle,CThostFtdcTraderApi  *pTraderApi,
 void queryT(TThostFtdcBrokerIDType brokerIDType, TThostFtdcInvestorIDType investorIDType, CThostFtdcTraderApi* pTraderApi)
 {
     while(true) {
+        cout << "account_position_query_counter = "<< account_position_query_counter++ << endl;
         CThostFtdcQryInvestorPositionField req;
         memset(&req, 0, sizeof(req));
         strcpy(req.BrokerID, brokerIDType);
@@ -157,7 +162,7 @@ int main() {
     //query investor postion /account postion at a fixed interval and save to db
     //using detached thread to achieve it
     std::thread QueryPostionT(queryT, brokerIDType, investorIDType, pTraderApi);
-    QueryPostionT.detach();
+    QueryPostionT.join();
 
 
 

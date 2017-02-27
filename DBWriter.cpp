@@ -106,10 +106,11 @@ void DBWriter::InsertOrUpdateAccountPostion(QString tableName, CThostFtdcInvesto
     exist.bindValue(":id", positionInfo->InvestorID);
     exist.bindValue(":instru", positionInfo->InstrumentID);
     exist.exec();
-
+    cout << "handle instrument " << positionInfo->InstrumentID << endl;
     //qDebug() << "000:" << exist.lastError().databaseText();
     if (exist.next()) {
         //如果存在就更新
+        //exist.record();
         QSqlQuery update(this->db);
         if (positionInfo->PosiDirection == THOST_FTDC_PD_Long) {    //多头持仓
             update.prepare("update account_position set long_position=:long_position , long_profit=:long_profit, "
@@ -120,10 +121,11 @@ void DBWriter::InsertOrUpdateAccountPostion(QString tableName, CThostFtdcInvesto
             update.bindValue(":date", positionInfo->TradingDay);
             update.bindValue(":id", positionInfo->InvestorID);
             update.bindValue(":instru", positionInfo->InstrumentID);
+            cout << "update long position " << update.lastQuery().toStdString() << endl;
             bool update_result = update.exec();
             if(update_result)
             {
-                cout << "update success"<<endl;
+                cout << "update long success" << positionInfo->InstrumentID <<endl;
             }
             //qDebug() << "111:"<<update.lastError().databaseText();
         }
@@ -137,9 +139,10 @@ void DBWriter::InsertOrUpdateAccountPostion(QString tableName, CThostFtdcInvesto
             update.bindValue(":id", positionInfo->InvestorID);
             update.bindValue(":instru", positionInfo->InstrumentID);
             bool update_result = update.exec();
+            cout << "update short position " << update.lastQuery().toStdString() << endl;
             if(update_result)
             {
-                cout << "update success"<<endl;
+                cout << "update short success"<< positionInfo->InstrumentID << endl;
             }
 
             //qDebug() << "222:" << update.lastError().databaseText();
@@ -155,13 +158,13 @@ void DBWriter::InsertOrUpdateAccountPostion(QString tableName, CThostFtdcInvesto
             insert.bindValue(":long_profit", positionInfo->PositionProfit);
             insert.bindValue(":long_margin", positionInfo->UseMargin);
             insert.bindValue(":date", positionInfo->TradingDay);
-//            cout << insert << endl;
-
+            cout << "insert long position " << insert.lastQuery().toStdString() << endl;
             bool insert_result = insert.exec();
             if(insert_result)
             {
                 cout << "insert success" <<endl;
             }
+
             //qDebug() << "333:" << insert.lastError().databaseText();
         }
         if (positionInfo->PosiDirection == THOST_FTDC_PD_Short) { //空头持仓
@@ -174,6 +177,7 @@ void DBWriter::InsertOrUpdateAccountPostion(QString tableName, CThostFtdcInvesto
             insert.bindValue(":short_margin", positionInfo->UseMargin);
             insert.bindValue(":date", positionInfo->TradingDay);
             insert.exec();
+            cout << "insert long position " << insert.lastQuery().toStdString() << endl;
             //qDebug() << "444:" << insert.lastError().databaseText();
         }
     }

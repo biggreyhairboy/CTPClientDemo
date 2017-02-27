@@ -1,0 +1,3 @@
+/home/patrick/ClionProjects/CTPClientDemo/Release/CMakeFiles/rebuild_cache.dir
+/home/patrick/ClionProjects/CTPClientDemo/Release/CMakeFiles/edit_cache.dir
+/home/patrick/ClionProjects/CTPClientDemo/Release/CMakeFiles/CTPClientDemo.dir

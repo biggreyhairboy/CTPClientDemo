@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="CTPClientDemo"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;CMake Files\..\;CMake Files\..\..\;CMake Files\..\..\..\;CMake Files\..\..\..\..\;CMake Files\..\..\..\..\usr\;CMake Files\..\..\..\..\usr\lib\;CMake Files\..\..\..\..\usr\lib\x86_64-linux-gnu\;CMake Files\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\;CMake Files\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\Qt5Widgets\;CMake Files\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\Qt5Gui\;CMake Files\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\Qt5Core\;CMake Files\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\Qt5Sql\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/home/patrick/ClionProjects/CTPClientDemo/Debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/patrick/ClionProjects/CTPClientDemo/Debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/patrick/ClionProjects/CTPClientDemo/Debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/patrick/ClionProjects/CTPClientDemo/Debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/patrick/ClionProjects/CTPClientDemo/Debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/home/patrick/ClionProjects/CTPClientDemo/Debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/patrick/ClionProjects/CTPClientDemo/Debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/patrick/ClionProjects/CTPClientDemo/Debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/patrick/ClionProjects/CTPClientDemo/Debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/patrick/ClionProjects/CTPClientDemo/Debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/home/patrick/ClionProjects/CTPClientDemo/Debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/patrick/ClionProjects/CTPClientDemo/Debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/patrick/ClionProjects/CTPClientDemo/Debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/patrick/ClionProjects/CTPClientDemo/Debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/patrick/ClionProjects/CTPClientDemo/Debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="CTPClientDemo">
+				<Option output="/home/patrick/ClionProjects/CTPClientDemo/Debug/CTPClientDemo" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/patrick/ClionProjects/CTPClientDemo/Debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DBOOST_LOG_DYN_LINK"/>
+					<Add option="-DBOOST_ALL_DYN_LINK"/>
+					<Add option="-DQT_WIDGETS_LIB"/>
+					<Add option="-DQT_GUI_LIB"/>
+					<Add option="-DQT_CORE_LIB"/>
+					<Add option="-DQT_SQL_LIB"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/qt5"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/qt5/QtWidgets"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/qt5/QtGui"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/qt5/QtCore"/>
+					<Add directory="/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/qt5/QtSql"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+					<Add directory="/usr/include/c++/5"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/5"/>
+					<Add directory="/usr/include/c++/5/backward"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/patrick/ClionProjects/CTPClientDemo/Debug/Makefile&quot;  VERBOSE=1 CTPClientDemo"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/patrick/ClionProjects/CTPClientDemo/Debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/patrick/ClionProjects/CTPClientDemo/Debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/patrick/ClionProjects/CTPClientDemo/Debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="CTPClientDemo/fast">
+				<Option output="/home/patrick/ClionProjects/CTPClientDemo/Debug/CTPClientDemo" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/patrick/ClionProjects/CTPClientDemo/Debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DBOOST_LOG_DYN_LINK"/>
+					<Add option="-DBOOST_ALL_DYN_LINK"/>
+					<Add option="-DQT_WIDGETS_LIB"/>
+					<Add option="-DQT_GUI_LIB"/>
+					<Add option="-DQT_CORE_LIB"/>
+					<Add option="-DQT_SQL_LIB"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/qt5"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/qt5/QtWidgets"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/qt5/QtGui"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/qt5/QtCore"/>
+					<Add directory="/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++-64"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/qt5/QtSql"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+					<Add directory="/usr/include/c++/5"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/5"/>
+					<Add directory="/usr/include/c++/5/backward"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/patrick/ClionProjects/CTPClientDemo/Debug/Makefile&quot;  VERBOSE=1 CTPClientDemo/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/patrick/ClionProjects/CTPClientDemo/Debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/patrick/ClionProjects/CTPClientDemo/Debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/patrick/ClionProjects/CTPClientDemo/Debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/home/patrick/ClionProjects/CTPClientDemo/DBDriver.cpp">
+			<Option target="CTPClientDemo"/>
+		</Unit>
+		<Unit filename="/home/patrick/ClionProjects/CTPClientDemo/DBDriver.h">
+			<Option target="CTPClientDemo"/>
+		</Unit>
+		<Unit filename="/home/patrick/ClionProjects/CTPClientDemo/DBWriter.cpp">
+			<Option target="CTPClientDemo"/>
+		</Unit>
+		<Unit filename="/home/patrick/ClionProjects/CTPClientDemo/DBWriter.h">
+			<Option target="CTPClientDemo"/>
+		</Unit>
+		<Unit filename="/home/patrick/ClionProjects/CTPClientDemo/GVAR.cpp">
+			<Option target="CTPClientDemo"/>
+		</Unit>
+		<Unit filename="/home/patrick/ClionProjects/CTPClientDemo/GVAR.h">
+			<Option target="CTPClientDemo"/>
+		</Unit>
+		<Unit filename="/home/patrick/ClionProjects/CTPClientDemo/MarketDataHandle.cpp">
+			<Option target="CTPClientDemo"/>
+		</Unit>
+		<Unit filename="/home/patrick/ClionProjects/CTPClientDemo/MarketDataHandle.h">
+			<Option target="CTPClientDemo"/>
+		</Unit>
+		<Unit filename="/home/patrick/ClionProjects/CTPClientDemo/TradingHandle.cpp">
+			<Option target="CTPClientDemo"/>
+		</Unit>
+		<Unit filename="/home/patrick/ClionProjects/CTPClientDemo/TradingHandle.h">
+			<Option target="CTPClientDemo"/>
+		</Unit>
+		<Unit filename="/home/patrick/ClionProjects/CTPClientDemo/Utility.cpp">
+			<Option target="CTPClientDemo"/>
+		</Unit>
+		<Unit filename="/home/patrick/ClionProjects/CTPClientDemo/Utility.h">
+			<Option target="CTPClientDemo"/>
+		</Unit>
+		<Unit filename="/home/patrick/ClionProjects/CTPClientDemo/initialize.cpp">
+			<Option target="CTPClientDemo"/>
+		</Unit>
+		<Unit filename="/home/patrick/ClionProjects/CTPClientDemo/initialize.h">
+			<Option target="CTPClientDemo"/>
+		</Unit>
+		<Unit filename="/home/patrick/ClionProjects/CTPClientDemo/main.cpp">
+			<Option target="CTPClientDemo"/>
+		</Unit>
+		<Unit filename="/home/patrick/ClionProjects/CTPClientDemo/sociDB.cpp">
+			<Option target="CTPClientDemo"/>
+		</Unit>
+		<Unit filename="/home/patrick/ClionProjects/CTPClientDemo/sociDB.h">
+			<Option target="CTPClientDemo"/>
+		</Unit>
+		<Unit filename="/home/patrick/ClionProjects/CTPClientDemo/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+		<Unit filename="/home/patrick/ClionProjects/CTPClientDemo/../../../../usr/lib/x86_64-linux-gnu/cmake/Qt5Widgets/Qt5WidgetsConfigVersion.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\Qt5Widgets\"/>
+		</Unit>
+		<Unit filename="/home/patrick/ClionProjects/CTPClientDemo/../../../../usr/lib/x86_64-linux-gnu/cmake/Qt5Widgets/Qt5WidgetsConfig.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\Qt5Widgets\"/>
+		</Unit>
+		<Unit filename="/home/patrick/ClionProjects/CTPClientDemo/../../../../usr/lib/x86_64-linux-gnu/cmake/Qt5Widgets/Qt5WidgetsConfigExtras.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\Qt5Widgets\"/>
+		</Unit>
+		<Unit filename="/home/patrick/ClionProjects/CTPClientDemo/../../../../usr/lib/x86_64-linux-gnu/cmake/Qt5Widgets/Qt5WidgetsMacros.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\Qt5Widgets\"/>
+		</Unit>
+		<Unit filename="/home/patrick/ClionProjects/CTPClientDemo/../../../../usr/lib/x86_64-linux-gnu/cmake/Qt5Gui/Qt5GuiConfigVersion.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\Qt5Gui\"/>
+		</Unit>
+		<Unit filename="/home/patrick/ClionProjects/CTPClientDemo/../../../../usr/lib/x86_64-linux-gnu/cmake/Qt5Gui/Qt5GuiConfig.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\Qt5Gui\"/>
+		</Unit>
+		<Unit filename="/home/patrick/ClionProjects/CTPClientDemo/../../../../usr/lib/x86_64-linux-gnu/cmake/Qt5Gui/Qt5GuiConfigExtras.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\Qt5Gui\"/>
+		</Unit>
+		<Unit filename="/home/patrick/ClionProjects/CTPClientDemo/../../../../usr/lib/x86_64-linux-gnu/cmake/Qt5Core/Qt5CoreConfigVersion.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\Qt5Core\"/>
+		</Unit>
+		<Unit filename="/home/patrick/ClionProjects/CTPClientDemo/../../../../usr/lib/x86_64-linux-gnu/cmake/Qt5Core/Qt5CoreConfig.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\Qt5Core\"/>
+		</Unit>
+		<Unit filename="/home/patrick/ClionProjects/CTPClientDemo/../../../../usr/lib/x86_64-linux-gnu/cmake/Qt5Core/Qt5CoreConfigExtras.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\Qt5Core\"/>
+		</Unit>
+		<Unit filename="/home/patrick/ClionProjects/CTPClientDemo/../../../../usr/lib/x86_64-linux-gnu/cmake/Qt5Core/Qt5CoreConfigExtrasMkspecDir.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\Qt5Core\"/>
+		</Unit>
+		<Unit filename="/home/patrick/ClionProjects/CTPClientDemo/../../../../usr/lib/x86_64-linux-gnu/cmake/Qt5Core/Qt5CoreMacros.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\Qt5Core\"/>
+		</Unit>
+		<Unit filename="/home/patrick/ClionProjects/CTPClientDemo/../../../../usr/lib/x86_64-linux-gnu/cmake/Qt5Sql/Qt5SqlConfigVersion.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\Qt5Sql\"/>
+		</Unit>
+		<Unit filename="/home/patrick/ClionProjects/CTPClientDemo/../../../../usr/lib/x86_64-linux-gnu/cmake/Qt5Sql/Qt5SqlConfig.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\Qt5Sql\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>

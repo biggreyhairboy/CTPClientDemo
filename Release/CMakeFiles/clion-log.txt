@@ -1,0 +1,42 @@
+/home/patrick/Downloads/clion-2016.3/bin/cmake/bin/cmake -DCMAKE_BUILD_TYPE=Release -G "CodeBlocks - Unix Makefiles" /home/patrick/ClionProjects/CTPClientDemo
+CMake Warning at /home/patrick/Downloads/clion-2016.3/bin/cmake/share/cmake-3.6/Modules/FindBoost.cmake:743 (message):
+  Imported targets not available for Boost version 106200
+Call Stack (most recent call first):
+  /home/patrick/Downloads/clion-2016.3/bin/cmake/share/cmake-3.6/Modules/FindBoost.cmake:842 (_Boost_COMPONENT_DEPENDENCIES)
+  /home/patrick/Downloads/clion-2016.3/bin/cmake/share/cmake-3.6/Modules/FindBoost.cmake:1395 (_Boost_MISSING_DEPENDENCIES)
+  CMakeLists.txt:8 (find_package)
+
+
+CMake Warning at /home/patrick/Downloads/clion-2016.3/bin/cmake/share/cmake-3.6/Modules/FindBoost.cmake:743 (message):
+  Imported targets not available for Boost version 106200
+Call Stack (most recent call first):
+  /home/patrick/Downloads/clion-2016.3/bin/cmake/share/cmake-3.6/Modules/FindBoost.cmake:842 (_Boost_COMPONENT_DEPENDENCIES)
+  /home/patrick/Downloads/clion-2016.3/bin/cmake/share/cmake-3.6/Modules/FindBoost.cmake:1395 (_Boost_MISSING_DEPENDENCIES)
+  CMakeLists.txt:8 (find_package)
+
+
+CMake Warning at /home/patrick/Downloads/clion-2016.3/bin/cmake/share/cmake-3.6/Modules/FindBoost.cmake:743 (message):
+  Imported targets not available for Boost version 106200
+Call Stack (most recent call first):
+  /home/patrick/Downloads/clion-2016.3/bin/cmake/share/cmake-3.6/Modules/FindBoost.cmake:842 (_Boost_COMPONENT_DEPENDENCIES)
+  /home/patrick/Downloads/clion-2016.3/bin/cmake/share/cmake-3.6/Modules/FindBoost.cmake:1395 (_Boost_MISSING_DEPENDENCIES)
+  CMakeLists.txt:8 (find_package)
+
+
+CMake Warning at /home/patrick/Downloads/clion-2016.3/bin/cmake/share/cmake-3.6/Modules/FindBoost.cmake:743 (message):
+  Imported targets not available for Boost version 106200
+Call Stack (most recent call first):
+  /home/patrick/Downloads/clion-2016.3/bin/cmake/share/cmake-3.6/Modules/FindBoost.cmake:842 (_Boost_COMPONENT_DEPENDENCIES)
+  /home/patrick/Downloads/clion-2016.3/bin/cmake/share/cmake-3.6/Modules/FindBoost.cmake:1395 (_Boost_MISSING_DEPENDENCIES)
+  CMakeLists.txt:8 (find_package)
+
+
+-- Boost version: 1.62.0
+-- Found the following Boost libraries:
+--   log
+--   system
+--   thread
+--   filesystem
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/patrick/ClionProjects/CTPClientDemo/Release
